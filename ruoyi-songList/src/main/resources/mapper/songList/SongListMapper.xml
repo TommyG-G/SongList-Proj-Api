@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.songList.mapper.SongListMapper">
+    
+    <resultMap type="SongList" id="SongListResult">
+        <result property="id"    column="id"    />
+        <result property="musicName"    column="music_name"    />
+        <result property="singer"    column="singer"    />
+        <result property="language"    column="language"    />
+        <result property="musicalStyle"    column="musical_style"    />
+        <result property="pay"    column="pay"    />
+        <result property="exclusiveLevel"    column="exclusive_level"    />
+        <result property="gift"    column="gift"    />
+        <result property="songSlice"    column="song_slice"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectSongListVo">
+        select id, music_name, singer, language, musical_style, pay, exclusive_level, gift, song_slice, remark from song_list
+    </sql>
+
+    <select id="selectSongListList" parameterType="SongList" resultMap="SongListResult">
+        <include refid="selectSongListVo"/>
+        <where>  
+            <if test="musicName != null  and musicName != ''"> and music_name like concat('%', #{musicName}, '%')</if>
+            <if test="singer != null  and singer != ''"> and singer = #{singer}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+            <if test="musicalStyle != null  and musicalStyle != ''"> and musical_style = #{musicalStyle}</if>
+            <if test="pay != null  and pay != ''"> and pay = #{pay}</if>
+            <if test="exclusiveLevel != null  and exclusiveLevel != ''"> and exclusive_level = #{exclusiveLevel}</if>
+            <if test="songSlice != null  and songSlice != ''"> and song_slice = #{songSlice}</if>
+        </where>
+    </select>
+    
+    <select id="selectSongListById" parameterType="Long" resultMap="SongListResult">
+        <include refid="selectSongListVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertSongList" parameterType="SongList">
+        insert into song_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="musicName != null and musicName != ''">music_name,</if>
+            <if test="singer != null and singer != ''">singer,</if>
+            <if test="language != null and language != ''">language,</if>
+            <if test="musicalStyle != null">musical_style,</if>
+            <if test="pay != null">pay,</if>
+            <if test="exclusiveLevel != null and exclusiveLevel != ''">exclusive_level,</if>
+            <if test="gift != null and gift != ''">gift,</if>
+            <if test="songSlice != null">song_slice,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="musicName != null and musicName != ''">#{musicName},</if>
+            <if test="singer != null and singer != ''">#{singer},</if>
+            <if test="language != null and language != ''">#{language},</if>
+            <if test="musicalStyle != null">#{musicalStyle},</if>
+            <if test="pay != null">#{pay},</if>
+            <if test="exclusiveLevel != null and exclusiveLevel != ''">#{exclusiveLevel},</if>
+            <if test="gift != null and gift != ''">#{gift},</if>
+            <if test="songSlice != null">#{songSlice},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSongList" parameterType="SongList">
+        update song_list
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="musicName != null and musicName != ''">music_name = #{musicName},</if>
+            <if test="singer != null and singer != ''">singer = #{singer},</if>
+            <if test="language != null and language != ''">language = #{language},</if>
+            <if test="musicalStyle != null">musical_style = #{musicalStyle},</if>
+            <if test="pay != null">pay = #{pay},</if>
+            <if test="exclusiveLevel != null and exclusiveLevel != ''">exclusive_level = #{exclusiveLevel},</if>
+            <if test="gift != null and gift != ''">gift = #{gift},</if>
+            <if test="songSlice != null">song_slice = #{songSlice},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSongListById" parameterType="Long">
+        delete from song_list where id = #{id}
+    </delete>
+
+    <delete id="deleteSongListByIds" parameterType="String">
+        delete from song_list where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <resultMap type="com.ruoyi.songList.vo.giftVo" id="GiftResult">
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="icon" column="icon"/>
+    </resultMap>
+
+    <select id="selectGiftList" parameterType="java.util.List" resultMap="GiftResult">
+        select id, name, price, icon from gift_list
+        <where>
+            <if test="list != null and list.size() > 0">
+                <foreach collection="list" item="param" open="(" close=")" separator=" OR ">
+                    (name = #{param.label} AND id  = #{param.value})
+                </foreach>
+            </if>
+        </where>
+        order by id ASC
+    </select>
+</mapper>
