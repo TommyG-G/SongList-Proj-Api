@@ -60,6 +60,19 @@ public class SongList extends BaseEntity
     @JsonDeserialize(using = JsonToStringDeserializer.class)
     private String gift;
 
+    /** 上传人 */
+    @Excel(name = "上传人")
+    @JsonDeserialize(using = JsonToStringDeserializer.class)
+    private String uploader;
+
+    public String getUploader() {
+        return uploader;
+    }
+
+    public void setUploader(String uploader) {
+        this.uploader = uploader;
+    }
+
     // 自定义JSON转字符串反序列化器
     public static class JsonToStringDeserializer extends JsonDeserializer<String> {
         @Override
@@ -182,6 +195,7 @@ public class SongList extends BaseEntity
             .append("songSlice", getSongSlice())
             .append("remark", getRemark())
             .append("gift", getGift())
+            .append("uploader", getUploader())
             .toString();
     }
 }

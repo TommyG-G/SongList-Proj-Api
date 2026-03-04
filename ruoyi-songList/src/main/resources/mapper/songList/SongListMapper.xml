@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectSongListList" parameterType="SongList" resultMap="SongListResult">
         <include refid="selectSongListVo"/>
-        <where>  
+        <where>
             <if test="musicName != null  and musicName != ''"> and music_name like concat('%', #{musicName}, '%')</if>
             <if test="singer != null  and singer != ''"> and singer = #{singer}</if>
             <if test="language != null  and language != ''"> and language = #{language}</if>
@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pay != null  and pay != ''"> and pay = #{pay}</if>
             <if test="exclusiveLevel != null  and exclusiveLevel != ''"> and exclusive_level = #{exclusiveLevel}</if>
             <if test="songSlice != null  and songSlice != ''"> and song_slice = #{songSlice}</if>
+            <if test="uploader != null  and uploader != ''"> and uploader = #{uploader}</if>
         </where>
     </select>
     
@@ -52,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gift != null and gift != ''">gift,</if>
             <if test="songSlice != null">song_slice,</if>
             <if test="remark != null">remark,</if>
+            <if test="uploader != null">uploader,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -64,6 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gift != null and gift != ''">#{gift},</if>
             <if test="songSlice != null">#{songSlice},</if>
             <if test="remark != null">#{remark},</if>
+            <if test="uploader != null">#{uploader},</if>
          </trim>
     </insert>
 

@@ -2,6 +2,8 @@ package com.ruoyi.songList.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.vo.giftVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +38,21 @@ public class SongListServiceImpl implements ISongListService
 
     /**
      * 查询歌单列表
-     * 
+     *
      * @param songList 歌单
      * @return 歌单
      */
     @Override
     public List<SongList> selectSongListList(SongList songList)
     {
+        // 获取当前登录用户
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        
+        // 如果不是超级管理员，则只查询当前用户上传的歌单
+        if (loginUser != null && !loginUser.getUser().isAdmin()) {
+            songList.setUploader(loginUser.getUserId().toString());
+        }
+        
         return songListMapper.selectSongListList(songList);
     }
 
@@ -55,6 +65,11 @@ public class SongListServiceImpl implements ISongListService
     @Override
     public int insertSongList(SongList songList)
     {
+
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+
+        songList.setUploader(loginUser.getUserId().toString());
+
         return songListMapper.insertSongList(songList);
     }
 
