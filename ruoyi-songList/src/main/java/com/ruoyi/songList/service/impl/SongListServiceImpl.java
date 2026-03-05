@@ -1,10 +1,12 @@
 package com.ruoyi.songList.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.exception.ServiceException;
+import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
@@ -188,7 +190,10 @@ public class SongListServiceImpl implements ISongListService
         {
             try
             {
-                // 验证是否存在这个用户
+                // 在验证和保存前进行字典转换
+                convertDictValues(music);
+                
+                // 验证是否存在这个歌曲
                 SongList s = songListMapper.selectSongListByMusicName(music.getMusicName());
                 if (StringUtils.isNull(s))
                 {
@@ -240,5 +245,96 @@ public class SongListServiceImpl implements ISongListService
         }
         return successMsg.toString();
     }
+
+    /**
+     * 转换字典值
+     * 将Excel中的中文显示值转换为数据库存储的字典值
+     *
+     * @param music 歌单对象
+     */
+    private void convertDictValues(SongList music) {
+        // 语言字段转换：中文 -> 字典值
+        if (StringUtils.isNotEmpty(music.getLanguage())) {
+            String languageValue = DictUtils.getDictValue("song_language", music.getLanguage());
+            if (StringUtils.isNotEmpty(languageValue)) {
+                music.setLanguage(languageValue);
+            } else {
+                throw new ServiceException("语言 '" + music.getLanguage() + "' 不存在于字典中");
+            }
+        }
+
+        // 曲风字段转换：汉字加"、"间隔符 -> 字典值用逗号分割
+        if (StringUtils.isNotEmpty(music.getMusicalStyle())) {
+            String musicalStyleValue = DictUtils.getDictValue("song_style", music.getMusicalStyle(), "、");
+            if (StringUtils.isNotEmpty(musicalStyleValue)) {
+                music.setMusicalStyle(musicalStyleValue);
+            } else {
+                throw new ServiceException("曲风 '" + music.getMusicalStyle() + "' 不存在于字典中");
+            }
+        }
+
+        // 大航海字段转换：中文 -> 字典值
+        if (StringUtils.isNotEmpty(music.getExclusiveLevel())) {
+            String exclusiveLevelValue = DictUtils.getDictValue("exclusive_level", music.getExclusiveLevel());
+            if (StringUtils.isNotEmpty(exclusiveLevelValue)) {
+                music.setExclusiveLevel(exclusiveLevelValue);
+            } else {
+                throw new ServiceException("大航海 '" + music.getExclusiveLevel() + "' 不存在于字典中");
+            }
+        }
+        // 歌切字段转换：中文 -> 字典值
+        if (StringUtils.isNotEmpty(music.getSongSlice())) {
+            String songSliceValue = DictUtils.getDictValue("song_slice", music.getSongSlice());
+            if (StringUtils.isNotEmpty(songSliceValue)) {
+                music.setSongSlice(songSliceValue);
+            } else {
+                throw new ServiceException("歌切 '" + music.getSongSlice() + "' 不存在于字典中");
+            }
+        }
+
+
+        // 礼物字段转换：中文名称 -> 查询gift_list表并组合信息
+        if (StringUtils.isNotEmpty(music.getGift())) {
+            convertGiftValue(music);
+        }
+    }
+
+    /**
+     * 转换礼物值
+     * 将Excel中的中文名称转换为gift_list表中的完整信息
+     *
+     * @param music 歌单对象
+     */
+    private void convertGiftValue(SongList music) {
+        // 1. 从字典中获取对应的value值（即gift_list表的id）
+        String giftDictValue = DictUtils.getDictValue("gift_list", music.getGift());
+        if (StringUtils.isEmpty(giftDictValue)) {
+            throw new ServiceException("礼物 '" + music.getGift() + "' 不存在于字典中");
+        }
+        try {
+            // 2. 根据id查询gift_list表获取详细信息
+            GiftSearchParam param = new GiftSearchParam();
+            param.setLabel(music.getGift()); // 礼物名称
+            param.setValue(giftDictValue);   // 对应的id
+            List<GiftSearchParam> paramList = new ArrayList<>();
+            paramList.add(param);
+            List<giftVo> giftList = songListMapper.selectGiftList(paramList);
+            if (giftList == null || giftList.isEmpty()) {
+                throw new ServiceException("礼物 '" + music.getGift() + "' 在gift_list表中不存在");
+            }
+            giftVo giftInfo = giftList.get(0);
+            // 3. 组合信息存储到gift字段
+            // 格式：name,price,icon,value
+            StringBuilder giftBuilder = new StringBuilder();
+            giftBuilder.append(giftInfo.getName()).append(",")
+                    .append(giftInfo.getPrice()).append(",")
+                    .append(giftInfo.getIcon()).append(",")
+                    .append(giftDictValue);
+            music.setGift(giftBuilder.toString());
+        } catch (Exception e) {
+            throw new ServiceException("礼物 '" + music.getGift() + "' 信息查询失败：" + e.getMessage());
+        }
+    }
+
 
 }

@@ -138,7 +138,7 @@ public class SongListController extends BaseController
     {
         ExcelUtil<SongList> util = new ExcelUtil<SongList>(SongList.class);
         List<SongList> SongList = util.importExcel(file.getInputStream());
-        String operName = getUsername();
+        String operName = getUserId().toString();
         String message = songListService.importSong(SongList, updateSupport, operName);
         return success(message);
     }
