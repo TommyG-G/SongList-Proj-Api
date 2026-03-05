@@ -24,6 +24,14 @@ public interface SongListMapper
     SongList selectSongListById(Long id);
 
     /**
+     * 通过歌曲名查询歌曲
+     *
+     * @param musicName 歌曲名称
+     * @return 歌曲对象信息
+     */
+    SongList selectSongListByMusicName(String musicName);
+
+    /**
      * 查询歌单列表
      *
      * @param songList 歌单

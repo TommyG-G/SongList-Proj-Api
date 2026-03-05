@@ -1,8 +1,11 @@
 package com.ruoyi.songList.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.songList.domain.SongList;
 import com.ruoyi.songList.param.GiftSearchParam;
+import com.ruoyi.songList.vo.SongListOperationResult;
 import com.ruoyi.songList.vo.giftVo;
 
 /**
@@ -31,11 +34,11 @@ public interface ISongListService
 
     /**
      * 新增歌单
-     * 
+     *
      * @param songList 歌单
-     * @return 结果
+     * @return 操作结果（包含操作类型和提示信息）
      */
-    public int insertSongList(SongList songList);
+    public SongListOperationResult insertSongList(SongList songList);
 
     /**
      * 修改歌单
@@ -62,4 +65,6 @@ public interface ISongListService
     public int deleteSongListById(Long id);
 
     public List<giftVo> selectGiftList(List<GiftSearchParam> giftSearchParam);
+
+    public String importSong(List<SongList> songList, Boolean isUpdateSupport, String operName);
 }

@@ -2,8 +2,10 @@ package com.ruoyi.songList.controller;
 
 import java.util.List;
 
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.vo.giftVo;
+import com.ruoyi.songList.vo.SongListOperationResult;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import com.ruoyi.songList.domain.SongList;
 import com.ruoyi.songList.service.ISongListService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 歌单Controller
@@ -80,7 +83,12 @@ public class SongListController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody SongList songList)
     {
-        return toAjax(songListService.insertSongList(songList));
+        SongListOperationResult result = songListService.insertSongList(songList);
+        if (result.getResult() > 0) {
+            return success(result.getMessage());
+        } else {
+            return error(result.getMessage());
+        }
     }
 
     /**
@@ -114,5 +122,24 @@ public class SongListController extends BaseController
     {
         System.out.println(giftSearchParam);
         return songListService.selectGiftList(giftSearchParam);
+    }
+
+    @PostMapping("/importTemplate")
+    public void importTemplate(HttpServletResponse response)
+    {
+        ExcelUtil<SongList> util = new ExcelUtil<SongList>(SongList.class);
+        util.importTemplateExcel(response, "歌单数据");
+    }
+
+    @Log(title = "歌单管理", businessType = BusinessType.IMPORT)
+    @PreAuthorize("@ss.hasPermi('songList:info:import')")
+    @PostMapping("/importData")
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<SongList> util = new ExcelUtil<SongList>(SongList.class);
+        List<SongList> SongList = util.importExcel(file.getInputStream());
+        String operName = getUsername();
+        String message = songListService.importSong(SongList, updateSupport, operName);
+        return success(message);
     }
 }

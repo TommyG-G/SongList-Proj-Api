@@ -31,8 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pay != null  and pay != ''"> and pay = #{pay}</if>
             <if test="exclusiveLevel != null  and exclusiveLevel != ''"> and exclusive_level = #{exclusiveLevel}</if>
             <if test="songSlice != null  and songSlice != ''"> and song_slice = #{songSlice}</if>
-            <if test="uploader != null  and uploader != ''"> and uploader = #{uploader}</if>
+            <if test="uploader != null  and uploader != ''"> and uploader like concat('%', #{uploader}, '%')</if>
         </where>
+    </select>
+
+    <select id="selectSongListByMusicName" parameterType="String" resultMap="SongListResult">
+        <include refid="selectSongListVo"/>
+        where music_name = #{musicName} and del_flag = '0'
     </select>
     
     <select id="selectSongListById" parameterType="Long" resultMap="SongListResult">
@@ -82,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="gift != null and gift != ''">gift = #{gift},</if>
             <if test="songSlice != null">song_slice = #{songSlice},</if>
             <if test="remark != null">remark = #{remark},</if>
+            <if test="uploader != null and uploader != ''">uploader = #{uploader},</if>
         </trim>
         where id = #{id}
     </update>
