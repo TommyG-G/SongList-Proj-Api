@@ -142,4 +142,31 @@ public class SongListController extends BaseController
         String message = songListService.importSong(SongList, updateSupport, operName);
         return success(message);
     }
+
+    /**
+     * 查询歌单显示列表
+     */
+    @PreAuthorize("@ss.hasPermi('songList:info:isShowColumns')")
+    @GetMapping("/isShowColumns")
+    public AjaxResult isShowColumns()
+    {
+        return success();
+    }
+
+    /**
+     * 新增歌单显示列表
+     */
+    @PreAuthorize("@ss.hasPermi('songList:info:saveShowColumns')")
+    @Log(title = "歌单", businessType = BusinessType.INSERT)
+    @PostMapping("/saveShowColumns")
+    public AjaxResult saveShowColumns(@RequestBody SongList songList)
+    {
+        SongListOperationResult result = songListService.insertSongList(songList);
+        if (result.getResult() > 0) {
+            return success(result.getMessage());
+        } else {
+            return error(result.getMessage());
+        }
+    }
+
 }
