@@ -120,4 +120,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
         order by id ASC
     </select>
+
+    <select id="selectShowColumnsByUserId" parameterType="Long" resultType="String">
+        select columns from isshow_song_table_columns where user_id = #{userId}
+    </select>
+
+    <update id="updateShowColumns" parameterType="map">
+        update isshow_song_table_columns set columns = #{columns} where user_id = #{userId}
+    </update>
+
+    <insert id="saveShowColumns" parameterType="map">
+        insert into isshow_song_table_columns (user_id, columns)
+        values (#{userId}, #{columns})
+        on duplicate key update columns = #{columns}
+    </insert>
 </mapper>

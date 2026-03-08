@@ -1,6 +1,7 @@
 package com.ruoyi.songList.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
@@ -50,7 +51,14 @@ public class SongListServiceImpl implements ISongListService
     @Override
     public SongList selectSongListById(Long id)
     {
-        return songListMapper.selectSongListById(id);
+        SongList songList = songListMapper.selectSongListById(id);
+        if (songList != null) {
+            // 对musicalStyle字段进行空值处理
+            if (songList.getMusicalStyle() == null || songList.getMusicalStyle().trim().isEmpty()) {
+                songList.setMusicalStyle(null);
+            }
+        }
+        return songList;
     }
 
     /**
@@ -336,5 +344,72 @@ public class SongListServiceImpl implements ISongListService
         }
     }
 
+    /**
+     * 查询歌单显示列配置
+     *
+     * @return 显示的列数组
+     */
+    @Override
+    public List<String> selectShowColumns() {
+        // 获取当前登录用户
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        Long currentUserId = loginUser != null ? loginUser.getUserId() : null;
+        
+        if (currentUserId == null) {
+            return new ArrayList<>();
+        }
+        
+        // 查询用户的显示列配置
+        String columnsStr = songListMapper.selectShowColumnsByUserId(currentUserId);
+        
+        if (StringUtils.isEmpty(columnsStr)) {
+            // 如果没有配置，返回默认的列
+            return getDefaultShowColumns();
+        }
+        
+        // 将字符串拆分成数组并返回
+        return Arrays.asList(columnsStr.split(","));
+    }
+
+    /**
+     * 获取默认显示列
+     *
+     * @return 默认显示的列列表
+     */
+    private List<String> getDefaultShowColumns() {
+        // 只保留第一个musicName作为默认列
+        return Arrays.asList("musicName");
+    }
+
+    /**
+     * 保存歌单显示列配置
+     *
+     * @param columns 要显示的列列表
+     * @return 操作结果
+     */
+    @Override
+    public int saveShowColumns(List<String> columns) {
+        // 获取当前登录用户
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        Long currentUserId = loginUser != null ? loginUser.getUserId() : null;
+        
+        if (currentUserId == null) {
+            return 0;
+        }
+        
+        // 将列列表转换为逗号分隔的字符串
+        String columnsStr = String.join(",", columns);
+        
+        // 先查询是否已存在该用户的显示列配置
+        String existingColumns = songListMapper.selectShowColumnsByUserId(currentUserId);
+        
+        if (existingColumns != null && !existingColumns.isEmpty()) {
+            // 如果已存在记录，则执行更新操作
+            return songListMapper.updateShowColumns(currentUserId, columnsStr);
+        } else {
+            // 如果不存在记录，则执行插入操作
+            return songListMapper.saveShowColumns(currentUserId, columnsStr);
+        }
+    }
 
 }

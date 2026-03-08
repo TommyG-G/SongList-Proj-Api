@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author TommyG
  * @date 2026-02-26
  */
-public class SongList extends BaseEntity
+public class SongList
 {
     private static final long serialVersionUID = 1L;
 
@@ -94,12 +94,10 @@ public class SongList extends BaseEntity
         this.gift = gift;
     }
 
-    @Override
     public String getRemark() {
         return remark;
     }
 
-    @Override
     public void setRemark(String remark) {
         this.remark = remark;
     }

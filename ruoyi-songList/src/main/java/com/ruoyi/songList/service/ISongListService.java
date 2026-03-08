@@ -67,4 +67,19 @@ public interface ISongListService
     public List<giftVo> selectGiftList(List<GiftSearchParam> giftSearchParam);
 
     public String importSong(List<SongList> songList, Boolean isUpdateSupport, String operName);
+
+    /**
+     * 查询歌单显示列配置
+     *
+     * @return 显示的列数组
+     */
+    public List<String> selectShowColumns();
+
+    /**
+     * 保存歌单显示列配置
+     *
+     * @param columns 要显示的列列表
+     * @return 操作结果
+     */
+    public int saveShowColumns(List<String> columns);
 }

@@ -144,28 +144,29 @@ public class SongListController extends BaseController
     }
 
     /**
-     * 查询歌单显示列表
+     * 查询歌单显示列配置
      */
     @PreAuthorize("@ss.hasPermi('songList:info:isShowColumns')")
     @GetMapping("/isShowColumns")
     public AjaxResult isShowColumns()
     {
-        return success();
+        List<String> showColumns = songListService.selectShowColumns();
+        return success(showColumns);
     }
 
     /**
-     * 新增歌单显示列表
+     * 保存歌单显示列配置
      */
     @PreAuthorize("@ss.hasPermi('songList:info:saveShowColumns')")
-    @Log(title = "歌单", businessType = BusinessType.INSERT)
+    @Log(title = "歌单显示列配置", businessType = BusinessType.UPDATE)
     @PostMapping("/saveShowColumns")
-    public AjaxResult saveShowColumns(@RequestBody SongList songList)
+    public AjaxResult saveShowColumns(@RequestBody List<String> columns)
     {
-        SongListOperationResult result = songListService.insertSongList(songList);
-        if (result.getResult() > 0) {
-            return success(result.getMessage());
+        int result = songListService.saveShowColumns(columns);
+        if (result > 0) {
+            return success("显示列配置保存成功");
         } else {
-            return error(result.getMessage());
+            return error("显示列配置保存失败");
         }
     }
 

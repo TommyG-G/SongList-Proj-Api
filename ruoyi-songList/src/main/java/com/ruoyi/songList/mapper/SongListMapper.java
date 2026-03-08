@@ -78,4 +78,30 @@ public interface SongListMapper
      * @return 礼物信息列表
      */
     List<giftVo> selectGiftList(List<GiftSearchParam> giftSearchParam);
+
+    /**
+     * 根据用户ID查询显示列配置
+     *
+     * @param userId 用户ID
+     * @return 显示列配置字符串
+     */
+    String selectShowColumnsByUserId(Long userId);
+
+    /**
+     * 更新用户的显示列配置
+     *
+     * @param userId 用户ID
+     * @param columns 显示列配置字符串
+     * @return 操作结果
+     */
+    int updateShowColumns(Long userId, String columns);
+
+    /**
+     * 保存或更新用户的显示列配置
+     *
+     * @param userId 用户ID
+     * @param columns 显示列配置字符串
+     * @return 操作结果
+     */
+    int saveShowColumns(Long userId, String columns);
 }
