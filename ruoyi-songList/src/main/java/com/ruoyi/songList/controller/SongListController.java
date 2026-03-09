@@ -170,4 +170,13 @@ public class SongListController extends BaseController
         }
     }
 
+    /**
+     * 查询曲风字典数据
+     */
+    @PostMapping("/selectMusicalStyle")
+    public AjaxResult selectMusicalStyle()
+    {
+        return success(songListService.selectMusicalStyle());
+    }
+
 }

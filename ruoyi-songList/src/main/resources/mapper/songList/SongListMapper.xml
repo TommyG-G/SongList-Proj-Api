@@ -134,4 +134,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         values (#{userId}, #{columns})
         on duplicate key update columns = #{columns}
     </insert>
+
+    <resultMap type="com.ruoyi.songList.vo.musicalStyleVo" id="musicalStyleVo">
+        <result property="dictLabel" column="dict_label"/>
+        <result property="dictValue" column="dict_value"/>
+        <result property="dictType" column="dict_type"/>
+    </resultMap>
+
+    <select id="selectMusicalStyleByDictValue" parameterType="String" resultMap="musicalStyleVo">
+        select dict_label, dict_value, dict_type
+        from musical_style
+        where dict_type = #{dictValue}
+        order by dict_sort asc
+    </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.ruoyi.songList.mapper;
 
 import java.util.List;
+
+import com.ruoyi.songList.vo.musicalStyleVo;
 import org.apache.ibatis.annotations.Mapper;
 import com.ruoyi.songList.domain.SongList;
 import com.ruoyi.songList.param.GiftSearchParam;
@@ -104,4 +106,12 @@ public interface SongListMapper
      * @return 操作结果
      */
     int saveShowColumns(Long userId, String columns);
+
+    /**
+     * 根据曲风字典值查询音乐风格
+     *
+     * @param dictValue 曲风字典值
+     * @return 操作结果
+     */
+    List<musicalStyleVo>selectMusicalStyleByDictValue(String dictValue);
 }

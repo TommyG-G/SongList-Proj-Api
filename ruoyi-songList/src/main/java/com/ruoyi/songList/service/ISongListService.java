@@ -82,4 +82,12 @@ public interface ISongListService
      * @return 操作结果
      */
     public int saveShowColumns(List<String> columns);
+
+    /**
+     * 查询曲风字典数据
+     *
+     * @return 曲风字典数据列表
+     */
+    public List<Object> selectMusicalStyle();
+
 }

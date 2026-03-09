@@ -2,8 +2,11 @@ package com.ruoyi.songList.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.exception.ServiceException;
@@ -14,6 +17,7 @@ import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.vo.giftVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
+import com.ruoyi.songList.vo.musicalStyleVo;
 import com.ruoyi.system.service.impl.SysUserServiceImpl;
 import jakarta.validation.Validator;
 import org.slf4j.Logger;
@@ -411,5 +415,38 @@ public class SongListServiceImpl implements ISongListService
             return songListMapper.saveShowColumns(currentUserId, columnsStr);
         }
     }
+
+    /**
+     * 查询曲风字典数据
+     *
+     * @return 曲风字典数据列表
+     */
+    @Override
+    public List<Object> selectMusicalStyle() {
+        // 获取song_style类型的字典数据
+        List<SysDictData> dictDatas = DictUtils.getDictCache("music_style");
+        
+        if (dictDatas == null || dictDatas.isEmpty()) {
+            return new ArrayList<>();
+        }
+        
+        // 转换为前端需要的格式
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (SysDictData dictData : dictDatas) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("label", dictData.getDictLabel());
+            item.put("value", dictData.getDictValue());
+            // 由于没有二级分类，children为空数组
+
+            List<musicalStyleVo> itemResult = songListMapper.selectMusicalStyleByDictValue(dictData.getDictValue());
+
+            item.put("children", itemResult);
+            result.add(item);
+        }
+
+        
+        return new ArrayList<>(result);
+    }
+
 
 }
