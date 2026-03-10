@@ -147,4 +147,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where dict_type = #{dictValue}
         order by dict_sort asc
     </select>
+
+    <select id="selectSongList" parameterType="com.ruoyi.songList.param.SongListSearchParam" resultMap="SongListResult">
+        <include refid="selectSongListVo"/>
+        <where>
+            <if test="musicName != null  and musicName != ''"> and music_name like concat('%', #{musicName}, '%')</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+            <if test="musicalStyle != null  and musicalStyle != ''"> and musical_style = #{musicalStyle}</if>
+            <if test="pay != null  and pay != ''"> and pay = #{pay}</if>
+            <if test="exclusiveLevel != null  and exclusiveLevel != ''"> and exclusive_level = #{exclusiveLevel}</if>
+            <if test="songSlice != null  and songSlice != ''"> and song_slice = #{songSlice}</if>
+            <if test="uploader != null  and uploader != ''"> and uploader like concat('%', #{uploader}, '%')</if>
+            <!-- 首字母筛选 -->
+            <if test="selectedLetter != null and selectedLetter != ''">
+                and (
+                    -- 处理英文歌曲：直接取第一个字符
+                    (music_name REGEXP '^[A-Za-z]' AND
+                     UPPER(SUBSTRING(music_name, 1, 1)) = UPPER(#{selectedLetter}))
+                    OR
+                    -- 处理数字开头的歌曲
+                    (music_name REGEXP '^[0-9]' AND #{selectedLetter} = '#')
+                    OR
+                    -- 处理其他字符开头的歌曲（包括中文）- 使用#表示非字母数字开头
+                    (#{selectedLetter} = '#' AND music_name NOT REGEXP '^[A-Za-z0-9]')
+                )
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.songList.param.GiftSearchParam;
+import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.vo.giftVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import jakarta.servlet.http.HttpServletResponse;
@@ -177,6 +178,16 @@ public class SongListController extends BaseController
     public AjaxResult selectMusicalStyle()
     {
         return success(songListService.selectMusicalStyle());
+    }
+
+    /**
+     * 查询歌单列表
+     */
+    @GetMapping("/songList")
+    public AjaxResult songList(SongListSearchParam songList)
+    {
+        List<SongList> list = songListService.selectSongList(songList);
+        return success(list);
     }
 
 }

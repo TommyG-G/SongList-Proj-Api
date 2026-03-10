@@ -15,6 +15,7 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.songList.param.GiftSearchParam;
+import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.vo.giftVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import com.ruoyi.songList.vo.musicalStyleVo;
@@ -447,6 +448,19 @@ public class SongListServiceImpl implements ISongListService
         
         return new ArrayList<>(result);
     }
+
+    public List<SongList> selectSongList(SongListSearchParam songList){
+        // 获取当前登录用户
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+
+        // 如果不是超级管理员，则只查询当前用户上传的歌单
+        if (loginUser != null && !loginUser.getUser().isAdmin()) {
+            songList.setUploader(loginUser.getUserId().toString());
+        }
+
+        return songListMapper.selectSongList(songList);
+    }
+
 
 
 }

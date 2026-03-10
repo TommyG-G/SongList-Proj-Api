@@ -2,6 +2,7 @@ package com.ruoyi.songList.mapper;
 
 import java.util.List;
 
+import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.vo.musicalStyleVo;
 import org.apache.ibatis.annotations.Mapper;
 import com.ruoyi.songList.domain.SongList;
@@ -114,4 +115,13 @@ public interface SongListMapper
      * @return 操作结果
      */
     List<musicalStyleVo>selectMusicalStyleByDictValue(String dictValue);
+
+    /**
+     * 查询歌单列表
+     *
+     * @param songList 歌单
+     * @return 歌单集合
+     */
+    List<SongList> selectSongList(SongListSearchParam songList);
+
 }

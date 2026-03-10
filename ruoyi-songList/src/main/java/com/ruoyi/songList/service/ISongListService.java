@@ -5,6 +5,7 @@ import java.util.List;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.songList.domain.SongList;
 import com.ruoyi.songList.param.GiftSearchParam;
+import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import com.ruoyi.songList.vo.giftVo;
 
@@ -25,7 +26,7 @@ public interface ISongListService
     public SongList selectSongListById(Long id);
 
     /**
-     * 查询歌单列表
+     * 查询歌单列表用于歌单管理
      * 
      * @param songList 歌单
      * @return 歌单集合
@@ -89,5 +90,13 @@ public interface ISongListService
      * @return 曲风字典数据列表
      */
     public List<Object> selectMusicalStyle();
+
+    /**
+     * 查询歌单列表用于歌单展示
+     *
+     * @param songList 歌单
+     * @return 歌单集合
+     */
+    public List<SongList> selectSongList(SongListSearchParam songList);
 
 }
