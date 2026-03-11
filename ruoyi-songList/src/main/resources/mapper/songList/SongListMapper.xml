@@ -161,15 +161,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <!-- 首字母筛选 -->
             <if test="selectedLetter != null and selectedLetter != ''">
                 and (
-                    -- 处理英文歌曲：直接取第一个字符
-                    (music_name REGEXP '^[A-Za-z]' AND
-                     UPPER(SUBSTRING(music_name, 1, 1)) = UPPER(#{selectedLetter}))
-                    OR
-                    -- 处理数字开头的歌曲
-                    (music_name REGEXP '^[0-9]' AND #{selectedLetter} = '#')
-                    OR
-                    -- 处理其他字符开头的歌曲（包括中文）- 使用#表示非字母数字开头
-                    (#{selectedLetter} = '#' AND music_name NOT REGEXP '^[A-Za-z0-9]')
+                -- 1. 字母开头：直接匹配首字母（前端已传大写，简化转换）
+                (music_name REGEXP '^[A-Za-z]' AND SUBSTRING(UPPER(music_name), 1, 1) = #{selectedLetter})
+                OR
+                -- 2. 数字开头：匹配#
+                (music_name REGEXP '^[0-9]' AND #{selectedLetter} = '#')
+                OR
+                -- 3. 中文开头：匹配拼音首字母（MySQL 8.0+ 支持）
+                (music_name REGEXP '^[\\u4e00-\\u9fa5]' AND SUBSTRING(UPPER(CONVERT(music_name USING gb2312)), 1, 1) = #{selectedLetter})
+                OR
+                -- 4. 其他字符（标点/空格等）开头：匹配#
+                (#{selectedLetter} = '#' AND music_name NOT REGEXP '^[A-Za-z0-9\\u4e00-\\u9fa5]')
                 )
             </if>
         </where>
