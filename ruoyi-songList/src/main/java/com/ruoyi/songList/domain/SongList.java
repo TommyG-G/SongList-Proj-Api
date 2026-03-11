@@ -65,12 +65,24 @@ public class SongList
     @JsonDeserialize(using = JsonToStringDeserializer.class)
     private String uploader;
 
+    /** 首字母 */
+    @Excel(name = "首字母")
+    private String firstLetter;
+
     public String getUploader() {
         return uploader;
     }
 
     public void setUploader(String uploader) {
         this.uploader = uploader;
+    }
+
+    public String getFirstLetter() {
+        return firstLetter;
+    }
+
+    public void setFirstLetter(String firstLetter) {
+        this.firstLetter = firstLetter;
     }
 
     // 自定义JSON转字符串反序列化器
@@ -194,6 +206,7 @@ public class SongList
             .append("remark", getRemark())
             .append("gift", getGift())
             .append("uploader", getUploader())
+            .append("firstLetter", getFirstLetter())
             .toString();
     }
 }

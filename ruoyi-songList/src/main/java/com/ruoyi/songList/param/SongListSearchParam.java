@@ -55,6 +55,26 @@ public class SongListSearchParam {
     @Excel(name = "选中首字母")
     private String selectedLetter;
 
+    private Boolean isFree;
+
+    private Boolean hasPayInfo;
+
+    public Boolean getIsFree() {
+        return isFree;
+    }
+
+    public void setIsFree(Boolean isFree) {
+        this.isFree = isFree;
+    }
+
+    public Boolean getHasPayInfo() {
+        return hasPayInfo;
+    }
+
+    public void setHasPayInfo(Boolean hasPayInfo) {
+        this.hasPayInfo = hasPayInfo;
+    }
+
     public Long getId() {
         return id;
     }
@@ -153,7 +173,7 @@ public class SongListSearchParam {
 
     @Override
     public String toString() {
-        return "songListSearchParam{" +
+        return "SongListSearchParam{" +
                 "id=" + id +
                 ", musicName='" + musicName + '\'' +
                 ", singer='" + singer + '\'' +
@@ -166,6 +186,8 @@ public class SongListSearchParam {
                 ", gift='" + gift + '\'' +
                 ", uploader='" + uploader + '\'' +
                 ", selectedLetter='" + selectedLetter + '\'' +
+                ", isFree=" + isFree +
+                ", hasPayInfo=" + hasPayInfo +
                 '}';
     }
 }

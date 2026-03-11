@@ -15,10 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="gift"    column="gift"    />
         <result property="songSlice"    column="song_slice"    />
         <result property="remark"    column="remark"    />
+        <result property="uploader"    column="uploader"    />
+        <result property="firstLetter"    column="first_letter"    />
     </resultMap>
 
     <sql id="selectSongListVo">
-        select id, music_name, singer, language, musical_style, pay, exclusive_level, gift, song_slice, remark from song_list
+        select id, music_name, singer, language, musical_style, pay, exclusive_level, gift, song_slice, remark, uploader, first_letter from song_list
     </sql>
 
     <select id="selectSongListList" parameterType="SongList" resultMap="SongListResult">
@@ -59,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="songSlice != null">song_slice,</if>
             <if test="remark != null">remark,</if>
             <if test="uploader != null">uploader,</if>
+            <if test="firstLetter != null and firstLetter != ''">first_letter,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -72,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="songSlice != null">#{songSlice},</if>
             <if test="remark != null">#{remark},</if>
             <if test="uploader != null">#{uploader},</if>
+            <if test="firstLetter != null and firstLetter != ''">#{firstLetter},</if>
          </trim>
     </insert>
 
@@ -88,6 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="songSlice != null">song_slice = #{songSlice},</if>
             <if test="remark != null">remark = #{remark},</if>
             <if test="uploader != null and uploader != ''">uploader = #{uploader},</if>
+            <if test="firstLetter != null and firstLetter != ''">first_letter = #{firstLetter},</if>
         </trim>
         where id = #{id}
     </update>
@@ -151,27 +156,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSongList" parameterType="com.ruoyi.songList.param.SongListSearchParam" resultMap="SongListResult">
         <include refid="selectSongListVo"/>
         <where>
-            <if test="musicName != null  and musicName != ''"> and music_name like concat('%', #{musicName}, '%')</if>
+            <if test="musicName != null  and musicName != ''">
+                and (
+                    music_name like concat('%', #{musicName}, '%')
+                    or first_letter = #{musicName}
+                )
+            </if>
             <if test="language != null  and language != ''"> and language = #{language}</if>
-            <if test="musicalStyle != null  and musicalStyle != ''"> and musical_style = #{musicalStyle}</if>
+            <if test="musicalStyle != null  and musicalStyle != ''"> and musical_style like concat('%', #{musicalStyle}, '%')</if>
             <if test="pay != null  and pay != ''"> and pay = #{pay}</if>
             <if test="exclusiveLevel != null  and exclusiveLevel != ''"> and exclusive_level = #{exclusiveLevel}</if>
             <if test="songSlice != null  and songSlice != ''"> and song_slice = #{songSlice}</if>
             <if test="uploader != null  and uploader != ''"> and uploader like concat('%', #{uploader}, '%')</if>
             <!-- 首字母筛选 -->
             <if test="selectedLetter != null and selectedLetter != ''">
+                and first_letter = #{selectedLetter}
+            </if>
+            <!-- 免费歌曲筛选：pay、exclusiveLevel、gift均为无效值 -->
+            <if test="isFree != null and isFree == true">
+                and (pay is null or pay = '')
+                and (exclusive_level is null or exclusive_level = '')
+                and (gift is null or gift = '')
+            </if>
+            <!-- 付费信息筛选：pay、exclusiveLevel、gift至少有一个有效值 -->
+            <if test="hasPayInfo != null and hasPayInfo == true">
                 and (
-                -- 1. 字母开头：直接匹配首字母（前端已传大写，简化转换）
-                (music_name REGEXP '^[A-Za-z]' AND SUBSTRING(UPPER(music_name), 1, 1) = #{selectedLetter})
-                OR
-                -- 2. 数字开头：匹配#
-                (music_name REGEXP '^[0-9]' AND #{selectedLetter} = '#')
-                OR
-                -- 3. 中文开头：匹配拼音首字母（MySQL 8.0+ 支持）
-                (music_name REGEXP '^[\\u4e00-\\u9fa5]' AND SUBSTRING(UPPER(CONVERT(music_name USING gb2312)), 1, 1) = #{selectedLetter})
-                OR
-                -- 4. 其他字符（标点/空格等）开头：匹配#
-                (#{selectedLetter} = '#' AND music_name NOT REGEXP '^[A-Za-z0-9\\u4e00-\\u9fa5]')
+                    (pay is not null and pay != '')
+                    or (exclusive_level is not null and exclusive_level != '')
+                    or (gift is not null and gift != '')
                 )
             </if>
         </where>

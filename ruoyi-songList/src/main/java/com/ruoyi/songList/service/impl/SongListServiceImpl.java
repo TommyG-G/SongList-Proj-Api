@@ -16,6 +16,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.param.SongListSearchParam;
+import com.ruoyi.songList.utils.PinyinUtils;
 import com.ruoyi.songList.vo.giftVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import com.ruoyi.songList.vo.musicalStyleVo;
@@ -98,6 +99,12 @@ public class SongListServiceImpl implements ISongListService
         LoginUser loginUser = SecurityUtils.getLoginUser();
         String currentUserId = loginUser != null ? loginUser.getUserId().toString() : "";
         
+        // 设置首字母
+        if (StringUtils.isNotEmpty(songList.getMusicName())) {
+            String firstLetter = PinyinUtils.getFirstLetter(songList.getMusicName());
+            songList.setFirstLetter(firstLetter);
+        }
+        
         // 检测是否有同名记录
         SongList existingSongList = songListMapper.selectSongListByMusicName(songList.getMusicName());
         
@@ -129,7 +136,7 @@ public class SongListServiceImpl implements ISongListService
 
     /**
      * 修改歌单
-     * 
+     *
      * @param songList 歌单
      * @return 结果
      */
@@ -139,6 +146,12 @@ public class SongListServiceImpl implements ISongListService
         // 获取当前登录用户
         LoginUser loginUser = SecurityUtils.getLoginUser();
         String currentUserId = loginUser != null ? loginUser.getUserId().toString() : "";
+        
+        // 设置首字母（如果歌名有变化）
+        if (StringUtils.isNotEmpty(songList.getMusicName())) {
+            String firstLetter = PinyinUtils.getFirstLetter(songList.getMusicName());
+            songList.setFirstLetter(firstLetter);
+        }
         
         // 查询原有记录获取uploader信息
         SongList originalSongList = songListMapper.selectSongListById(songList.getId());
@@ -205,6 +218,12 @@ public class SongListServiceImpl implements ISongListService
             {
                 // 在验证和保存前进行字典转换
                 convertDictValues(music);
+                
+                // 设置首字母
+                if (StringUtils.isNotEmpty(music.getMusicName())) {
+                    String firstLetter = PinyinUtils.getFirstLetter(music.getMusicName());
+                    music.setFirstLetter(firstLetter);
+                }
                 
                 // 验证是否存在这个歌曲
                 SongList s = songListMapper.selectSongListByMusicName(music.getMusicName());
@@ -276,14 +295,26 @@ public class SongListServiceImpl implements ISongListService
             }
         }
 
-        // 曲风字段转换：汉字加"、"间隔符 -> 字典值用逗号分割
+        // 曲风字段转换：支持多种分隔符（中文顿号"、"、中文逗号"，"和英文逗号",")-> 字典值用逗号分割
         if (StringUtils.isNotEmpty(music.getMusicalStyle())) {
-            String musicalStyleValue = DictUtils.getDictValue("song_style", music.getMusicalStyle(), "、");
-            if (StringUtils.isNotEmpty(musicalStyleValue)) {
-                music.setMusicalStyle(musicalStyleValue);
-            } else {
-                throw new ServiceException("曲风 '" + music.getMusicalStyle() + "' 不存在于字典中");
+            // 支持多种分隔符：中文顿号、中文逗号和英文逗号
+            String[] styleArray = music.getMusicalStyle().split("[、，,]");
+            List<String> dictValues = new ArrayList<>();
+            
+            for (String style : styleArray) {
+                String trimmedStyle = style.trim();
+                if (StringUtils.isNotEmpty(trimmedStyle)) {
+                    String dictValue = DictUtils.getDictValue("song_style", trimmedStyle);
+                    if (StringUtils.isEmpty(dictValue)) {
+                        throw new ServiceException("曲风 '" + trimmedStyle + "' 不存在于字典中");
+                    }
+                    dictValues.add(dictValue);
+                }
             }
+            
+            // 将字典值用逗号连接
+            String musicalStyleValue = String.join(",", dictValues);
+            music.setMusicalStyle(musicalStyleValue);
         }
 
         // 大航海字段转换：中文 -> 字典值
@@ -314,7 +345,7 @@ public class SongListServiceImpl implements ISongListService
 
     /**
      * 转换礼物值
-     * 将Excel中的中文名称转换为gift_list表中的完整信息
+     * 将Excel中的中文名称转换为gift_list表中的完整信息（JSON格式）
      *
      * @param music 歌单对象
      */
@@ -336,14 +367,16 @@ public class SongListServiceImpl implements ISongListService
                 throw new ServiceException("礼物 '" + music.getGift() + "' 在gift_list表中不存在");
             }
             giftVo giftInfo = giftList.get(0);
-            // 3. 组合信息存储到gift字段
-            // 格式：name,price,icon,value
-            StringBuilder giftBuilder = new StringBuilder();
-            giftBuilder.append(giftInfo.getName()).append(",")
-                    .append(giftInfo.getPrice()).append(",")
-                    .append(giftInfo.getIcon()).append(",")
-                    .append(giftDictValue);
-            music.setGift(giftBuilder.toString());
+            // 3. 组合信息存储到gift字段（改为JSON格式，与新增功能保持一致）
+            // 格式：{"name":"小花花","price":"0.1","icon":"https://...","value":5}
+            String jsonGift = String.format(
+                "{\"name\":\"%s\",\"price\":\"%s\",\"icon\":\"%s\",\"value\":%s}",
+                giftInfo.getName(),
+                giftInfo.getPrice(),
+                giftInfo.getIcon(),
+                giftDictValue
+            );
+            music.setGift(jsonGift);
         } catch (Exception e) {
             throw new ServiceException("礼物 '" + music.getGift() + "' 信息查询失败：" + e.getMessage());
         }
