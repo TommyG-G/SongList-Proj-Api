@@ -18,6 +18,7 @@ import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.utils.PinyinUtils;
 import com.ruoyi.songList.vo.giftVo;
+import com.ruoyi.songList.vo.SongListExportVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import com.ruoyi.songList.vo.musicalStyleVo;
 import com.ruoyi.system.service.impl.SysUserServiceImpl;
@@ -494,6 +495,69 @@ public class SongListServiceImpl implements ISongListService
         return songListMapper.selectSongList(songList);
     }
 
+    /**
+     * 查询歌单列表用于导出
+     *
+     * @param songList 歌单查询条件
+     * @return 导出VO列表
+     */
+    @Override
+    public List<SongListExportVo> selectSongListForExport(SongList songList) {
+        // 获取原始歌单数据
+        List<SongList> songLists = selectSongListList(songList);
+        
+        // 转换为导出VO并进行字典转换
+        List<SongListExportVo> exportVos = new ArrayList<>();
+        for (SongList item : songLists) {
+            SongListExportVo exportVo = SongListExportVo.fromSongList(item);
+            // 进行字典值转换
+            convertDictValuesForExport(exportVo);
+            exportVos.add(exportVo);
+        }
+        
+        return exportVos;
+    }
+
+    /**
+     * 转换字典值为标签（用于导出）
+     * 将数据库存储的字典值转换为中文显示值
+     *
+     * @param exportVo 导出VO对象
+     */
+    private void convertDictValuesForExport(SongListExportVo exportVo) {
+        // 语言字段转换：字典值 -> 中文
+        if (StringUtils.isNotEmpty(exportVo.getLanguage())) {
+            String languageLabel = DictUtils.getDictLabel("song_language", exportVo.getLanguage());
+            if (StringUtils.isNotEmpty(languageLabel)) {
+                exportVo.setLanguage(languageLabel);
+            }
+        }
+
+        // 曲风字段转换：字典值（逗号分隔）-> 中文标签（顿号分隔）
+        if (StringUtils.isNotEmpty(exportVo.getMusicalStyle())) {
+            String musicalStyleLabel = DictUtils.getDictLabel("song_style", exportVo.getMusicalStyle(), ",");
+            if (StringUtils.isNotEmpty(musicalStyleLabel)) {
+                // 将逗号替换为顿号
+                exportVo.setMusicalStyle(musicalStyleLabel.replace(",", "、"));
+            }
+        }
+
+        // 大航海字段转换：字典值 -> 中文
+        if (StringUtils.isNotEmpty(exportVo.getExclusiveLevel())) {
+            String exclusiveLevelLabel = DictUtils.getDictLabel("exclusive_level", exportVo.getExclusiveLevel());
+            if (StringUtils.isNotEmpty(exclusiveLevelLabel)) {
+                exportVo.setExclusiveLevel(exclusiveLevelLabel);
+            }
+        }
+
+        // 歌切字段转换：字典值 -> 中文
+        if (StringUtils.isNotEmpty(exportVo.getSongSlice())) {
+            String songSliceLabel = DictUtils.getDictLabel("song_slice", exportVo.getSongSlice());
+            if (StringUtils.isNotEmpty(songSliceLabel)) {
+                exportVo.setSongSlice(songSliceLabel);
+            }
+        }
+    }
 
 
 }

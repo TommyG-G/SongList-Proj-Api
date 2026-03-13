@@ -144,4 +144,16 @@ public interface SysUserMapper
      * @return 结果
      */
     public SysUser checkEmailUnique(String email);
+
+    /**
+     * 新增用户扩展信息
+     *
+     * @param userId 用户ID
+     * @param uid UID
+     * @param liveUrl 直播链接
+     * @param homePage 主页链接
+     * @return 结果
+     */
+    public int insertUserExtendInfo(@Param("userId") Long userId, @Param("uid") String uid,
+                                   @Param("liveUrl") String liveUrl, @Param("homePage") String homePage);
 }

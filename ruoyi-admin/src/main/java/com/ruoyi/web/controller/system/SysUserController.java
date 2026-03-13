@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.system;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.ruoyi.common.core.domain.param.UserExtendInfo;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -253,4 +255,14 @@ public class SysUserController extends BaseController
     {
         return success(deptService.selectDeptTreeList(dept));
     }
+
+    /**
+     * 新增用户扩展信息
+     */
+    @PutMapping("/addExtendInfo")
+    public AjaxResult addExtendInfo(@Validated @RequestBody UserExtendInfo user)
+    {
+        return toAjax(userService.addUserExtendInfo(user));
+    }
+
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.ruoyi.common.core.domain.param.UserExtendInfo;
 import jakarta.validation.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -562,4 +564,17 @@ public class SysUserServiceImpl implements ISysUserService
         }
         return successMsg.toString();
     }
+
+    @Override
+    public Integer addUserExtendInfo(UserExtendInfo user){
+        // 获取当前登录用户ID
+        Long currentUserId = SecurityUtils.getUserId();
+        if (currentUserId == null) {
+            throw new ServiceException("用户未登录");
+        }
+        
+        // 插入用户扩展信息
+        return userMapper.insertUserExtendInfo(currentUserId, user.getUID(), user.getLiveUrl(), user.getHomePage());
+    }
+
 }

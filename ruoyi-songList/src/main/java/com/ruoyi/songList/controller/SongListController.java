@@ -6,6 +6,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.vo.giftVo;
+import com.ruoyi.songList.vo.SongListExportVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -61,8 +62,8 @@ public class SongListController extends BaseController
     @PostMapping("/export")
     public void export(HttpServletResponse response, SongList songList)
     {
-        List<SongList> list = songListService.selectSongListList(songList);
-        ExcelUtil<SongList> util = new ExcelUtil<SongList>(SongList.class);
+        List<SongListExportVo> list = songListService.selectSongListForExport(songList);
+        ExcelUtil<SongListExportVo> util = new ExcelUtil<SongListExportVo>(SongListExportVo.class);
         util.exportExcel(response, list, "歌单数据");
     }
 
@@ -128,7 +129,7 @@ public class SongListController extends BaseController
     @PostMapping("/importTemplate")
     public void importTemplate(HttpServletResponse response)
     {
-        ExcelUtil<SongList> util = new ExcelUtil<SongList>(SongList.class);
+        ExcelUtil<SongListExportVo> util = new ExcelUtil<SongListExportVo>(SongListExportVo.class);
         util.importTemplateExcel(response, "歌单数据");
     }
 

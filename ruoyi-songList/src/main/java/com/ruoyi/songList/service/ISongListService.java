@@ -6,16 +6,17 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.songList.domain.SongList;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.param.SongListSearchParam;
+import com.ruoyi.songList.vo.SongListExportVo;
 import com.ruoyi.songList.vo.SongListOperationResult;
 import com.ruoyi.songList.vo.giftVo;
 
 /**
  * 歌单Service接口
- * 
+ *
  * @author TommyG
  * @date 2026-02-26
  */
-public interface ISongListService 
+public interface ISongListService
 {
     /**
      * 查询歌单
@@ -98,5 +99,13 @@ public interface ISongListService
      * @return 歌单集合
      */
     public List<SongList> selectSongList(SongListSearchParam songList);
+
+    /**
+     * 查询歌单列表用于导出
+     *
+     * @param songList 歌单查询条件
+     * @return 导出VO列表
+     */
+    public List<SongListExportVo> selectSongListForExport(SongList songList);
 
 }
