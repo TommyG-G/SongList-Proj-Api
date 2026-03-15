@@ -2,6 +2,8 @@ package com.ruoyi.system.mapper;
 
 import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.core.domain.param.UserExtendInfo;
 import org.apache.ibatis.annotations.Param;
 import com.ruoyi.common.core.domain.entity.SysUser;
 
@@ -152,8 +154,73 @@ public interface SysUserMapper
      * @param uid UID
      * @param liveUrl 直播链接
      * @param homePage 主页链接
+     * @param backgroundImage 背景图片地址
+     * @param backgroundColor 背景颜色值
      * @return 结果
      */
     public int insertUserExtendInfo(@Param("userId") Long userId, @Param("uid") String uid,
-                                   @Param("liveUrl") String liveUrl, @Param("homePage") String homePage);
+                                   @Param("liveUrl") String liveUrl, @Param("homePage") String homePage,
+                                   @Param("backgroundImage") String backgroundImage, @Param("backgroundColor") String backgroundColor,
+                                   @Param("pageTitle") String pageTitle, @Param("mainPrompt") String mainPrompt, @Param("subPrompt") String subPrompt);
+
+    /**
+     * 更新用户扩展信息
+     *
+     * @param userId 用户ID
+     * @param uid UID
+     * @param liveUrl 直播链接
+     * @param homePage 主页链接
+     * @param backgroundImage 背景图片地址
+     * @return 结果
+     */
+    public int updateUserExtendInfo(@Param("userId") Long userId, @Param("uid") String uid,
+                                   @Param("liveUrl") String liveUrl, @Param("homePage") String homePage,
+                                   @Param("backgroundImage") String backgroundImage, @Param("backgroundColor") String backgroundColor,
+                                   @Param("pageTitle") String pageTitle, @Param("mainPrompt") String mainPrompt, @Param("subPrompt") String subPrompt);
+
+    /**
+     * 根据用户ID查询用户扩展信息
+     *
+     * @param userId 用户ID
+     * @return 用户扩展信息
+     */
+    public UserExtendInfo selectUserExtendInfoByUserId(@Param("userId") Long userId);
+
+    /**
+     * 检查用户扩展信息是否存在
+     *
+     * @param userId 用户ID
+     * @return 存在返回1，不存在返回0
+     */
+    public int checkUserExtendInfoExists(@Param("userId") Long userId);
+
+    /**
+     * 更新用户背景图片
+     *
+     * @param userId 用户ID
+     * @param backgroundImage 背景图片地址
+     * @return 结果
+     */
+    public int updateUserBackgroundImage(@Param("userId") Long userId, @Param("backgroundImage") String backgroundImage);
+
+    /**
+     * 更新用户背景颜色
+     *
+     * @param userId 用户ID
+     * @param backgroundColor 背景颜色值
+     * @return 结果
+     */
+    public int updateUserBackgroundColor(@Param("userId") Long userId, @Param("backgroundColor") String backgroundColor);
+
+    /**
+     * 更新用户页面标题和提示信息
+     *
+     * @param userId 用户ID
+     * @param pageTitle 网页标签标题
+     * @param mainPrompt 主标题
+     * @param subPrompt 副标题
+     * @return 结果
+     */
+    public int updateUserPrompts(@Param("userId") Long userId, @Param("pageTitle") String pageTitle,
+                                @Param("mainPrompt") String mainPrompt, @Param("subPrompt") String subPrompt);
 }

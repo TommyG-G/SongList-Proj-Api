@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.ruoyi.common.core.domain.param.UserExtendInfo;
+import com.ruoyi.songList.domain.SongList;
+import com.ruoyi.songList.param.SongListSearchParam;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -263,6 +265,16 @@ public class SysUserController extends BaseController
     public AjaxResult addExtendInfo(@Validated @RequestBody UserExtendInfo user)
     {
         return toAjax(userService.addUserExtendInfo(user));
+    }
+
+    /**
+     * 查询用户扩展信息
+     */
+    @GetMapping("/selectExtendInfo")
+    public AjaxResult selectExtendInfo()
+    {
+        UserExtendInfo result = userService.selectUserExtendInfo();
+        return success(result);
     }
 
 }

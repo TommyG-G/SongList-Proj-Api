@@ -564,7 +564,6 @@ public class SysUserServiceImpl implements ISysUserService
         }
         return successMsg.toString();
     }
-
     @Override
     public Integer addUserExtendInfo(UserExtendInfo user){
         // 获取当前登录用户ID
@@ -573,8 +572,89 @@ public class SysUserServiceImpl implements ISysUserService
             throw new ServiceException("用户未登录");
         }
         
-        // 插入用户扩展信息
-        return userMapper.insertUserExtendInfo(currentUserId, user.getUID(), user.getLiveUrl(), user.getHomePage());
+        // 检查用户扩展信息是否存在
+        int exists = userMapper.checkUserExtendInfoExists(currentUserId);
+        
+        if (exists > 0) {
+            // 存在则更新
+            return userMapper.updateUserExtendInfo(currentUserId, user.getUid(), user.getLiveUrl(), user.getHomePage(),
+                    user.getBackgroundImage(), user.getBackgroundColor(), user.getPageTitle(), user.getMainPrompt(), user.getSubPrompt());
+        } else {
+            // 不存在则插入
+            return userMapper.insertUserExtendInfo(currentUserId, user.getUid(), user.getLiveUrl(), user.getHomePage(),
+                    user.getBackgroundImage(), user.getBackgroundColor(), user.getPageTitle(), user.getMainPrompt(), user.getSubPrompt());
+        }
     }
 
+    @Override
+    public UserExtendInfo selectUserExtendInfo(){
+        // 获取当前登录用户ID
+        Long currentUserId = SecurityUtils.getUserId();
+        if (currentUserId == null) {
+            throw new ServiceException("用户未登录");
+        }
+        
+        // 查询用户扩展信息
+        return userMapper.selectUserExtendInfoByUserId(currentUserId);
+    }
+
+    @Override
+    public boolean updateUserBackgroundImage(String backgroundImage) {
+        // 获取当前登录用户ID
+        Long currentUserId = SecurityUtils.getUserId();
+        if (currentUserId == null) {
+            throw new ServiceException("用户未登录");
+        }
+        
+        // 检查用户扩展信息是否存在
+        int exists = userMapper.checkUserExtendInfoExists(currentUserId);
+        
+        if (exists > 0) {
+            // 存在则更新背景图片字段
+            return userMapper.updateUserBackgroundImage(currentUserId, backgroundImage) > 0;
+        } else {
+            // 不存在则插入新的记录，只设置背景图片字段
+            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, backgroundImage, null, null, null, null) > 0;
+        }
+    }
+
+    @Override
+    public boolean updateUserBackgroundColor(String backgroundColor) {
+        // 获取当前登录用户ID
+        Long currentUserId = SecurityUtils.getUserId();
+        if (currentUserId == null) {
+            throw new ServiceException("用户未登录");
+        }
+        
+        // 检查用户扩展信息是否存在
+        int exists = userMapper.checkUserExtendInfoExists(currentUserId);
+        
+        if (exists > 0) {
+            // 存在则更新背景颜色字段
+            return userMapper.updateUserBackgroundColor(currentUserId, backgroundColor) > 0;
+        } else {
+            // 不存在则插入新的记录，只设置背景颜色字段
+            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, backgroundColor, null, null, null) > 0;
+        }
+    }
+
+    @Override
+    public boolean updateUserPrompts(String pageTitle, String mainPrompt, String subPrompt) {
+        // 获取当前登录用户ID
+        Long currentUserId = SecurityUtils.getUserId();
+        if (currentUserId == null) {
+            throw new ServiceException("用户未登录");
+        }
+        
+        // 检查用户扩展信息是否存在
+        int exists = userMapper.checkUserExtendInfoExists(currentUserId);
+        
+        if (exists > 0) {
+            // 存在则更新页面标题和提示信息字段
+            return userMapper.updateUserPrompts(currentUserId, pageTitle, mainPrompt, subPrompt) > 0;
+        } else {
+            // 不存在则插入新的记录，只设置页面标题和提示信息字段
+            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, null, pageTitle, mainPrompt, subPrompt) > 0;
+        }
+    }
 }

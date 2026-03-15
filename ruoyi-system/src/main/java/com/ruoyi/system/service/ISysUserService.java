@@ -216,5 +216,44 @@ public interface ISysUserService
      */
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
 
+    /**
+     * 新增或更新用户扩展信息
+     *
+     * @param user 用户扩展信息
+     * @return 结果
+     */
     public Integer addUserExtendInfo(UserExtendInfo user);
+
+    /**
+     * 根据当前登录用户ID查询用户扩展信息
+     *
+     * @return 用户扩展信息
+     */
+    public UserExtendInfo selectUserExtendInfo();
+
+    /**
+     * 更新用户背景图片
+     *
+     * @param backgroundImage 背景图片地址
+     * @return 结果
+     */
+    public boolean updateUserBackgroundImage(String backgroundImage);
+
+    /**
+     * 更新用户背景颜色
+     *
+     * @param backgroundColor 背景颜色值
+     * @return 结果
+     */
+    public boolean updateUserBackgroundColor(String backgroundColor);
+
+    /**
+     * 更新用户页面标题和提示信息
+     *
+     * @param pageTitle 网页标签标题
+     * @param mainPrompt 主标题
+     * @param subPrompt 副标题
+     * @return 结果
+     */
+    public boolean updateUserPrompts(String pageTitle, String mainPrompt, String subPrompt);
 }

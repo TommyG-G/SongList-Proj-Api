@@ -2,8 +2,9 @@ package com.ruoyi.songList.controller;
 
 import java.util.List;
 
-import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.param.UserExtendInfo;
 import com.ruoyi.songList.param.GiftSearchParam;
+import com.ruoyi.songList.param.PromptsUpdateParam;
 import com.ruoyi.songList.param.SongListSearchParam;
 import com.ruoyi.songList.vo.giftVo;
 import com.ruoyi.songList.vo.SongListExportVo;
@@ -28,6 +29,11 @@ import com.ruoyi.songList.service.ISongListService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestParam;
+import com.ruoyi.common.config.RuoYiConfig;
+import com.ruoyi.common.utils.file.FileUploadUtils;
+import com.ruoyi.common.utils.file.MimeTypeUtils;
+import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 歌单Controller
@@ -41,6 +47,9 @@ public class SongListController extends BaseController
 {
     @Autowired
     private ISongListService songListService;
+
+    @Autowired
+    private ISysUserService userService;
 
     /**
      * 查询歌单列表
@@ -171,7 +180,6 @@ public class SongListController extends BaseController
             return error("显示列配置保存失败");
         }
     }
-
     /**
      * 查询曲风字典数据
      */
@@ -191,4 +199,151 @@ public class SongListController extends BaseController
         return success(list);
     }
 
+    /**
+     * 背景图片上传
+     */
+    @Log(title = "歌单背景图片", businessType = BusinessType.UPDATE)
+    @PostMapping("/uploadBackground")
+    public AjaxResult uploadBackground(@RequestParam("backgroundFile") MultipartFile file) throws Exception
+    {
+        if (!file.isEmpty())
+        {
+            // 上传图片到默认地址
+            String backgroundImage = FileUploadUtils.upload(RuoYiConfig.getProfile(), file, MimeTypeUtils.IMAGE_EXTENSION, true);
+            
+            // 将存储地址存储到user_extend_info表中
+            if (userService.updateUserBackgroundImage(backgroundImage))
+            {
+                AjaxResult ajax = AjaxResult.success();
+                ajax.put("imgUrl", backgroundImage);
+                return ajax;
+            }
+        }
+        return error("上传图片异常，请联系管理员");
+    }
+
+    /**
+     * 获取用户背景图片
+     */
+    @GetMapping("/getBackground")
+    public AjaxResult getBackground()
+    {
+        try {
+            // 获取当前用户的扩展信息
+            UserExtendInfo userExtendInfo = userService.selectUserExtendInfo();
+            
+            if (userExtendInfo != null && userExtendInfo.getBackgroundImage() != null
+                && !userExtendInfo.getBackgroundImage().trim().isEmpty()) {
+                // 有背景图片数据，返回图片地址
+                return success(userExtendInfo.getBackgroundImage());
+            } else {
+                // 没有背景图片数据，返回空字符串
+                return success("");
+            }
+        } catch (Exception e) {
+            // 如果出现异常（如用户未登录），也返回空字符串
+            return error("获取数据发生一场，请连续管理员");
+        }
+    }
+
+    /**
+     * 更新用户背景颜色
+     */
+    @Log(title = "歌单背景颜色", businessType = BusinessType.UPDATE)
+    @PostMapping("/uploadBackgroundColor")
+    public AjaxResult uploadBackgroundColor(@RequestParam("color") String color) throws Exception
+    {
+        if (color != null && !color.trim().isEmpty()) {
+            // 将颜色值存储到user_extend_info表中
+            if (userService.updateUserBackgroundColor(color)) {
+                AjaxResult ajax = AjaxResult.success();
+                ajax.put("color", color);
+                return ajax;
+            }
+        }
+        return error("颜色参数异常，请联系管理员");
+    }
+
+    /**
+     * 获取用户背景颜色
+     */
+    @GetMapping("/getBackgroundColor")
+    public AjaxResult getBackgroundColor()
+    {
+        try {
+            // 获取当前用户的扩展信息
+            UserExtendInfo userExtendInfo = userService.selectUserExtendInfo();
+            
+            if (userExtendInfo != null && userExtendInfo.getBackgroundColor() != null
+                && !userExtendInfo.getBackgroundColor().trim().isEmpty()) {
+                // 有背景颜色数据，返回颜色值
+                return success(userExtendInfo.getBackgroundColor());
+            } else {
+                // 没有背景颜色数据，返回空字符串
+                return success("");
+            }
+        } catch (Exception e) {
+            // 如果出现异常（如用户未登录），也返回空字符串
+            return success("");
+        }
+    }
+
+    /**
+     * 更新用户页面标题和提示信息
+     */
+    @Log(title = "歌单页面标题和提示信息", businessType = BusinessType.UPDATE)
+    @PostMapping("/updatePrompts")
+    public AjaxResult updatePrompts(@RequestBody PromptsUpdateParam promptsUpdateParam)
+    {
+        // 检查参数是否都为空
+        if ((promptsUpdateParam.getPageTitle() == null || promptsUpdateParam.getPageTitle().trim().isEmpty()) &&
+            (promptsUpdateParam.getMainPrompt() == null || promptsUpdateParam.getMainPrompt().trim().isEmpty()) &&
+            (promptsUpdateParam.getSubPrompt() == null || promptsUpdateParam.getSubPrompt().trim().isEmpty())) {
+            return error("至少需要提供一个有效的参数值");
+        }
+        
+        // 将页面标题和提示信息存储到user_extend_info表中
+        if (userService.updateUserPrompts(promptsUpdateParam.getPageTitle(), promptsUpdateParam.getMainPrompt(), promptsUpdateParam.getSubPrompt())) {
+            AjaxResult ajax = AjaxResult.success();
+            ajax.put("pageTitle", promptsUpdateParam.getPageTitle());
+            ajax.put("mainPrompt", promptsUpdateParam.getMainPrompt());
+            ajax.put("subPrompt", promptsUpdateParam.getSubPrompt());
+            return ajax;
+        }
+        return error("保存页面标题和提示信息失败，请联系管理员");
+    }
+
+    /**
+     * 获取用户页面标题和提示信息
+     */
+    @GetMapping("/getPrompts")
+    public AjaxResult getPrompts()
+    {
+        try {
+            // 获取当前用户的扩展信息
+            UserExtendInfo userExtendInfo = userService.selectUserExtendInfo();
+            
+            if (userExtendInfo != null) {
+                AjaxResult ajax = AjaxResult.success();
+                ajax.put("pageTitle", userExtendInfo.getPageTitle() != null ? userExtendInfo.getPageTitle() : "");
+                ajax.put("mainPrompt", userExtendInfo.getMainPrompt() != null ? userExtendInfo.getMainPrompt() : "");
+                ajax.put("subPrompt", userExtendInfo.getSubPrompt() != null ? userExtendInfo.getSubPrompt() : "");
+                return ajax;
+            } else {
+                // 没有数据，返回空值
+                AjaxResult ajax = AjaxResult.success();
+                ajax.put("pageTitle", "");
+                ajax.put("mainPrompt", "");
+                ajax.put("subPrompt", "");
+                return ajax;
+            }
+        } catch (Exception e) {
+            // 如果出现异常（如用户未登录），也返回空值
+            AjaxResult ajax = AjaxResult.success();
+            ajax.put("pageTitle", "");
+            ajax.put("mainPrompt", "");
+            ajax.put("subPrompt", "");
+            return ajax;
+        }
+    }
 }
