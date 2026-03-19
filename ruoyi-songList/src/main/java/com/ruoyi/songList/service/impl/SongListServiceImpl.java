@@ -204,7 +204,7 @@ public class SongListServiceImpl implements ISongListService
     }
 
     @Override
-    public String importSong(List<SongList> songList, Boolean isUpdateSupport, String operName){
+    public String importSong(List<SongList> songList, String operName){
         if (StringUtils.isNull(songList) || songList.size() == 0)
         {
             throw new ServiceException("导入歌单数据不能为空！");
@@ -236,7 +236,7 @@ public class SongListServiceImpl implements ISongListService
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、歌曲 " + music.getMusicName() + " 导入成功");
                 }
-                else if (isUpdateSupport)
+                else
                 {
                     BeanValidators.validateWithException(validator, music);
                     // 更新时仅在原有uploader基础上追加当前登录人ID
@@ -252,11 +252,6 @@ public class SongListServiceImpl implements ISongListService
                     songListMapper.updateSongList(music);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、歌曲 " + music.getMusicName() + " 更新成功");
-                }
-                else
-                {
-                    failureNum++;
-                    failureMsg.append("<br/>" + failureNum + "、歌曲 " + music.getMusicName() + " 已存在");
                 }
             }
             catch (Exception e)

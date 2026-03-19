@@ -68,7 +68,7 @@ public interface ISongListService
 
     public List<giftVo> selectGiftList(List<GiftSearchParam> giftSearchParam);
 
-    public String importSong(List<SongList> songList, Boolean isUpdateSupport, String operName);
+    public String importSong(List<SongList> songList, String operName);
 
     /**
      * 查询歌单显示列配置

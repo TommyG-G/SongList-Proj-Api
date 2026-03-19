@@ -127,7 +127,6 @@ public class SongListController extends BaseController
     /**
      * 查询礼物信息
      */
-    @PreAuthorize("@ss.hasPermi('songList:info:list')")
     @PostMapping("/giftList")
     public List<giftVo> gift(@RequestBody List<GiftSearchParam> giftSearchParam)
     {
@@ -143,21 +142,19 @@ public class SongListController extends BaseController
     }
 
     @Log(title = "歌单管理", businessType = BusinessType.IMPORT)
-    @PreAuthorize("@ss.hasPermi('songList:info:import')")
     @PostMapping("/importData")
-    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    public AjaxResult importData(MultipartFile file) throws Exception
     {
         ExcelUtil<SongList> util = new ExcelUtil<SongList>(SongList.class);
         List<SongList> SongList = util.importExcel(file.getInputStream());
         String operName = getUserId().toString();
-        String message = songListService.importSong(SongList, updateSupport, operName);
+        String message = songListService.importSong(SongList, operName);
         return success(message);
     }
 
     /**
      * 查询歌单显示列配置
      */
-    @PreAuthorize("@ss.hasPermi('songList:info:isShowColumns')")
     @GetMapping("/isShowColumns")
     public AjaxResult isShowColumns()
     {
@@ -168,7 +165,6 @@ public class SongListController extends BaseController
     /**
      * 保存歌单显示列配置
      */
-    @PreAuthorize("@ss.hasPermi('songList:info:saveShowColumns')")
     @Log(title = "歌单显示列配置", businessType = BusinessType.UPDATE)
     @PostMapping("/saveShowColumns")
     public AjaxResult saveShowColumns(@RequestBody List<String> columns)
