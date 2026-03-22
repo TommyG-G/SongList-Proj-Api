@@ -11,7 +11,7 @@
  Target Server Version : 80045 (8.0.45)
  File Encoding         : 65001
 
- Date: 16/03/2026 20:35:37
+ Date: 22/03/2026 20:50:12
 */
 
 SET NAMES utf8mb4;
@@ -206,12 +206,13 @@ CREATE TABLE `isshow_song_table_columns`  (
   `user_id` int NULL DEFAULT NULL COMMENT '用户ID',
   `columns` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '显示列集合',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of isshow_song_table_columns
 -- ----------------------------
 INSERT INTO `isshow_song_table_columns` VALUES (1, 1, 'musicName,singer,language,musicalStyle,pay,songSlice,remark');
+INSERT INTO `isshow_song_table_columns` VALUES (2, 3, 'musicName,singer,musicalStyle');
 
 -- ----------------------------
 -- Table structure for musical_style
@@ -532,7 +533,7 @@ CREATE TABLE `song_list`  (
   `first_letter` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '歌名首字母',
   `singer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '歌手',
   `language` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '语言',
-  `musical_style` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '曲风',
+  `musical_style` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '曲风',
   `pay` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '付费',
   `exclusive_level` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '大航海',
   `gift` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '礼物',
@@ -540,16 +541,16 @@ CREATE TABLE `song_list`  (
   `remark` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '备注',
   `uploader` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '上传人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1459 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '歌单' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1945 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '歌单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of song_list
 -- ----------------------------
-INSERT INTO `song_list` VALUES (973, 'SLEEPWALK', 'S', 'ヒトリエ', '2', '11', '30', '1', '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\",\"value\":25}', '1', '', '1');
-INSERT INTO `song_list` VALUES (974, 'フユノ(冬野)', '#', 'ヒトリエ', '2', '10', '', NULL, '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\",\"value\":25}', '', '', '1');
-INSERT INTO `song_list` VALUES (975, '日常と地球の額縁 (日常和地球的画框)', 'R', 'ヒトリエ', '2', '12,13', '30', '1', '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\",\"value\":25}', '', '', '1');
-INSERT INTO `song_list` VALUES (976, 'カラノワレモノ (空之碎物)', '#', 'ヒトリエ', '2', '11,10', '', NULL, NULL, '', '', '1');
-INSERT INTO `song_list` VALUES (977, 'さらってほしいの (希望你能把我带走)', '#', 'ヒトリエ', '2', '13,10', '', NULL, NULL, '', '', '1');
+INSERT INTO `song_list` VALUES (973, 'SLEEPWALK', 'S', 'ヒトリエ', '2', '', '30', '1', '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\",\"value\":25}', '1', '', '1');
+INSERT INTO `song_list` VALUES (974, 'フユノ(冬野)', '#', 'ヒトリエ', '2', '', '', NULL, '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\",\"value\":25}', '', '', '1');
+INSERT INTO `song_list` VALUES (975, '日常と地球の額縁 (日常和地球的画框)', 'R', 'ヒトリエ', '2', '', '30', '1', '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\",\"value\":25}', '', '', '1');
+INSERT INTO `song_list` VALUES (976, 'カラノワレモノ (空之碎物)', '#', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '1');
+INSERT INTO `song_list` VALUES (977, 'さらってほしいの (希望你能把我带走)', '#', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '1');
 INSERT INTO `song_list` VALUES (978, 'モノカラー (黑白色彩)', '#', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '1');
 INSERT INTO `song_list` VALUES (979, 'RIVER FOG,CHOCOLATE BUTTERFLY', 'R', 'ヒトリエ', '2', '', '30', '1', NULL, '', '', '1');
 INSERT INTO `song_list` VALUES (980, 'NOTOK', 'N', 'ヒトリエ', '2', '', '', '3', NULL, '', '', '1');
@@ -1031,6 +1032,492 @@ INSERT INTO `song_list` VALUES (1455, '我怀念的', 'W', '孙燕姿', '1', '',
 INSERT INTO `song_list` VALUES (1456, '下等马', 'X', '洛天依Official/ChiliChill', '1', '', '', NULL, NULL, '', '', '1');
 INSERT INTO `song_list` VALUES (1457, '普通朋友', 'P', '陶喆', '1', '', '', NULL, NULL, '', '', '1');
 INSERT INTO `song_list` VALUES (1458, '几分之几', 'J', '卢广仲', '1', '', '', NULL, NULL, '', '', '1');
+INSERT INTO `song_list` VALUES (1459, 'SLEEPWALK', 'S', 'ヒトリエ', '2', '[[\"common_category\",\"流行\"],[\"common_category\",\"古风\"],[\"common_category\",\"国风\"],[\"common_category\",\"ACG\"],[\"common_category\",\"V家\"],[\"common_category\",\"东方\"],[\"common_category\",\"经典\"],[\"common_category\",\"怀旧\"],[\"common_category\",\"民谣\"],[\"common_category\",\"民族\"],[\"common_category\",\"美声\"],[\"common_category\",\"爵士\"],[\"common_category\",\"摇滚\"],[\"common_category\",\"电子\"],[\"common_category\",\"金属\"],[\"common_category\",\"戏腔\"],[\"common_category\",\"RAP\"],[\"common_category\",\"儿歌\"],[\"common_category\",\"整活\"],[\"common_category\",\"可爱\"],[\"common_category\",\"治愈\"],[\"common_category\",\"温柔\"],[\"common_category\",\"活泼\"],[\"common_category\",\"悲伤\"],[\"common_category\",\"空灵\"],[\"common_category\",\"童年回忆\"],[\"common_category\",\"OST\"],[\"common_category\",\"动漫\"],[\"common_category\",\"影视金曲\"],[\"common_category\",\"游戏\"],[\"common_category\",\"原创曲\"],[\"common_category\",\"弹唱\"],[\"common_category\",\"合唱\"],[\"common_category\",\"舞曲\"],[\"common_category\",\"偶像\"],[\"common_category\",\"音乐剧\"],[\"common_category\",\"哥特\"],[\"common_category\",\"特摄\"],[\"common_category\",\"说唱\"],[\"common_category\",\"喊麦\"],[\"common_category\",\"配音\"],[\"common_category\",\"方言\"],[\"common_category\",\"约德尔\"],[\"common_category\",\"其他\"]]', '30', '1', '{\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\"}', '1', '', '3');
+INSERT INTO `song_list` VALUES (1460, 'フユノ(冬野)', '#', 'ヒトリエ', '2', '', '', NULL, '{\"id\":25,\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\"}', '', '', '3');
+INSERT INTO `song_list` VALUES (1461, '日常と地球の額縁 (日常和地球的画框)', 'R', 'ヒトリエ', '2', '', '30', '1', '{\"id\":25,\"name\":\"重拳出击\",\"price\":\"19.9\",\"icon\":\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\"}', '', '', '3');
+INSERT INTO `song_list` VALUES (1462, 'カラノワレモノ (空之碎物)', '#', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1463, 'さらってほしいの (希望你能把我带走)', '#', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1464, 'モノカラー (黑白色彩)', '#', 'ヒトリエ', '2', '[[\"pitch_category\",\"高音\"],[\"pitch_category\",\"中音\"],[\"pitch_category\",\"低音\"]]', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1465, 'RIVER FOG,CHOCOLATE BUTTERFLY', 'R', 'ヒトリエ', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1466, 'NOTOK', 'N', 'ヒトリエ', '2', '', '', '3', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1467, '(W)HERE', '#', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1468, '癖', 'P', 'ヒトリエ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1469, '東京フラッシュ (东京闪景)', 'D', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1470, 'napori', 'N', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1471, '踊り子 (舞女)', 'Y', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1472, '灯火', 'D', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1473, '裸の勇者 (赤裸的勇士)', 'L', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1474, '僕は今日も (今天我也)', 'P', 'Vaundy', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1475, '不可幸力', 'B', 'Vaundy', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1476, '走馬灯', 'Z', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1477, '恋風邪にのせて (患上恋爱感冒)', 'L', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1478, '怪獣の唄', 'G', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1479, '宮', 'G', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1480, '花占い (花瓣占卜)', 'H', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1481, 'mabataki', 'M', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1482, 'HERO', 'H', 'Vaundy', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1483, '風神 (日剧《狮子的藏身处》主题曲)', 'F', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1484, '常熱', 'C', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1485, 'トドメの一撃 feat. Cory Wong', '#', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1486, 'GORILLA SHIBAI (猿芝居)', 'G', 'Vaundy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1487, '逃避行 (逃避之旅)', 'T', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1488, '断面 (日剧《教祖之女》主题曲)', 'D', 'Dios', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1489, '王', 'W', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1490, 'ダークルーム（暗室）', '#', 'Dios', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1491, '＆疾走', '#', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1492, '呆然', 'D', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1493, '愛がすべて (爱即是一切 / All I need is love)', 'A', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1494, 'ラブレス (LOVELESS/爱恋失格)', '#', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1495, '天国', 'T', 'Dios', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1496, '芝居の終焉 (戏剧的尽头)', 'Z', 'Dios', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1497, '寄り酔い (倚醉)', 'J', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1498, 'ブラウニー (布朗尼 Brownie)', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1499, 'イージーゲーム (Easy Game)', '#', '和ぬか', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1500, 'The Fog', 'T', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1501, 'ビーユアセルフ (做你自己 Be Yourself)', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1502, '進め！そっちだ！ (auお正月新CM)', 'J', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1503, 'シュガーロス', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1504, '泡沫', 'P', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1505, 'まだ浅はか (feat. 和ぬか)', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1506, 'アイオクレ', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1507, 'アミ (日剧《妖怪合租屋》主题曲)', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1508, 'ラブの逃走 (爱意逃亡)', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1509, 'ロックでキス', '#', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1510, '真っ裸', 'Z', '和ぬか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1511, 'ミカヅキ (新月)', '#', 'さユリ', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1512, 'フラレガイガール (被甩男女)', '#', 'さユリ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1513, '光と闇 (光与暗)', 'G', 'さユリ', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1514, '十億年', 'S', 'さユリ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1515, 'さよーならあなた', '#', 'カネコアヤノ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1516, 'エメラルド', '#', 'カネコアヤノ', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1517, 'かみつきたい', '#', 'カネコアヤノ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1518, 'アーケード (拱廊)', '#', 'カネコアヤノ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1519, '朝になって夢からさめて', 'C', 'カネコアヤノ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1520, '祝日', 'Z', 'カネコアヤノ', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1521, '湯船', 'T', 'カネコアヤノ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1522, 'あなたは煙草 私はシャボン(你是烟草 我是泡沫)', '#', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1523, '水星', 'S', 'ラブリーサマーちゃん', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1524, 'サーカスナイト', '#', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1525, '202 (New Mix)', '#', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1526, 'ルミネセンス', '#', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1527, 'はじめまして', '#', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1528, '私の好きなもの (我喜欢的东西)', 'S', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1529, 'わたしのうた', '#', 'ラブリーサマーちゃん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1530, '笑い話', 'X', 'ラブリーサマーちゃん', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1531, 'サターン (土星)', '#', 'ずっと真夜中でいいのに', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1532, 'グラスとラムレーズン', '#', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1533, 'Ham', 'H', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1534, '君がいて水になる (有你在即可化成水)', 'J', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1535, 'またね幻 (再会，幻)', '#', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1536, 'ばかじゃないのに (虚心若愚)', '#', 'ずっと真夜中でいいのに', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1537, 'Dear Mr 「F」 (亲爱的F先生)', 'D', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1538, '正義', 'Z', 'ずっと真夜中でいいのに', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1539, '秒針を噛む（咬住秒针）', 'M', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1540, '消えてしまいそうです', 'X', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1541, '残機', 'C', 'ずっと真夜中でいいのに', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1542, 'お勉強しといてよ (得好好学习喔)', '#', 'ずっと真夜中でいいのに', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1543, '雲丹と栗', 'Y', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1544, '深昏睡', 'S', '春野', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1545, 'nuit', 'N', '春野', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1546, 'Venus Flytrap feat. 佐藤千亜妃', 'V', '春野', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1547, '私怨', 'S', '春野', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1548, 'I\'m In Love', 'I', '春野', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1549, 'can\'t be waiting anymore?', 'C', '春野', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1550, 'Buddha', 'B', '春野', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1551, 'スコール (疾风骤雨)', '#', '春野', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1552, 'YOU & IDOL', 'Y', '相対性理論(やくしまるえつこ)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1553, '地獄先生', 'D', '相対性理論(やくしまるえつこ)', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1554, 'わたしは人類 (我是人类)', '#', '相対性理論(やくしまるえつこ)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1555, 'sky riders(vo+pf)', 'S', '相対性理論(やくしまるえつこ)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1556, 'バーモント・キス (佛蒙特之吻)', '#', '相対性理論(やくしまるえつこ)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1557, '(恋は) 百年戦争', '#', '相対性理論(やくしまるえつこ)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1558, 'ムーンライト銀河', '#', '相対性理論(やくしまるえつこ)', NULL, '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1559, 'cry', 'C', '日向文', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1560, '落下(いっぱつにゅうこんver.)', 'L', '日向文', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1561, '波よ、君の頬を', 'B', '日向文', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1562, 'リナリア', '#', '日向文', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1563, 'ライバー', '#', '日向文', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1564, '秘密', 'M', '日向文', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1565, 'だから僕は音楽を辞めた（所以我放弃了音乐）', '#', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1566, '春泥棒', 'C', 'ヨルシカ／n-buna', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1567, '嘘月', 'X', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1568, '第一夜', 'D', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1569, '夜明けと蛍', 'Y', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1570, 'アルジャーノン', '#', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1571, 'ヒッチコック', '#', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1572, '晴る', 'Q', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1573, '忘れてください', 'W', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1574, '修羅', 'X', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1575, '月に吠える', 'Y', 'ヨルシカ／n-buna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1576, '歌舞伎町の女王', 'G', '椎名林檎', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1577, '丸ノ内サディスティック', 'W', '椎名林檎', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1578, '人生は夢だらけ', 'R', '椎名林檎', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1579, '眩暈', 'X', '椎名林檎', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1580, '愛妻家の朝食', 'A', '椎名林檎', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1581, 'ドリームレス・ドリームス (无梦之梦)', '#', 'はるまきごはん(春卷饭)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1582, '第三の心臓', 'D', 'はるまきごはん(春卷饭)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1583, '雨子', 'Y', 'はるまきごはん(春卷饭)', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1584, '僕は可憐な少女にはなれない (我无法成为凛然少女)', 'P', 'はるまきごはん(春卷饭)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1585, '人間だった (曾生为人)', 'R', 'picon', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1586, '水葬', 'S', 'おいしくるメロンパン', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1587, '亡き王女のための水域 (悼念公主的水域)', 'W', 'おいしくるメロンパン', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1588, '色水 (彩色水)', 'S', 'おいしくるメロンパン', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1589, '瞬き', 'S', 'back number', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1590, 'クリスマスソング', '#', 'back number', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1591, '笑顔', 'X', 'back number', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1592, '花束', 'H', 'back number', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1593, '風の強い日', 'F', 'back number', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1594, '僕の名前を', 'P', 'back number', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1595, 'カワキヲアメク (声嘶力竭)', '#', '美波', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1596, 'アメヲマツ、 (等雨)', '#', '美波', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1597, 'ETERNAL BLUE', 'E', '美波', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1598, '花', 'H', '藤井風', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1599, '満ちてゆく', 'M', '藤井風', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1600, '死ぬのがいいわ (不如死去)', 'S', '藤井風', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1601, 'きらり (闪耀)', '#', '藤井風', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1602, 'ガーデン (花园)', '#', '藤井風', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1603, '真っ白', 'Z', '藤井風', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1604, '怪物 (TV动画《BEASTARS》第二季片头曲)', 'G', 'YOASOBI', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1605, '群青', 'Q', 'YOASOBI', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1606, 'たぶん', '#', 'YOASOBI', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1607, '祝福', 'Z', 'YOASOBI', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1608, '好きだから。 (因为喜欢你。)', 'H', '『ユイカ』', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1609, '恋音と雨空 (恋歌与沥雨)', 'L', 'AAA', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1610, '永遠のあくる日 (永远的翌日)', 'Y', 'Ado', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1611, '逆光', 'N', 'Ado', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1612, 'Value', 'V', 'Ado', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1613, '蝸旋(feat. Ado)', 'G', 'Ado', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1614, 'カブトムシ', '#', 'aiko', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1615, 'カタオモイ (单相思)', '#', 'Aimer', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1616, 'あの夏で待ってる(在那个夏日等待)', '#', 'cadode', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1617, '青春にして已む(青春已逝)', 'Q', 'Cö shu Nie', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1618, 'ロングスカートは靡いて', '#', 'Conton Candy', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1619, '猫', 'M', 'DISH//', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1620, 'モディファイ(修复)', '#', 'Doctrine Doctrine', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1621, '夜に浮かぶ(浮于夜色)', 'Y', 'Haruna', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1622, '可愛くてごめん', 'K', 'HoneyWorks/早見沙織', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1623, '飛行艇 (飞艇)', 'F', 'King Gnu', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1624, '白日', 'B', 'King Gnu', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1625, 'Prayer X', 'P', 'King Gnu', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1626, '呼吸', 'H', 'kyooo', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1627, '心做し', 'X', 'majiko', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1628, 'Anytime Anywhere (TV动画《葬送的芙莉莲》片尾曲)', 'A', 'milet', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1629, '春愁', 'C', 'Mrs. GREEN APPLE', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1630, 'Tell Me Baby', 'T', 'Mrs. GREEN APPLE', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1631, 'ヒマワリが咲く予定(向日葵将绽放)', '#', 'Nakamura Emi', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1632, 'チクッ', '#', 'Nakamura Emi', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1633, 'l', 'L', 'Nakamura Emi', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1634, '愛にできることはまだあるかい', 'A', 'RADWIMPS', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1635, 'なんでもないや', '#', 'RADWIMPS', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1636, 'めめしぃ (优柔寡断)', '#', 'RADWIMPS', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1637, 'me me she', 'M', 'RADWIMPS', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1638, 'すずめ feat.十明', '#', 'RADWIMPS/十明', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1639, '雨に唄えば(对雨高歌)', 'Y', 'ReoNa', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1640, 'シンデレラボーイ(灰姑娘男孩)', '#', 'Saucy Dog', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1641, 'いつか', '#', 'Saucy Dog', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1642, 'またおいで(请再来吧)', '#', 'South&/可不', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1643, '化作青烟(さくらひらり)', 'H', 'TOMO', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1644, '別の人の彼女になったよ', 'B', 'wacci', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1645, 'ルナ', '#', 'waka', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1646, '分かってないよ', 'F', 'WurtS', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1647, 'Oz. (TV动画《国王排名》片尾曲)', 'O', 'yama', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1648, 'again', 'A', 'YUI', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1649, 'Why me', 'W', 'YUI', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1650, '10月無口な君を忘れる (忘却十月沈默的你)', '#', 'あたらよ', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1651, '夏霞', 'X', 'あたらよ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1652, '8.8', '#', 'あたらよ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1653, 'x分の１', 'X', 'ウソツキ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1654, '琥珀色の街、上海蟹の朝', 'H', 'くるり', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1655, 'たばこ', '#', 'コレサワ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1656, '新宝島', 'X', 'サカナクション', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1657, '愛ゆえに', 'A', 'さとうもか', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1658, 'ランデヴー', '#', 'シャイトープ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1659, 'ロビンソン', '#', 'スピッツ(spitz)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1660, 'Midnight Call', 'M', 'ぜったくん/kojikoji', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1661, 'I wanna kill you', 'I', 'たかやん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1662, '玩具(Toy)', 'W', 'たかやん', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1663, '貴方の恋人になりたい(想成为你的恋人)', 'G', 'チョーキューメイ', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1664, '君がいればいい', 'J', 'つじあやの', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1665, '誰にもなれない私だから (正因为是无法成为他人的我）', 'S', 'トゲナシトゲアリ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1666, '空の箱', 'K', 'トゲナシトゲアリ', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1667, '紡ぐ(织心)', 'F', 'とた', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1668, 'Overdose', 'O', 'なとり', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1669, '夜の歯車', 'Y', 'なとり', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1670, 'ヘビースモーク(heavy smoke)', '#', 'にしな(nishina)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1671, '誰にだって訳がある(人人都有缘由)', 'S', 'ハルレオ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1672, '火炎', 'H', '女王蜂', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1673, 'さがしもの(寻找的东西)', '#', 'ハンバート ハンバート', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1674, '悪魔の子 (恶魔之子)', 'E', 'ヒグチアイ', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1675, 'なんでもないよ、(没什么大不了)', '#', 'マカロニえんぴつ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1676, 'それを愛と呼ぶだけ', '#', 'まふまふ(mafumafu)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1677, '鏡花水月', 'J', 'まふまふ(mafumafu)', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1678, 'プリーズ', '#', 'メガテラ・ゼロ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1679, '私じゃなかったんだね (并非是我)', 'S', 'りりあ。', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1680, '失恋ソング沢山聴いて 泣いてばかりの私はもう.', 'S', 'りりあ。', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1681, 'ロミオとシンデレラ', '#', '初音ミク/doriko', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1682, 'クエスチョン', '#', '初音ミク/john', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1683, '回る空うさぎ', 'H', '初音ミク/Orangestar', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1684, 'メルト(melt)', '#', '初音ミク/supercell', '2', '', '', '2', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1685, '福寿草', 'F', '初音ミク/ぐにょ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1686, 'パズルガール(拼图女孩)', '#', '初音ミク/とあ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1687, '小夜子', 'X', '初音ミク/みきとP', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1688, '僕は依存症feat. みきとP (我是依存症)', 'P', '初音ミク/みきとP', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1689, '奈落', 'N', '初音ミク/みきとP', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1690, 'さようなら、花泥棒さん(再见了，盗花人)', '#', '初音ミク/メル', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1691, '魔法の絨毯 (魔法毯)', 'M', '川崎鷹也', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1692, '君の為のキミノウタ', 'J', '川崎鷹也', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1693, 'れぞんでーとる(Raison d\'etre)', '#', '存流', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1694, '味覚', 'W', '淡甘', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1695, 'ハルノ寂寞 (春日寂寞)', '#', '稲葉曇', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1696, '落日', 'L', '東京事変', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1697, '睡魔', 'S', '缶缶/Ayase', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1698, 'ド屑', '#', '歌愛ユキ/なきそ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1699, '強風オールバック', 'Q', '歌愛ユキ/ゆこぴ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1700, 'そして花になる', '#', '花譜', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1701, 'わたしの線香', '#', '花譜', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1702, 'ギターと孤独と蒼い惑星', '#', '結束バンド', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1703, 'ひとり旅(独自旅行)', '#', '瀬名航/鎖那', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1704, 'ソラゴト(Fake)', '#', '明透', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1705, '夕立', 'X', '日食なつこ', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1706, 'yellow', 'Y', '神山羊', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1707, '彼女は旅に出る (她踏上了旅途)', 'B', '鎖那', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1708, '紅い呪い(鲜红诅咒)', 'H', '吐息/aruma', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1709, 'ビビデバ(星彗闪耀)', '#', '星街すいせい', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1710, '月の明り', 'Y', '伊田恵美', NULL, '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1711, 'ダーリン', '#', '須田景凪', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1712, 'ダイビング', '#', '岩見拓馬', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1713, '月が綺麗', 'Y', '岩見拓馬', '2', '', '', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1714, '1999', '#', '羊文学', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1715, 'fake face dance music', 'F', '音田雅則', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1716, '香水', 'X', '瑛人', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1717, 'ドライフラワー', '#', '優里', '2', '', '30', '1', NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1718, '阿吽のビーツ', 'A', '羽生迷子/v flower', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1719, '好きな人がいること(有喜欢的人)', 'H', '知英', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1720, '糸(线)', 'M', '中島みゆき', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1721, 'S.S.S.', 'S', '佐藤千亜妃', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1722, 'ハルノユキ', '#', 'リリィ、さよなら。', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1723, '今晩はお月さん', 'J', 'ハンバート ハンバート', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1724, '星屑ビーナス', 'X', 'Aimer', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1725, '别问很可怕', 'B', 'J. Sheon', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1726, 'Melody Remix', 'M', '未知', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1727, '大鱼', 'D', '周深', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1728, '不要说话', 'B', '陈奕迅', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1729, '成全', 'C', '林宥嘉', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1730, '梦回还', 'M', '呦猫UNEKO', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1731, '谓风', 'W', '双笙/流仙', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1732, '四重罪孽', 'S', '洛天依/乐正绫/言和/DELA', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1733, '是风动', 'S', '银临/河图', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1734, '六重不忠', 'L', '洛天依/乐正绫/言和/DELA', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1735, '东京不太热', 'D', '洛天依/Z新豪', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1736, '不朽之罪', 'B', '双笙/玄觞', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1737, '幹物女(干物女)', 'G', '洛天依/Z新豪', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1738, '百鬼阴阳抄-柔情版', 'B', '银临/Aki阿杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1739, '权御天下', 'Q', '洛天依等', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1740, '桃花笑', 'T', '洛天依/乐正绫/言和', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1741, '恋人', 'L', '刘嘉星', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1742, '这条小鱼在乎', 'Z', '王OK/洪佩瑜', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1743, '听夜雨', 'T', '礼越', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1744, '珠玉', 'Z', '单依纯', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1745, '爱情讯息', 'A', '郭静', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1746, '她说', 'T', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1747, '愿与愁', 'Y', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1748, '床', 'C', '草东没有派对', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1749, '喜欢', 'X', '张悬', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1750, '爱人错过', 'A', '告五人', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1751, 'Time Machine', 'T', 'mj apanay ft. aren park', '3', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1752, '有何不可', 'Y', '许嵩', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1753, '稻香', 'D', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1754, '龙卷风', 'L', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1755, '夏天的风', 'X', '温岚', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1756, '晚婚', 'W', '李宗盛', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1757, '太聪明', 'T', '陈绮贞', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1758, '小半', 'X', '陈粒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1759, '走马', 'Z', '陈粒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1760, '奇妙能力歌', 'Q', '陈粒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1761, '虚拟', 'X', '陈粒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1762, '易燃易爆炸', 'Y', '陈粒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1763, '绝对占有 相对自由', 'J', '陈粒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1764, '可惜没如果', 'K', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1765, '背对背拥抱', 'B', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1766, '修炼爱情', 'X', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1767, '心墙', 'X', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1768, '曹操', 'C', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1769, '小酒窝', 'X', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1770, '关键词', 'G', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1771, '黑夜问白天', 'H', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1772, '不潮不用花钱', 'B', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1773, '新地球', 'X', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1774, '花海', 'H', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1775, '唯一', 'W', '告五人', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1776, '最长的电影', 'Z', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1777, '别找我麻烦', 'B', '蔡健雅', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1778, '采茶纪', 'C', '双笙', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1779, '第三人称', 'D', 'Hush', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1780, '晴天', 'Q', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1781, '体面', 'T', '于文文', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1782, '笑', 'X', '太一', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1783, '至少还有你', 'Z', '林忆莲', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1784, '啷个哩个啷', 'L', '鹏泊', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1785, '偏爱', 'P', '张芸京', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1786, '男孩', 'N', '梁博', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1787, '童话镇', 'T', '暗杠', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1788, '谁', 'S', '廖俊涛', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1789, 'Tired', 'T', 'vietra', '3', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1790, '孤勇者', 'G', '陈奕迅', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1791, '爱如潮水', 'A', '张信哲', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1792, '年轮', 'N', '汪苏泷', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1793, '东西', 'D', '林俊呈', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1794, '白羊', 'B', '徐秉龙', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1795, '陷阱', 'X', '王北车', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1796, '一笑倾城', 'Y', '汪苏泷', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1797, '好想爱这个世界啊', 'H', '华晨宇', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1798, '童年', 'T', '罗大佑', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1799, '下个路口见', 'X', '李宇春', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1800, '说爱你', 'S', '蔡依林', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1801, '我的歌声里', 'W', '曲婉婷', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1802, '素颜', 'S', '许嵩', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1803, '故梦', 'G', '橙翼', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1804, '鬼', 'G', '草东没有派对', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1805, '梦的光点', 'M', '王心凌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1806, '红马', 'H', '许蓝心', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1807, '突然好想你', 'T', '五月天', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1808, '光年之外', 'G', '邓紫棋', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1809, '难生恨', 'N', 'DAWN', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1810, '消愁', 'X', '毛不易', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1811, '暗号', 'A', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1812, '快乐的扑满', 'K', '邵丽棠', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1813, 'FLY ME TO THE MOON', 'F', 'OLIVIA ONG', '3', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1814, '第三十八年夏至', 'D', '河图', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1815, '当', 'D', '动力火车', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1816, '隐形的翅膀', 'Y', '张韶涵', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1817, '不染', 'B', '毛不易', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1818, '彩虹的微笑', 'C', '王心凌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1819, '时间煮雨', 'S', '郁可唯', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1820, '静悄悄', 'J', '陈泫孝', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1821, '匆匆那年', 'C', '王菲', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1822, '空空如也', 'K', '任然', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1823, '飞机场', 'F', '徐良/小凌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1824, '如果这就是爱情', 'R', '张靓颖', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1825, '欧若拉', 'O', '张韶涵', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1826, '想想念念', 'X', 'FAFA/雪二', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1827, '天地缓缓', 'T', '伦桑', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1828, '喜欢你', 'X', '陈洁仪', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1829, '下雨天', 'X', '南拳妈妈', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1830, '客官不可以', 'K', '徐良/小凌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1831, '绿色', 'L', '陈雪凝', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1832, '世界上的另一个我', 'S', '阿肆 / 郭采洁', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1833, '快乐星猫', 'K', '牛奶咖啡', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1834, '参商', 'C', '不才', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1835, '告白气球', 'G', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1836, '50 Feet', '#', 'SoMo', '3', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1837, '梁山伯与朱丽叶', 'L', '曹格/卓文萱', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1838, '菲菲', 'F', '沈以诚', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1839, '身骑白马', 'S', '徐佳莹', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1840, '吹灭小山河', 'C', '国风堂/司南', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1841, '小宇', 'X', '蓝心羽', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1842, '自作多情', 'Z', '本兮', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1843, '凄美地', 'Q', '郭顶', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1844, '雨爱', 'Y', '杨丞琳', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1845, '七里香', 'Q', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1846, '悬溺', 'X', '葛东琪', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1847, '情花', 'Q', '本兮', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1848, '烟雨行舟', 'Y', '伦桑', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1849, '小幸运', 'X', '田馥甄', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1850, '若把你', 'R', 'Kirsty刘瑾睿', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1851, '无语', 'W', '本兮', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1852, '战放', 'Z', '本兮', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1853, '画', 'H', '邓紫棋', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1854, '狐言', 'H', '河图 / 洛天依', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1855, '赤伶', 'C', 'HITA', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1856, '失眠飞行', 'S', '沈以诚', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1857, '红色高跟鞋', 'H', '蔡健雅', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1858, '烟花易冷', 'Y', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1859, '霜雪千年', 'S', '洛天依/乐正绫', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1860, '载我回家', 'Z', '陈珊妮', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1861, '保留', 'B', '郭顶', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1862, '有心无意', 'Y', '本兮', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1863, '出山', 'C', '花粥', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1864, '大风吹', 'D', '草东没有派对', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1865, '形容', 'X', '沈以诚', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1866, '可乐', 'K', '赵紫骅', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1867, '左肩', 'Z', '安苏羽', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1868, '我好想你', 'W', '苏打绿', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1869, '水星记', 'S', '郭顶', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1870, '年少有为', 'N', '李荣浩', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1871, 'R.', 'R', '李子豪(HtFR)/大喜', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1872, '爱你', 'A', '王心凌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1873, '九九八十一', 'J', '洛天依/乐正绫', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1874, '椿', 'C', '沈以诚', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1875, '夜车', 'Y', '曾轶可', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1876, '红昭愿', 'H', '音阙诗听', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1877, '红尘客栈', 'H', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1878, '蒲公英的约定', 'P', '周杰伦', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1879, '时间飞行', 'S', '白宇/朱一龙', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1880, '醒着醉', 'X', '马良', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1881, '九张机', 'J', '叶炫清', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1882, '说谎', 'S', '林宥嘉', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1883, '浮生未歇', 'F', '音频怪物／双笙', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1884, '撒野', 'S', '凯瑟喵', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1885, '我的一个道姑朋友', 'W', '以冬', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1886, '浪费', 'L', '林宥嘉', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1887, '棠梨煎雪', 'T', '银临', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1888, '后来的我们', 'H', '五月天', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1889, '宝贝', 'B', '张悬', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1890, '好想你', 'H', '朱主爱', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1891, '倾尽天下', 'Q', '河图', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1892, '隐', 'Y', '河图', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1893, '如花', 'R', '河图', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1894, '狂野想乡', 'K', '西瓜JUN', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1895, '丹青客', 'D', 'HITA/小曲儿', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1896, '写给我第一个喜欢的女孩的歌', 'X', '洛天依', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1897, '恶魔的爱', 'E', '李宏毅/李明霖', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1898, '白石溪', 'B', '洛天依/乐正绫', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1899, '锦鲤抄', 'J', '银临/云之泣', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1900, '圈圈点点圈圈点点圈圈点点', 'Q', '洛天依', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1901, '直觉', 'Z', '赵方婧', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1902, '迷人的危险', 'M', 'Dance Flow', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1903, 'The Star', 'T', '李佳思', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1904, '恶作剧', 'E', '王蓝菌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1905, '新九九八十一', 'X', '泠鸢', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1906, '凉城', 'L', '任然', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1907, '那年', 'N', '任然', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1908, '杀手', 'S', '林俊杰', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1909, '孙尚香', 'S', '洛天依/乐正绫/空气凝', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1910, '归零', 'G', '小曲儿', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1911, '水仙', 'S', '王心凌', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1912, '落霞云归', 'L', '慕寒', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1913, '你就不要想起我', 'N', '田馥甄', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1914, '腐草为萤', 'F', '银临', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1915, '越来越不懂', 'Y', '蔡健雅', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1916, '忆江南', 'Y', '五音JW', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1917, '失落沙洲', 'S', '徐佳莹', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1918, '只要平凡', 'Z', '张杰/张碧晨', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1919, '暗淡的是你曾温柔的小动作', 'A', '太一', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1920, '很久很久', 'H', '杨和苏', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1921, '心如止水', 'X', 'Ice Paper', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1922, '太久', 'T', '刘思鉴/桃德李Todd Li', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1923, '当爱已成往事', 'D', '林忆莲/李宗盛', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1924, '勘ぐれい', 'K', 'ずっと真夜中でいいのに', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1925, '薄れる', 'B', 'rinri/裏命', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1926, 'プロポーズ', '#', 'なとり', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1927, 'オノマトペ', '#', '羽生まゐご/りりあ。', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1928, 'Aliens', 'A', 'KIRINJI', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1929, 'ヒスイ', '#', 'nonoc', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1930, '月 feat. ヰ世界情緒', 'Y', 'Guiano/ヰ世界情緒', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1931, '寝言は寝て言え', 'Q', '月ノ美兎', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1932, '君のヒーロー', 'J', '十明', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1933, 'Bunny Girl', 'B', 'AKASAKI', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1934, 'マジか！', '#', '梓川', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1935, 'フィナーレ（终曲）', '#', 'eill', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1936, 'JANE DOE', 'J', '宇多田光/米津玄师', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1937, '死別', 'S', 'シャノン', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1938, '雨き声残響', 'Y', '初音ミク/Orangestar', '2', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1939, '幻彩国', 'H', '双笙', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1940, '食虫植物', 'S', NULL, NULL, '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1941, '我怀念的', 'W', '孙燕姿', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1942, '下等马', 'X', '洛天依Official/ChiliChill', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1943, '普通朋友', 'P', '陶喆', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1944, '几分之几', 'J', '卢广仲', '1', '', '', NULL, NULL, '', '', '3');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -1057,7 +1544,7 @@ INSERT INTO `sys_config` VALUES (1, '主框架页-默认皮肤样式名称', 'sy
 INSERT INTO `sys_config` VALUES (2, '用户管理-账号初始密码', 'sys.user.initPassword', '123456', 'Y', 'admin', '2026-02-24 20:59:02', '', NULL, '初始化密码 123456');
 INSERT INTO `sys_config` VALUES (3, '主框架页-侧边栏主题', 'sys.index.sideTheme', 'theme-dark', 'Y', 'admin', '2026-02-24 20:59:02', '', NULL, '深色主题theme-dark，浅色主题theme-light');
 INSERT INTO `sys_config` VALUES (4, '账号自助-验证码开关', 'sys.account.captchaEnabled', 'false', 'Y', 'admin', '2026-02-24 20:59:02', 'admin', '2026-02-24 21:20:26', '是否开启验证码功能（true开启，false关闭）');
-INSERT INTO `sys_config` VALUES (5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'false', 'Y', 'admin', '2026-02-24 20:59:02', '', NULL, '是否开启注册用户功能（true开启，false关闭）');
+INSERT INTO `sys_config` VALUES (5, '账号自助-是否开启用户注册功能', 'sys.account.registerUser', 'true', 'Y', 'admin', '2026-02-24 20:59:02', 'admin', '2026-03-19 20:00:56', '是否开启注册用户功能（true开启，false关闭）');
 INSERT INTO `sys_config` VALUES (6, '用户登录-黑名单列表', 'sys.login.blackIPList', '', 'Y', 'admin', '2026-02-24 20:59:02', '', NULL, '设置登录IP黑名单限制，多个匹配项以;分隔，支持匹配（*通配、网段）');
 INSERT INTO `sys_config` VALUES (7, '用户管理-初始密码修改策略', 'sys.account.initPasswordModify', '1', 'Y', 'admin', '2026-02-24 20:59:02', '', NULL, '0：初始密码修改策略关闭，没有任何提示，1：提醒用户，如果未修改初始密码，则在登录时就会提醒修改密码对话框');
 INSERT INTO `sys_config` VALUES (8, '用户管理-账号密码更新周期', 'sys.account.passwordValidateDays', '0', 'Y', 'admin', '2026-02-24 20:59:02', '', NULL, '密码更新周期（填写数字，数据初始化值为0不限制，若修改必须为大于0小于365的正整数），如果超过这个周期登录系统时，则在登录时就会提醒修改密码对话框');
@@ -1370,7 +1857,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 156 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 191 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1431,6 +1918,41 @@ INSERT INTO `sys_logininfor` VALUES (152, 'ry', '127.0.0.1', '内网IP', 'Chrome
 INSERT INTO `sys_logininfor` VALUES (153, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-15 18:15:21');
 INSERT INTO `sys_logininfor` VALUES (154, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-15 18:15:39');
 INSERT INTO `sys_logininfor` VALUES (155, 'ry', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-15 18:15:42');
+INSERT INTO `sys_logininfor` VALUES (156, 'ry', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 19:31:25');
+INSERT INTO `sys_logininfor` VALUES (157, 'ry', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 19:31:57');
+INSERT INTO `sys_logininfor` VALUES (158, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 19:32:01');
+INSERT INTO `sys_logininfor` VALUES (159, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 19:32:46');
+INSERT INTO `sys_logininfor` VALUES (160, 'ry', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 19:32:50');
+INSERT INTO `sys_logininfor` VALUES (161, 'ry', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:00:18');
+INSERT INTO `sys_logininfor` VALUES (162, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:00:41');
+INSERT INTO `sys_logininfor` VALUES (163, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:01:00');
+INSERT INTO `sys_logininfor` VALUES (164, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:01:08');
+INSERT INTO `sys_logininfor` VALUES (165, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:02:26');
+INSERT INTO `sys_logininfor` VALUES (166, 'test', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '注册成功', '2026-03-19 20:02:43');
+INSERT INTO `sys_logininfor` VALUES (167, 'test', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:02:49');
+INSERT INTO `sys_logininfor` VALUES (168, 'test', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:02:53');
+INSERT INTO `sys_logininfor` VALUES (169, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:03:00');
+INSERT INTO `sys_logininfor` VALUES (170, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:03:19');
+INSERT INTO `sys_logininfor` VALUES (171, 'test', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:03:23');
+INSERT INTO `sys_logininfor` VALUES (172, 'test', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:09:53');
+INSERT INTO `sys_logininfor` VALUES (173, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:09:57');
+INSERT INTO `sys_logininfor` VALUES (174, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:10:15');
+INSERT INTO `sys_logininfor` VALUES (175, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:15:53');
+INSERT INTO `sys_logininfor` VALUES (176, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:15:58');
+INSERT INTO `sys_logininfor` VALUES (177, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:16:44');
+INSERT INTO `sys_logininfor` VALUES (178, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:16:46');
+INSERT INTO `sys_logininfor` VALUES (179, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:17:35');
+INSERT INTO `sys_logininfor` VALUES (180, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:17:36');
+INSERT INTO `sys_logininfor` VALUES (181, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:17:42');
+INSERT INTO `sys_logininfor` VALUES (182, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '退出成功', '2026-03-19 20:17:44');
+INSERT INTO `sys_logininfor` VALUES (183, 'admin', '127.0.0.1', '内网IP', 'Chrome 145', 'Windows10', '0', '登录成功', '2026-03-19 20:17:45');
+INSERT INTO `sys_logininfor` VALUES (184, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-21 20:16:46');
+INSERT INTO `sys_logininfor` VALUES (185, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-21 20:50:26');
+INSERT INTO `sys_logininfor` VALUES (186, 'test', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-21 20:50:29');
+INSERT INTO `sys_logininfor` VALUES (187, 'test', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-21 21:49:59');
+INSERT INTO `sys_logininfor` VALUES (188, 'test', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-22 00:09:50');
+INSERT INTO `sys_logininfor` VALUES (189, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-22 00:09:50');
+INSERT INTO `sys_logininfor` VALUES (190, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-22 00:38:21');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1458,7 +1980,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2010 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2011 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1558,6 +2080,7 @@ INSERT INTO `sys_menu` VALUES (2006, '歌单删除', 2002, 4, '#', '', NULL, '',
 INSERT INTO `sys_menu` VALUES (2007, '歌单导出', 2002, 5, '#', '', NULL, '', 1, 0, 'F', '0', '0', 'songList:info:export', '#', 'admin', '2026-02-26 20:37:53', 'admin', '2026-02-26 20:59:08', '');
 INSERT INTO `sys_menu` VALUES (2008, '歌单导入', 2002, 6, '', NULL, NULL, '', 1, 0, 'F', '0', '0', 'songList:info:import', '#', 'admin', '2026-03-04 15:12:53', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2009, '网页歌单', 0, 5, 'songList/edit', 'songList/edit/index', NULL, 'songlistEdit', 1, 0, 'C', '0', '0', 'songList:edit:list', 'button', 'admin', '2026-03-14 22:18:34', 'admin', '2026-03-14 22:28:02', '');
+INSERT INTO `sys_menu` VALUES (2010, '外部访问歌单', 0, 8, 'songlist', 'songList/index', NULL, 'songlist', 1, 0, 'M', '1', '0', '', '#', 'admin', '2026-03-19 21:17:50', 'admin', '2026-03-19 21:18:01', '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1609,7 +2132,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 222 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 250 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -1736,6 +2259,34 @@ INSERT INTO `sys_oper_log` VALUES (218, '歌单显示列配置', 2, 'com.ruoyi.s
 INSERT INTO `sys_oper_log` VALUES (219, '歌单', 5, 'com.ruoyi.songList.controller.SongListController.export()', 'POST', 1, 'admin', '管理员', '/songList/info/export', '127.0.0.1', '内网IP', '{\"pageSize\":\"10\",\"pageNum\":\"1\"}', NULL, 0, NULL, '2026-03-15 17:48:17', 242);
 INSERT INTO `sys_oper_log` VALUES (220, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '管理员', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2026-02-24 20:59:01\",\"dataScope\":\"2\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2009,2000,2001],\"params\":{},\"remark\":\"普通角色\",\"roleId\":2,\"roleKey\":\"common\",\"roleName\":\"普通角色\",\"roleSort\":2,\"status\":\"0\",\"updateBy\":\"admin\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-15 18:13:50', 55);
 INSERT INTO `sys_oper_log` VALUES (221, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.dataScope()', 'PUT', 1, 'admin', '管理员', '/system/role/dataScope', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2026-02-24 20:59:01\",\"dataScope\":\"2\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"deptIds\":[100,101,103,105],\"flag\":false,\"menuCheckStrictly\":true,\"params\":{},\"remark\":\"普通角色\",\"roleId\":2,\"roleKey\":\"common\",\"roleName\":\"普通角色\",\"roleSort\":2,\"status\":\"0\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-15 18:15:37', 18);
+INSERT INTO `sys_oper_log` VALUES (222, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', '管理员', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2026-02-24 20:59:01\",\"dataScope\":\"2\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2009,2002,2003,2004,2005,2006,2007,2008,2000,2001],\"params\":{},\"remark\":\"普通角色\",\"roleId\":2,\"roleKey\":\"common\",\"roleName\":\"普通角色\",\"roleSort\":2,\"status\":\"0\",\"updateBy\":\"admin\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-19 19:32:35', 51);
+INSERT INTO `sys_oper_log` VALUES (223, '歌单管理', 6, 'com.ruoyi.songList.controller.SongListController.importData()', 'POST', 1, 'ry', '主播', '/songList/info/importData', '127.0.0.1', '内网IP', '{\"updateSupport\":\"0\"}', NULL, 1, '很抱歉，导入失败！共 490 条数据格式不正确，错误如下：<br/>1、歌曲 SLEEPWALK 已存在<br/>2、歌曲 フユノ(冬野) 已存在<br/>3、歌曲 日常と地球の額縁 (日常和地球的画框) 已存在<br/>4、歌曲 カラノワレモノ (空之碎物) 已存在<br/>5、歌曲 さらってほしいの (希望你能把我带走) 已存在<br/>6、歌曲 モノカラー (黑白色彩) 已存在<br/>7、歌曲 RIVER FOG,CHOCOLATE BUTTERFLY 已存在<br/>8、歌曲 NOTOK 已存在<br/>9、歌曲 (W)HERE 已存在<br/>10、歌曲 癖 已存在<br/>11、歌曲 東京フラッシュ (东京闪景) 已存在<br/>12、歌曲 napori 已存在<br/>13、歌曲 踊り子 (舞女) 已存在<br/>14、歌曲 灯火 已存在<br/>15、歌曲 裸の勇者 (赤裸的勇士) 已存在<br/>16、歌曲 僕は今日も (今天我也) 已存在<br/>17、歌曲 不可幸力 已存在<br/>18、歌曲 走馬灯 已存在<br/>19、歌曲 恋風邪にのせて (患上恋爱感冒) 已存在<br/>20、歌曲 怪獣の唄 已存在<br/>21、歌曲 宮 已存在<br/>22、歌曲 花占い (花瓣占卜) 已存在<br/>23、歌曲 mabataki 已存在<br/>24、歌曲 HERO 已存在<br/>25、歌曲 風神 (日剧《狮子的藏身处》主题曲) 已存在<br/>26、歌曲 常熱 已存在<br/>27、歌曲 トドメの一撃 feat. Cory Wong 已存在<br/>28、歌曲 GORILLA SHIBAI (猿芝居) 已存在<br/>29、歌曲 逃避行 (逃避之旅) 已存在<br/>30、歌曲 断面 (日剧《教祖之女》主题曲) 已存在<br/>31、歌曲 王 已存在<br/>32、歌曲 ダークルーム（暗室） 已存在<br/>33、歌曲 ＆疾走 已存在<br/>34、歌曲 呆然 已存在<br/>35、歌曲 愛がすべて (爱即是一切 / All I need is love) 已存在<br/>36、歌曲 ラブレス (LOVELESS/爱恋失格) 已存在<br/>37、歌曲 天国 已存在<br/>38、歌曲 芝居の終焉 (戏剧的尽头) 已存在<br/>39、歌曲 寄り酔い (倚醉) 已存在<br/>40、歌曲 ブラウニー (布朗尼 Brownie) 已存在<br/>41、歌曲 イージーゲーム (Easy Game) 已存在<br/>42、歌曲 The Fog 已存在<br/>43、歌曲 ビーユアセルフ (做你自己 Be Yourself) 已存在<br/>44、歌曲 進め！そっちだ！ (auお正月新CM) 已存在<br/>45、歌曲 シュガーロス 已存在<br/>46、歌曲 泡沫 已存在<br/>47、歌曲 まだ浅はか (feat. 和ぬか) 已存在<br/>48、歌曲 アイオクレ 已存在<br/>49、歌曲 アミ (日剧《妖怪合租屋》主题曲) 已存在<br/>50、歌曲 ラブの逃走 (爱意逃亡) 已存在<br/>51、歌曲 ロックでキス 已存在<br/>52、歌曲 真っ裸 已存在<br/>53、歌曲 ミカヅキ (新月) 已存在<br/>54、歌曲 フラレガイガール (被甩男女) 已存在<br/>55、歌曲 光と闇 (光与暗) 已存在<br/>56、歌曲 十億年 已存在<br/>57、歌曲 さよーならあなた 已存在<br/>58、歌曲 エメラルド 已存在<br/>59、歌曲 かみつきたい 已存在<br/>60、歌曲 アーケード (拱廊) 已存在<br/>61、歌曲 朝になって夢からさめて 已存在<br/>62、歌曲 祝日 已存在<br/>63、歌曲 湯船 已存在<br/>64、歌曲 あなたは煙草 私はシャボン(你是烟草 我是泡沫) 已存在<br/>65、歌曲 水星 已存在<br/>66、歌曲 サーカスナイト 已存在<br/>67、歌曲 202 (New Mix) 已存在<br/>68、歌曲 ルミネセンス 已存在<br/>69、歌曲 はじめまして 已存在<br/>70、歌曲 私の好きなもの (我喜欢的东西) 已存在<br/>71、歌曲 わたしのうた 已存在<br/>72、歌曲 笑い話 已存在<br/>73、歌曲 サターン (土星) 已存在<br/>74、歌曲 グラスとラムレーズン 已存在<br/>75、歌曲 Ham 已存在<br/>76、歌曲 君がいて水になる (有你在即可化成水) 已存在<br/>77、歌曲 またね幻 (再会，幻) 已存在<br/>78、歌曲 ばかじゃないのに (虚心若愚) 已存在<br/>79、歌曲 Dea', '2026-03-19 19:35:29', 2943);
+INSERT INTO `sys_oper_log` VALUES (224, '歌单管理', 6, 'com.ruoyi.songList.controller.SongListController.importData()', 'POST', 1, 'ry', '主播', '/songList/info/importData', '127.0.0.1', '内网IP', '{\"updateSupport\":\"0\"}', NULL, 1, '很抱歉，导入失败！共 490 条数据格式不正确，错误如下：<br/>1、歌曲 SLEEPWALK 已存在<br/>2、歌曲 フユノ(冬野) 已存在<br/>3、歌曲 日常と地球の額縁 (日常和地球的画框) 已存在<br/>4、歌曲 カラノワレモノ (空之碎物) 已存在<br/>5、歌曲 さらってほしいの (希望你能把我带走) 已存在<br/>6、歌曲 モノカラー (黑白色彩) 已存在<br/>7、歌曲 RIVER FOG,CHOCOLATE BUTTERFLY 已存在<br/>8、歌曲 NOTOK 已存在<br/>9、歌曲 (W)HERE 已存在<br/>10、歌曲 癖 已存在<br/>11、歌曲 東京フラッシュ (东京闪景) 已存在<br/>12、歌曲 napori 已存在<br/>13、歌曲 踊り子 (舞女) 已存在<br/>14、歌曲 灯火 已存在<br/>15、歌曲 裸の勇者 (赤裸的勇士) 已存在<br/>16、歌曲 僕は今日も (今天我也) 已存在<br/>17、歌曲 不可幸力 已存在<br/>18、歌曲 走馬灯 已存在<br/>19、歌曲 恋風邪にのせて (患上恋爱感冒) 已存在<br/>20、歌曲 怪獣の唄 已存在<br/>21、歌曲 宮 已存在<br/>22、歌曲 花占い (花瓣占卜) 已存在<br/>23、歌曲 mabataki 已存在<br/>24、歌曲 HERO 已存在<br/>25、歌曲 風神 (日剧《狮子的藏身处》主题曲) 已存在<br/>26、歌曲 常熱 已存在<br/>27、歌曲 トドメの一撃 feat. Cory Wong 已存在<br/>28、歌曲 GORILLA SHIBAI (猿芝居) 已存在<br/>29、歌曲 逃避行 (逃避之旅) 已存在<br/>30、歌曲 断面 (日剧《教祖之女》主题曲) 已存在<br/>31、歌曲 王 已存在<br/>32、歌曲 ダークルーム（暗室） 已存在<br/>33、歌曲 ＆疾走 已存在<br/>34、歌曲 呆然 已存在<br/>35、歌曲 愛がすべて (爱即是一切 / All I need is love) 已存在<br/>36、歌曲 ラブレス (LOVELESS/爱恋失格) 已存在<br/>37、歌曲 天国 已存在<br/>38、歌曲 芝居の終焉 (戏剧的尽头) 已存在<br/>39、歌曲 寄り酔い (倚醉) 已存在<br/>40、歌曲 ブラウニー (布朗尼 Brownie) 已存在<br/>41、歌曲 イージーゲーム (Easy Game) 已存在<br/>42、歌曲 The Fog 已存在<br/>43、歌曲 ビーユアセルフ (做你自己 Be Yourself) 已存在<br/>44、歌曲 進め！そっちだ！ (auお正月新CM) 已存在<br/>45、歌曲 シュガーロス 已存在<br/>46、歌曲 泡沫 已存在<br/>47、歌曲 まだ浅はか (feat. 和ぬか) 已存在<br/>48、歌曲 アイオクレ 已存在<br/>49、歌曲 アミ (日剧《妖怪合租屋》主题曲) 已存在<br/>50、歌曲 ラブの逃走 (爱意逃亡) 已存在<br/>51、歌曲 ロックでキス 已存在<br/>52、歌曲 真っ裸 已存在<br/>53、歌曲 ミカヅキ (新月) 已存在<br/>54、歌曲 フラレガイガール (被甩男女) 已存在<br/>55、歌曲 光と闇 (光与暗) 已存在<br/>56、歌曲 十億年 已存在<br/>57、歌曲 さよーならあなた 已存在<br/>58、歌曲 エメラルド 已存在<br/>59、歌曲 かみつきたい 已存在<br/>60、歌曲 アーケード (拱廊) 已存在<br/>61、歌曲 朝になって夢からさめて 已存在<br/>62、歌曲 祝日 已存在<br/>63、歌曲 湯船 已存在<br/>64、歌曲 あなたは煙草 私はシャボン(你是烟草 我是泡沫) 已存在<br/>65、歌曲 水星 已存在<br/>66、歌曲 サーカスナイト 已存在<br/>67、歌曲 202 (New Mix) 已存在<br/>68、歌曲 ルミネセンス 已存在<br/>69、歌曲 はじめまして 已存在<br/>70、歌曲 私の好きなもの (我喜欢的东西) 已存在<br/>71、歌曲 わたしのうた 已存在<br/>72、歌曲 笑い話 已存在<br/>73、歌曲 サターン (土星) 已存在<br/>74、歌曲 グラスとラムレーズン 已存在<br/>75、歌曲 Ham 已存在<br/>76、歌曲 君がいて水になる (有你在即可化成水) 已存在<br/>77、歌曲 またね幻 (再会，幻) 已存在<br/>78、歌曲 ばかじゃないのに (虚心若愚) 已存在<br/>79、歌曲 Dea', '2026-03-19 19:42:36', 67423);
+INSERT INTO `sys_oper_log` VALUES (225, '参数管理', 2, 'com.ruoyi.web.controller.system.SysConfigController.edit()', 'PUT', 1, 'admin', '管理员', '/system/config', '127.0.0.1', '内网IP', '{\"configId\":5,\"configKey\":\"sys.account.registerUser\",\"configName\":\"账号自助-是否开启用户注册功能\",\"configType\":\"Y\",\"configValue\":\"true\",\"createBy\":\"admin\",\"createTime\":\"2026-02-24 20:59:02\",\"params\":{},\"remark\":\"是否开启注册用户功能（true开启，false关闭）\",\"updateBy\":\"admin\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-19 20:00:56', 34);
+INSERT INTO `sys_oper_log` VALUES (226, '用户管理', 4, 'com.ruoyi.web.controller.system.SysUserController.insertAuthRole()', 'PUT', 1, 'admin', '管理员', '/system/user/authRole', '127.0.0.1', '内网IP', '{\"roleIds\":\"2\",\"userId\":\"3\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-19 20:03:14', 30);
+INSERT INTO `sys_oper_log` VALUES (227, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"songList/index\",\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"外部访问歌单\",\"menuType\":\"C\",\"orderNum\":8,\"params\":{},\"parentId\":0,\"path\":\"songlist\",\"routeName\":\"songlist\",\"status\":\"0\",\"visible\":\"1\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-19 21:17:50', 29);
+INSERT INTO `sys_oper_log` VALUES (228, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"songList/index\",\"createTime\":\"2026-03-19 21:17:50\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2010,\"menuName\":\"外部访问歌单\",\"menuType\":\"M\",\"orderNum\":8,\"params\":{},\"parentId\":0,\"path\":\"songlist\",\"perms\":\"\",\"routeName\":\"songlist\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"1\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-19 21:18:01', 17);
+INSERT INTO `sys_oper_log` VALUES (229, '歌单管理', 6, 'com.ruoyi.songList.controller.SongListController.importData()', 'POST', 1, 'admin', '管理员', '/songList/info/importData', '127.0.0.1', '内网IP', '', '{\"msg\":\"恭喜您，数据已全部导入成功！共新增 0 条，更新 486 条，数据如下：<br/>1、歌曲 SLEEPWALK 更新成功<br/>2、歌曲 フユノ(冬野) 更新成功<br/>3、歌曲 日常と地球の額縁 (日常和地球的画框) 更新成功<br/>4、歌曲 カラノワレモノ (空之碎物) 更新成功<br/>5、歌曲 さらってほしいの (希望你能把我带走) 更新成功<br/>6、歌曲 モノカラー (黑白色彩) 更新成功<br/>7、歌曲 RIVER FOG,CHOCOLATE BUTTERFLY 更新成功<br/>8、歌曲 NOTOK 更新成功<br/>9、歌曲 (W)HERE 更新成功<br/>10、歌曲 癖 更新成功<br/>11、歌曲 東京フラッシュ (东京闪景) 更新成功<br/>12、歌曲 napori 更新成功<br/>13、歌曲 踊り子 (舞女) 更新成功<br/>14、歌曲 灯火 更新成功<br/>15、歌曲 裸の勇者 (赤裸的勇士) 更新成功<br/>16、歌曲 僕は今日も (今天我也) 更新成功<br/>17、歌曲 不可幸力 更新成功<br/>18、歌曲 走馬灯 更新成功<br/>19、歌曲 恋風邪にのせて (患上恋爱感冒) 更新成功<br/>20、歌曲 怪獣の唄 更新成功<br/>21、歌曲 宮 更新成功<br/>22、歌曲 花占い (花瓣占卜) 更新成功<br/>23、歌曲 mabataki 更新成功<br/>24、歌曲 HERO 更新成功<br/>25、歌曲 風神 (日剧《狮子的藏身处》主题曲) 更新成功<br/>26、歌曲 常熱 更新成功<br/>27、歌曲 トドメの一撃 feat. Cory Wong 更新成功<br/>28、歌曲 GORILLA SHIBAI (猿芝居) 更新成功<br/>29、歌曲 逃避行 (逃避之旅) 更新成功<br/>30、歌曲 断面 (日剧《教祖之女》主题曲) 更新成功<br/>31、歌曲 王 更新成功<br/>32、歌曲 ダークルーム（暗室） 更新成功<br/>33、歌曲 ＆疾走 更新成功<br/>34、歌曲 呆然 更新成功<br/>35、歌曲 愛がすべて (爱即是一切 / All I need is love) 更新成功<br/>36、歌曲 ラブレス (LOVELESS/爱恋失格) 更新成功<br/>37、歌曲 天国 更新成功<br/>38、歌曲 芝居の終焉 (戏剧的尽头) 更新成功<br/>39、歌曲 寄り酔い (倚醉) 更新成功<br/>40、歌曲 ブラウニー (布朗尼 Brownie) 更新成功<br/>41、歌曲 イージーゲーム (Easy Game) 更新成功<br/>42、歌曲 The Fog 更新成功<br/>43、歌曲 ビーユアセルフ (做你自己 Be Yourself) 更新成功<br/>44、歌曲 進め！そっちだ！ (auお正月新CM) 更新成功<br/>45、歌曲 シュガーロス 更新成功<br/>46、歌曲 泡沫 更新成功<br/>47、歌曲 まだ浅はか (feat. 和ぬか) 更新成功<br/>48、歌曲 アイオクレ 更新成功<br/>49、歌曲 アミ (日剧《妖怪合租屋》主题曲) 更新成功<br/>50、歌曲 ラブの逃走 (爱意逃亡) 更新成功<br/>51、歌曲 ロックでキス 更新成功<br/>52、歌曲 真っ裸 更新成功<br/>53、歌曲 ミカヅキ (新月) 更新成功<br/>54、歌曲 フラレガイガール (被甩男女) 更新成功<br/>55、歌曲 光と闇 (光与暗) 更新成功<br/>56、歌曲 十億年 更新成功<br/>57、歌曲 さよーならあなた 更新成功<br/>58、歌曲 エメラルド 更新成功<br/>59、歌曲 かみつきたい 更新成功<br/>60、歌曲 アーケード (拱廊) 更新成功<br/>61、歌曲 朝になって夢からさめて 更新成功<br/>62、歌曲 祝日 更新成功<br/>63、歌曲 湯船 更新成功<br/>64、歌曲 あなたは煙草 私はシャボン(你是烟草 我是泡沫) 更新成功<br/>65、歌曲 水星 更新成功<br/>66、歌曲 サーカスナイト 更新成功<br/>67、歌曲 202 (New Mix) 更新成功<br/>68、歌曲 ルミネセンス 更新成功<br/>69、歌曲 はじめまして 更新成功<br/>70、歌曲 私の好きなもの (我喜欢的东西) 更新成功<br/>71、歌曲 わたしのうた 更新成功<br/>72、歌曲 笑い話 更新成功<br/>73、歌曲 サターン (土星) 更新成功<br/>74、歌曲 グラスとラムレーズン 更新成功<br/>75、歌曲 Ham 更新成功<br/>76、歌曲 君がい', 0, NULL, '2026-03-21 20:50:09', 3647);
+INSERT INTO `sys_oper_log` VALUES (230, '歌单管理', 6, 'com.ruoyi.songList.controller.SongListController.importData()', 'POST', 1, 'test', NULL, '/songList/info/importData', '127.0.0.1', '内网IP', '', '{\"msg\":\"恭喜您，数据已全部导入成功！共新增 486 条，更新 0 条，数据如下：<br/>1、歌曲 SLEEPWALK 导入成功<br/>2、歌曲 フユノ(冬野) 导入成功<br/>3、歌曲 日常と地球の額縁 (日常和地球的画框) 导入成功<br/>4、歌曲 カラノワレモノ (空之碎物) 导入成功<br/>5、歌曲 さらってほしいの (希望你能把我带走) 导入成功<br/>6、歌曲 モノカラー (黑白色彩) 导入成功<br/>7、歌曲 RIVER FOG,CHOCOLATE BUTTERFLY 导入成功<br/>8、歌曲 NOTOK 导入成功<br/>9、歌曲 (W)HERE 导入成功<br/>10、歌曲 癖 导入成功<br/>11、歌曲 東京フラッシュ (东京闪景) 导入成功<br/>12、歌曲 napori 导入成功<br/>13、歌曲 踊り子 (舞女) 导入成功<br/>14、歌曲 灯火 导入成功<br/>15、歌曲 裸の勇者 (赤裸的勇士) 导入成功<br/>16、歌曲 僕は今日も (今天我也) 导入成功<br/>17、歌曲 不可幸力 导入成功<br/>18、歌曲 走馬灯 导入成功<br/>19、歌曲 恋風邪にのせて (患上恋爱感冒) 导入成功<br/>20、歌曲 怪獣の唄 导入成功<br/>21、歌曲 宮 导入成功<br/>22、歌曲 花占い (花瓣占卜) 导入成功<br/>23、歌曲 mabataki 导入成功<br/>24、歌曲 HERO 导入成功<br/>25、歌曲 風神 (日剧《狮子的藏身处》主题曲) 导入成功<br/>26、歌曲 常熱 导入成功<br/>27、歌曲 トドメの一撃 feat. Cory Wong 导入成功<br/>28、歌曲 GORILLA SHIBAI (猿芝居) 导入成功<br/>29、歌曲 逃避行 (逃避之旅) 导入成功<br/>30、歌曲 断面 (日剧《教祖之女》主题曲) 导入成功<br/>31、歌曲 王 导入成功<br/>32、歌曲 ダークルーム（暗室） 导入成功<br/>33、歌曲 ＆疾走 导入成功<br/>34、歌曲 呆然 导入成功<br/>35、歌曲 愛がすべて (爱即是一切 / All I need is love) 导入成功<br/>36、歌曲 ラブレス (LOVELESS/爱恋失格) 导入成功<br/>37、歌曲 天国 导入成功<br/>38、歌曲 芝居の終焉 (戏剧的尽头) 导入成功<br/>39、歌曲 寄り酔い (倚醉) 导入成功<br/>40、歌曲 ブラウニー (布朗尼 Brownie) 导入成功<br/>41、歌曲 イージーゲーム (Easy Game) 导入成功<br/>42、歌曲 The Fog 导入成功<br/>43、歌曲 ビーユアセルフ (做你自己 Be Yourself) 导入成功<br/>44、歌曲 進め！そっちだ！ (auお正月新CM) 导入成功<br/>45、歌曲 シュガーロス 导入成功<br/>46、歌曲 泡沫 导入成功<br/>47、歌曲 まだ浅はか (feat. 和ぬか) 导入成功<br/>48、歌曲 アイオクレ 导入成功<br/>49、歌曲 アミ (日剧《妖怪合租屋》主题曲) 导入成功<br/>50、歌曲 ラブの逃走 (爱意逃亡) 导入成功<br/>51、歌曲 ロックでキス 导入成功<br/>52、歌曲 真っ裸 导入成功<br/>53、歌曲 ミカヅキ (新月) 导入成功<br/>54、歌曲 フラレガイガール (被甩男女) 导入成功<br/>55、歌曲 光と闇 (光与暗) 导入成功<br/>56、歌曲 十億年 导入成功<br/>57、歌曲 さよーならあなた 导入成功<br/>58、歌曲 エメラルド 导入成功<br/>59、歌曲 かみつきたい 导入成功<br/>60、歌曲 アーケード (拱廊) 导入成功<br/>61、歌曲 朝になって夢からさめて 导入成功<br/>62、歌曲 祝日 导入成功<br/>63、歌曲 湯船 导入成功<br/>64、歌曲 あなたは煙草 私はシャボン(你是烟草 我是泡沫) 导入成功<br/>65、歌曲 水星 导入成功<br/>66、歌曲 サーカスナイト 导入成功<br/>67、歌曲 202 (New Mix) 导入成功<br/>68、歌曲 ルミネセンス 导入成功<br/>69、歌曲 はじめまして 导入成功<br/>70、歌曲 私の好きなもの (我喜欢的东西) 导入成功<br/>71、歌曲 わたしのうた 导入成功<br/>72、歌曲 笑い話 导入成功<br/>73、歌曲 サターン (土星) 导入成功<br/>74、歌曲 グラスとラムレーズン 导入成功<br/>75、歌曲 Ham 导入成功<br/>76、歌曲 君がい', 0, NULL, '2026-03-21 21:02:51', 4796);
+INSERT INTO `sys_oper_log` VALUES (231, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 21:06:43', 18);
+INSERT INTO `sys_oper_log` VALUES (232, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\",\"language\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 21:06:53', 8);
+INSERT INTO `sys_oper_log` VALUES (233, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 21:09:56', 8);
+INSERT INTO `sys_oper_log` VALUES (234, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\",\"language\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 21:10:30', 8);
+INSERT INTO `sys_oper_log` VALUES (235, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\",\"language\",\"musicalStyle\",\"pay\",\"songSlice\",\"remark\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 21:13:56', 11);
+INSERT INTO `sys_oper_log` VALUES (236, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 21:14:18', 9);
+INSERT INTO `sys_oper_log` VALUES (237, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"id\\\":25,\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"11\",\"pay\":\"30\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"1\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 22:56:52', 21);
+INSERT INTO `sys_oper_log` VALUES (238, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"firstLetter\":\"#\",\"gift\":\"{\\\"id\\\":25,\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\"}\",\"id\":1460,\"language\":\"2\",\"musicName\":\"フユノ(冬野)\",\"musicalStyle\":\"10\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 22:57:12', 11);
+INSERT INTO `sys_oper_log` VALUES (239, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"11\",\"pay\":\"30\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"1\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:00:07', 13);
+INSERT INTO `sys_oper_log` VALUES (240, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"R\",\"gift\":\"{\\\"id\\\":25,\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1461,\"language\":\"2\",\"musicName\":\"日常と地球の額縁 (日常和地球的画框)\",\"musicalStyle\":\"12,13\",\"pay\":\"30\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:00:12', 11);
+INSERT INTO `sys_oper_log` VALUES (241, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"firstLetter\":\"#\",\"gift\":\"{\\\"id\\\":25,\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1460,\"language\":\"2\",\"musicName\":\"フユノ(冬野)\",\"musicalStyle\":\"10\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:00:19', 9);
+INSERT INTO `sys_oper_log` VALUES (242, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"id\\\":25,\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"11\",\"pay\":\"30\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"1\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:00:24', 13);
+INSERT INTO `sys_oper_log` VALUES (243, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"firstLetter\":\"#\",\"id\":1464,\"language\":\"2\",\"musicName\":\"モノカラー (黑白色彩)\",\"musicalStyle\":\"\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:01:09', 7);
+INSERT INTO `sys_oper_log` VALUES (244, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"firstLetter\":\"#\",\"id\":1464,\"language\":\"2\",\"musicName\":\"モノカラー (黑白色彩)\",\"musicalStyle\":\"[[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"newMusicalStyle\":\"[[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:01:59', 61);
+INSERT INTO `sys_oper_log` VALUES (245, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"firstLetter\":\"#\",\"id\":1464,\"language\":\"2\",\"musicName\":\"モノカラー (黑白色彩)\",\"musicalStyle\":\"[[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"newMusicalStyle\":\"[[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:05:23', 33649);
+INSERT INTO `sys_oper_log` VALUES (246, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"firstLetter\":\"#\",\"id\":1464,\"language\":\"2\",\"musicName\":\"モノカラー (黑白色彩)\",\"musicalStyle\":\"[[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"newMusicalStyle\":\"[[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"remark\":\"\",\"singer\":\"ヒトリエ\",\"songSlice\":\"\",\"uploader\":\"3\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:08:01', 52578);
+INSERT INTO `sys_oper_log` VALUES (247, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\",\"musicalStyle\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 23:41:49', 11);
+INSERT INTO `sys_oper_log` VALUES (248, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_cate', NULL, 1, '\r\n### Error updating database.  Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column \'musical_style\' at row 1\r\n### The error may exist in file [C:\\Proj\\RuoYi\\RuoYi-Api\\ruoyi-songList\\target\\classes\\mapper\\songList\\SongListMapper.xml]\r\n### The error may involve com.ruoyi.songList.mapper.SongListMapper.updateSongList-Inline\r\n### The error occurred while setting parameters\r\n### SQL: update song_list          SET music_name = ?,             singer = ?,             language = ?,             musical_style = ?,             pay = ?,             exclusive_level = ?,             gift = ?,             song_slice = ?,             remark = ?,             uploader = ?,             first_letter = ?          where id = ?\r\n### Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column \'musical_style\' at row 1\n; Data truncation: Data too long for column \'musical_style\' at row 1', '2026-03-21 23:50:32', 189);
+INSERT INTO `sys_oper_log` VALUES (249, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_cate', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:51:11', 19);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1789,7 +2340,7 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0', '0', 'admin', '2026-02-24 20:59:01', '', NULL, '超级管理员');
-INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2026-02-24 20:59:01', 'admin', '2026-03-15 18:15:37', '普通角色');
+INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2026-02-24 20:59:01', 'admin', '2026-03-19 19:32:35', '普通角色');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1824,6 +2375,13 @@ CREATE TABLE `sys_role_menu`  (
 -- ----------------------------
 INSERT INTO `sys_role_menu` VALUES (2, 2000);
 INSERT INTO `sys_role_menu` VALUES (2, 2001);
+INSERT INTO `sys_role_menu` VALUES (2, 2002);
+INSERT INTO `sys_role_menu` VALUES (2, 2003);
+INSERT INTO `sys_role_menu` VALUES (2, 2004);
+INSERT INTO `sys_role_menu` VALUES (2, 2005);
+INSERT INTO `sys_role_menu` VALUES (2, 2006);
+INSERT INTO `sys_role_menu` VALUES (2, 2007);
+INSERT INTO `sys_role_menu` VALUES (2, 2008);
 INSERT INTO `sys_role_menu` VALUES (2, 2009);
 
 -- ----------------------------
@@ -1852,13 +2410,14 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '超级管理员', '00', '18888888888@163.com', '18888888888', '0', '/profile/avatar/2026/03/15/847276882d154bd4b81b31274f8ab67e.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-15 18:15:22', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', '2026-03-15 12:49:41', '管理员');
-INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-15 18:15:43', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', NULL, '测试员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '超级管理员', '00', '18888888888@163.com', '18888888888', '0', '/profile/avatar/2026/03/15/847276882d154bd4b81b31274f8ab67e.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-22 00:09:51', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', '2026-03-15 12:49:41', '管理员');
+INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-19 19:32:51', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', NULL, '测试员');
+INSERT INTO `sys_user` VALUES (3, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$CaNBqJW7hMXuNx6Pdw2rpe0EY59wpAuBzJOeK4lRck9N3pe5u/VSa', '0', '0', '127.0.0.1', '2026-03-21 21:50:00', '2026-03-19 20:02:44', '', '2026-03-19 20:02:43', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -1891,6 +2450,7 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 2);
+INSERT INTO `sys_user_role` VALUES (3, 2);
 
 -- ----------------------------
 -- Table structure for user_extend_info

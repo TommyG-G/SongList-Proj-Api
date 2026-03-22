@@ -78,12 +78,29 @@ public interface ISongListService
     public List<String> selectShowColumns();
 
     /**
+     * 通过外部指定的用户 UID 直接查询该人的显示配置（用于免认证）
+     */
+    public List<String> selectShowColumnsByUid(Long uid);
+
+    /**
      * 保存歌单显示列配置
      *
      * @param columns 要显示的列列表
      * @return 操作结果
      */
     public int saveShowColumns(List<String> columns);
+
+    /**
+     * 动态查询目前在库中真实存在的有效曲风列表，解析 JSON 截断层级后进行回显
+     * 
+     * @return 可用的列表，提供给前端 el-select 生成的带有 label/value 的 Map 数组
+     */
+    public List<java.util.Map<String, String>> getExistingMusicalStyles();
+
+    /**
+     * 参数版查询真实存在有效曲风
+     */
+    public List<java.util.Map<String, String>> getExistingMusicalStylesByUid(String uploaderId);
 
     /**
      * 查询曲风字典数据

@@ -595,7 +595,23 @@ public class SysUserServiceImpl implements ISysUserService
         }
         
         // 查询用户扩展信息
-        return userMapper.selectUserExtendInfoByUserId(currentUserId);
+        return selectUserExtendInfoByUserId(currentUserId);
+    }
+
+    @Override
+    public UserExtendInfo selectUserExtendInfoByUserId(Long userId) {
+        if (userId == null) {
+            return null;
+        }
+        return userMapper.selectUserExtendInfoByUserId(userId);
+    }
+
+    @Override
+    public UserExtendInfo selectUserExtendInfoByUid(String uid) {
+        if (StringUtils.isEmpty(uid)) {
+            return null;
+        }
+        return userMapper.selectUserExtendInfoByUid(uid);
     }
 
     @Override

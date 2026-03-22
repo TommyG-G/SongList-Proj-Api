@@ -27,12 +27,20 @@ public interface SongListMapper
     SongList selectSongListById(Long id);
 
     /**
-     * 通过歌曲名查询歌曲
+     * 通过歌曲名查询歌曲列表
      *
      * @param musicName 歌曲名称
-     * @return 歌曲对象信息
+     * @return 歌曲对象信息列表
      */
-    SongList selectSongListByMusicName(String musicName);
+    List<SongList> selectSongListByMusicName(String musicName);
+
+    /**
+     * 获取数据库中已存在的纯曲风记录原始字符串（含有机型、二维数组JSON等）列表
+     *
+     * @param uploader 当前登录用户的ID（字符型）
+     * @return 原始存储串集合
+     */
+    List<String> selectExistingMusicalStyles(String uploader);
 
     /**
      * 查询歌单列表

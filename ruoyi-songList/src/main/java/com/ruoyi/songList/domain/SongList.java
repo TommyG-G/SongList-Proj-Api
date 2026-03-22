@@ -35,9 +35,13 @@ public class SongList
     @Excel(name = "语言")
     private String language;
 
-    /** 曲风 */
+    /** 曲风 (原本存逗号分隔，现升级为存JSON) */
     @Excel(name = "曲风")
     private String musicalStyle;
+
+    /** 新曲风（前端接收专用二维数组转JSON用） */
+    @JsonDeserialize(using = JsonToStringDeserializer.class)
+    private String newMusicalStyle;
 
     /** 付费 */
     @Excel(name = "付费")
@@ -152,6 +156,14 @@ public class SongList
     public String getMusicalStyle() 
     {
         return musicalStyle;
+    }
+
+    public String getNewMusicalStyle() {
+        return newMusicalStyle;
+    }
+
+    public void setNewMusicalStyle(String newMusicalStyle) {
+        this.newMusicalStyle = newMusicalStyle;
     }
 
     public void setPay(String pay) 

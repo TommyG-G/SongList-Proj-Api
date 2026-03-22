@@ -2,6 +2,8 @@ package com.ruoyi.common.core.domain.param;
 
 public class UserExtendInfo {
 
+    private Long userId;
+
     private String uid;
 
     private String liveUrl;
@@ -17,6 +19,14 @@ public class UserExtendInfo {
     private String mainPrompt;
 
     private String subPrompt;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getUid() {
         return uid;

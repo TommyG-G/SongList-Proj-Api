@@ -250,6 +250,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 根据用户ID查询用户扩展信息 -->
   <select id="selectUserExtendInfoByUserId" resultType="com.ruoyi.common.core.domain.param.UserExtendInfo">
    	select
+   	    user_id as userId,
    		uid as uid,
    		live_url as liveUrl,
    		homepage_url as homePage,
@@ -260,6 +261,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		sub_prompt as subPrompt
    	from user_extend_info
   	where user_id = #{userId}
+  </select>
+
+  <!-- 根据对外自定义的文字 UID 反向查询真实身份扩展信息 -->
+  <select id="selectUserExtendInfoByUid" resultType="com.ruoyi.common.core.domain.param.UserExtendInfo">
+   	select
+   	    user_id as userId,
+   		uid as uid,
+   		live_url as liveUrl,
+   		homepage_url as homePage,
+   		background_image as backgroundImage,
+   		background_color as backgroundColor,
+   		page_title as pageTitle,
+   		main_prompt as mainPrompt,
+   		sub_prompt as subPrompt
+   	from user_extend_info
+  	where uid = #{uid}
   </select>
 
   <!-- 检查用户扩展信息是否存在 -->

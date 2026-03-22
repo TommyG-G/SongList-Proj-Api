@@ -2,6 +2,8 @@ package com.ruoyi.songList.controller;
 
 import java.util.List;
 
+import com.ruoyi.common.annotation.Anonymous;
+import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.common.core.domain.param.UserExtendInfo;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.param.PromptsUpdateParam;
@@ -177,6 +179,15 @@ public class SongListController extends BaseController
         }
     }
     /**
+     * 查询已设定的曲风数据
+     */
+    @GetMapping("/existingMusicalStyles")
+    public AjaxResult existingMusicalStyles()
+    {
+        return success(songListService.getExistingMusicalStyles());
+    }
+
+    /**
      * 查询曲风字典数据
      */
     @PostMapping("/selectMusicalStyle")
@@ -341,5 +352,56 @@ public class SongListController extends BaseController
             ajax.put("subPrompt", "");
             return ajax;
         }
+    }
+
+    /**
+     * 公开的聚合查询接口，允许外部人员免登录提取指定 UID 下的所有数据
+     */
+    @Anonymous
+    @GetMapping("/public/initData")
+    public AjaxResult getPublicInitData(SongListSearchParam params, @RequestParam(value = "uid", required = false) String uid)
+    {
+        if (com.ruoyi.common.utils.StringUtils.isEmpty(uid)) {
+             return error("未提供有效的访问通行证 (UID 缺失)");
+        }
+
+        // 通过扩展表寻找真正的主人 user_id
+        UserExtendInfo extendInfo = userService.selectUserExtendInfoByUid(uid);
+        if (extendInfo == null || extendInfo.getUserId() == null) {
+             return error("找不到通行证对应的访客馆长，请检查 UID 是否正确");
+        }
+        
+        Long realUserId = extendInfo.getUserId();
+
+        AjaxResult ajax = AjaxResult.success();
+        
+        // 1. 设置查询的所属人 (底层依靠真实的数字 user_id)
+        params.setUploader(String.valueOf(realUserId));
+        List<SongList> songs = songListService.selectSongList(params);
+        ajax.put("songList", songs);
+        
+        // 2. 提取该用户的独立曲风库
+        ajax.put("existingMusicalStyles", songListService.getExistingMusicalStylesByUid(String.valueOf(realUserId)));
+        
+        // 3. 收取该用户的显示列偏好
+        ajax.put("showColumns", songListService.selectShowColumnsByUid(realUserId));
+        
+        // 4. 收取该用户的展示和扩展配置信息
+        ajax.put("extendInfo", extendInfo);
+        
+        // 5. 补充播主基础信息 (用于标题等展示)
+        com.ruoyi.common.core.domain.entity.SysUser hostUser = userService.selectUserById(realUserId);
+        if (hostUser != null) {
+            ajax.put("hostNickname", hostUser.getNickName());
+        }
+        
+        // 5. 提前从后端字典缓存池强行拉取所用字典，避开前端 useDict 的 401
+        ajax.put("songLanguageDict", DictUtils.getDictCache("song_language"));
+        ajax.put("exclusiveLevelDict", DictUtils.getDictCache("exclusive_level"));
+        ajax.put("songStyleDict", DictUtils.getDictCache("song_style"));
+        ajax.put("songSliceDict", DictUtils.getDictCache("song_slice"));
+        ajax.put("giftListDict", DictUtils.getDictCache("gift_list"));
+        
+        return ajax;
     }
 }

@@ -187,6 +187,13 @@ public interface SysUserMapper
     public UserExtendInfo selectUserExtendInfoByUserId(@Param("userId") Long userId);
 
     /**
+     * 据自定义文字 UID 获取扩展信息
+     *
+     * @param uid 字符外生UID
+     */
+    public UserExtendInfo selectUserExtendInfoByUid(@Param("uid") String uid);
+
+    /**
      * 检查用户扩展信息是否存在
      *
      * @param userId 用户ID

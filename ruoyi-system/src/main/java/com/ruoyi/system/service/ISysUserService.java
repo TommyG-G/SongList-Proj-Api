@@ -232,6 +232,19 @@ public interface ISysUserService
     public UserExtendInfo selectUserExtendInfo();
 
     /**
+     * 根据任意指定用户ID查询用户扩展信息（免登录可见适用）
+     *
+     * @param userId 提取的用户ID
+     * @return 用户扩展信息
+     */
+    public UserExtendInfo selectUserExtendInfoByUserId(Long userId);
+
+    /**
+     * 通过外部推广自设的 UID 字符串查询扩展配置与内部映射 (用于免登录关联)
+     */
+    public UserExtendInfo selectUserExtendInfoByUid(String uid);
+
+    /**
      * 更新用户背景图片
      *
      * @param backgroundImage 背景图片地址

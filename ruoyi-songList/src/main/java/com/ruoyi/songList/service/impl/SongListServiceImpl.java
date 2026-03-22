@@ -1,11 +1,9 @@
 package com.ruoyi.songList.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginUser;
@@ -99,6 +97,11 @@ public class SongListServiceImpl implements ISongListService
     {
         LoginUser loginUser = SecurityUtils.getLoginUser();
         String currentUserId = loginUser != null ? loginUser.getUserId().toString() : "";
+
+        // 如果前端传了新曲风的JSON串，将其覆写存储到 musicalStyle 字段中
+        if (com.ruoyi.common.utils.StringUtils.isNotEmpty(songList.getNewMusicalStyle())) {
+            songList.setMusicalStyle(songList.getNewMusicalStyle());
+        }
         
         // 设置首字母
         if (StringUtils.isNotEmpty(songList.getMusicName())) {
@@ -107,27 +110,27 @@ public class SongListServiceImpl implements ISongListService
         }
         
         // 检测是否有同名记录
-        SongList existingSongList = songListMapper.selectSongListByMusicName(songList.getMusicName());
+        List<SongList> existingList = songListMapper.selectSongListByMusicName(songList.getMusicName());
+        SongList existingSongList = null;
+        if (existingList != null && !existingList.isEmpty()) {
+            for (SongList s : existingList) {
+                if (StringUtils.isNotEmpty(s.getUploader()) && s.getUploader().contains(currentUserId)) {
+                    existingSongList = s;
+                    break;
+                }
+            }
+        }
         
         if (existingSongList != null) {
-            // 存在同名记录，执行更新操作
+            // 存在原本属于当前用户的同名记录，执行更新操作
             songList.setId(existingSongList.getId());
-            
-            // 处理uploader字段：只有当当前用户不在原有的uploader中时，才需要追加
-            String originalUploader = existingSongList.getUploader();
-            if (StringUtils.isNotEmpty(originalUploader) && !originalUploader.contains(currentUserId)) {
-                String newUploader = originalUploader + "," + currentUserId;
-                songList.setUploader(newUploader);
-            } else if (StringUtils.isEmpty(originalUploader)) {
-                songList.setUploader(currentUserId);
-            }
-            // 如果当前用户已经在uploader中存在，则不进行任何修改，保持原有uploader
+            songList.setUploader(existingSongList.getUploader());
             
             int result = songListMapper.updateSongList(songList);
             String message = "歌曲 '" + songList.getMusicName() + "' 已存在，已自动更新为最新信息";
             return new SongListOperationResult("UPDATE", result, message);
         } else {
-            // 不存在同名记录，执行新增操作
+            // 不存在属于当前用户的同名记录，执行新增操作
             songList.setUploader(currentUserId);
             int result = songListMapper.insertSongList(songList);
             String message = "歌曲 '" + songList.getMusicName() + "' 新增成功";
@@ -147,6 +150,11 @@ public class SongListServiceImpl implements ISongListService
         // 获取当前登录用户
         LoginUser loginUser = SecurityUtils.getLoginUser();
         String currentUserId = loginUser != null ? loginUser.getUserId().toString() : "";
+
+        // 如果前端传了新曲风的JSON串，将其覆写存储到 musicalStyle 字段中
+        if (StringUtils.isNotEmpty(songList.getNewMusicalStyle())) {
+            songList.setMusicalStyle(songList.getNewMusicalStyle());
+        }
         
         // 设置首字母（如果歌名有变化）
         if (StringUtils.isNotEmpty(songList.getMusicName())) {
@@ -156,19 +164,9 @@ public class SongListServiceImpl implements ISongListService
         
         // 查询原有记录获取uploader信息
         SongList originalSongList = songListMapper.selectSongListById(songList.getId());
-        if (originalSongList != null && StringUtils.isNotEmpty(currentUserId)) {
-            String originalUploader = originalSongList.getUploader();
-            
-            // 只有当当前用户不在原有的uploader中时，才需要追加
-            // 这样可以避免同一个人多次操作同一记录时重复添加自己的ID
-            if (StringUtils.isNotEmpty(originalUploader) && !originalUploader.contains(currentUserId)) {
-                String newUploader = originalUploader + "," + currentUserId;
-                songList.setUploader(newUploader);
-            } else if (StringUtils.isEmpty(originalUploader)) {
-                // 如果原记录没有uploader，则设置为当前用户ID
-                songList.setUploader(currentUserId);
-            }
-            // 如果当前用户已经在uploader中存在，则不进行任何修改，保持原有uploader
+        if (originalSongList != null) {
+            // 保持原有的uploader，不再追加
+            songList.setUploader(originalSongList.getUploader());
         }
         
         return songListMapper.updateSongList(songList);
@@ -211,6 +209,8 @@ public class SongListServiceImpl implements ISongListService
         }
         int successNum = 0;
         int failureNum = 0;
+        int insertNum = 0;
+        int updateNum = 0;
         StringBuilder successMsg = new StringBuilder();
         StringBuilder failureMsg = new StringBuilder();
         for (SongList music : songList)
@@ -226,31 +226,35 @@ public class SongListServiceImpl implements ISongListService
                     music.setFirstLetter(firstLetter);
                 }
                 
-                // 验证是否存在这个歌曲
-                SongList s = songListMapper.selectSongListByMusicName(music.getMusicName());
-                if (StringUtils.isNull(s))
+                // 验证是否存在这个歌曲(按上传人同名的逻辑)
+                List<SongList> existingList = songListMapper.selectSongListByMusicName(music.getMusicName());
+                SongList s = null;
+                if (existingList != null && !existingList.isEmpty()) {
+                    for (SongList existing : existingList) {
+                        if (StringUtils.isNotEmpty(existing.getUploader()) && existing.getUploader().contains(operName)) {
+                            s = existing;
+                            break;
+                        }
+                    }
+                }
+
+                if (s == null)
                 {
                     BeanValidators.validateWithException(validator, music);
                     music.setUploader(operName);
                     songListMapper.insertSongList(music);
                     successNum++;
+                    insertNum++;
                     successMsg.append("<br/>" + successNum + "、歌曲 " + music.getMusicName() + " 导入成功");
                 }
                 else
                 {
                     BeanValidators.validateWithException(validator, music);
-                    // 更新时仅在原有uploader基础上追加当前登录人ID
-                    // 只有当当前用户不在原有的uploader中时，才需要追加
-                    String originalUploader = s.getUploader();
-                    if (StringUtils.isNotEmpty(originalUploader) && !originalUploader.contains(operName)) {
-                        String newUploader = originalUploader + "," + operName;
-                        music.setUploader(newUploader);
-                    } else if (StringUtils.isEmpty(originalUploader)) {
-                        music.setUploader(operName);
-                    }
-                    // 如果当前用户已经在uploader中存在，则不进行任何修改，保持原有uploader
+                    music.setId(s.getId());
+                    music.setUploader(s.getUploader());
                     songListMapper.updateSongList(music);
                     successNum++;
+                    updateNum++;
                     successMsg.append("<br/>" + successNum + "、歌曲 " + music.getMusicName() + " 更新成功");
                 }
             }
@@ -269,7 +273,7 @@ public class SongListServiceImpl implements ISongListService
         }
         else
         {
-            successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
+            successMsg.insert(0, "恭喜您，数据已全部导入成功！共新增 " + insertNum + " 条，更新 " + updateNum + " 条，数据如下：");
         }
         return successMsg.toString();
     }
@@ -388,13 +392,17 @@ public class SongListServiceImpl implements ISongListService
         // 获取当前登录用户
         LoginUser loginUser = SecurityUtils.getLoginUser();
         Long currentUserId = loginUser != null ? loginUser.getUserId() : null;
-        
-        if (currentUserId == null) {
+        return selectShowColumnsByUid(currentUserId);
+    }
+
+    @Override
+    public List<String> selectShowColumnsByUid(Long uid) {
+        if (uid == null) {
             return new ArrayList<>();
         }
         
         // 查询用户的显示列配置
-        String columnsStr = songListMapper.selectShowColumnsByUserId(currentUserId);
+        String columnsStr = songListMapper.selectShowColumnsByUserId(uid);
         
         if (StringUtils.isEmpty(columnsStr)) {
             // 如果没有配置，返回默认的列
@@ -554,5 +562,52 @@ public class SongListServiceImpl implements ISongListService
         }
     }
 
+    @Override
+    public List<Map<String, String>> getExistingMusicalStyles() {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        String uploaderId = loginUser != null ? String.valueOf(loginUser.getUserId()) : null;
+        return getExistingMusicalStylesByUid(uploaderId);
+    }
+
+    @Override
+    public List<Map<String, String>> getExistingMusicalStylesByUid(String uploaderId) {
+        List<String> rawStyles = songListMapper.selectExistingMusicalStyles(uploaderId);
+        Set<String> uniqueStyles = new HashSet<>();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        
+        for (String raw : rawStyles) {
+            try {
+                if (raw != null && raw.startsWith("[")) {
+                     List<List<String>> list = mapper.readValue(raw, new TypeReference<List<List<String>>>() {});
+                     for (List<String> arr : list) {
+                         if (arr != null && arr.size() > 1) {
+                             uniqueStyles.add(arr.get(1));
+                         } else if (arr != null && arr.size() > 0) {
+                             uniqueStyles.add(arr.get(0));
+                         }
+                     }
+                } else if (raw != null) {
+                     String[] split = raw.split(",");
+                     for (String s : split) {
+                         if (StringUtils.isNotEmpty(s)) {
+                             uniqueStyles.add(s.trim());
+                         }
+                     }
+                }
+            } catch (Exception e) {
+                 // ignore parsing error for individual rows
+            }
+        }
+        
+        List<Map<String, String>> result = new ArrayList<>();
+        for (String style : uniqueStyles) {
+            Map<String, String> map = new HashMap<>();
+            map.put("label", style);
+            map.put("value", style);
+            result.add(map);
+        }
+        return result;
+    }
 
 }

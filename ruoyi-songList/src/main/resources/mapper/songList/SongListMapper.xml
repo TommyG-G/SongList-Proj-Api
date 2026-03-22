@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="musicName != null  and musicName != ''"> and music_name like concat('%', #{musicName}, '%')</if>
             <if test="singer != null  and singer != ''"> and singer = #{singer}</if>
             <if test="language != null  and language != ''"> and language = #{language}</if>
-            <if test="musicalStyle != null  and musicalStyle != ''"> and musical_style = #{musicalStyle}</if>
+            <if test="musicalStyle != null  and musicalStyle != ''"> and musical_style like concat('%', #{musicalStyle}, '%')</if>
             <if test="pay != null  and pay != ''"> and pay = #{pay}</if>
             <if test="exclusiveLevel != null  and exclusiveLevel != ''"> and exclusive_level = #{exclusiveLevel}</if>
             <if test="songSlice != null  and songSlice != ''"> and song_slice = #{songSlice}</if>
@@ -40,6 +40,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectSongListByMusicName" parameterType="String" resultMap="SongListResult">
         <include refid="selectSongListVo"/>
         where music_name = #{musicName}
+    </select>
+
+    <select id="selectExistingMusicalStyles" parameterType="String" resultType="String">
+        SELECT DISTINCT musical_style FROM song_list 
+        WHERE musical_style IS NOT NULL AND musical_style != '' 
+        AND uploader = #{uploader}
     </select>
     
     <select id="selectSongListById" parameterType="Long" resultMap="SongListResult">
