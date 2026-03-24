@@ -498,6 +498,13 @@ public class SongListServiceImpl implements ISongListService
         return songListMapper.selectSongList(songList);
     }
 
+    public List<SongList> selectSongListForPublic(SongListSearchParam songList){
+
+            songList.setUploader(songList.getUploader());
+
+        return songListMapper.selectSongList(songList);
+    }
+
     /**
      * 查询歌单列表用于导出
      *

@@ -125,4 +125,12 @@ public interface ISongListService
      */
     public List<SongListExportVo> selectSongListForExport(SongList songList);
 
+    /**
+     * 查询歌单列表用于公开歌单展示
+     *
+     * @param songList 歌单
+     * @return 歌单集合
+     */
+    public List<SongList> selectSongListForPublic(SongListSearchParam songList);
+
 }

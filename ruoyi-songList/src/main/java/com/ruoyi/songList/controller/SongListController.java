@@ -3,8 +3,10 @@ package com.ruoyi.songList.controller;
 import java.util.List;
 
 import com.ruoyi.common.annotation.Anonymous;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.common.core.domain.param.UserExtendInfo;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.songList.param.GiftSearchParam;
 import com.ruoyi.songList.param.PromptsUpdateParam;
 import com.ruoyi.songList.param.SongListSearchParam;
@@ -36,6 +38,13 @@ import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.file.MimeTypeUtils;
 import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.system.service.ISysRoleService;
+import com.ruoyi.system.service.ISysPostService;
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.common.utils.SecurityUtils;
+import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * 歌单Controller
@@ -52,6 +61,12 @@ public class SongListController extends BaseController
 
     @Autowired
     private ISysUserService userService;
+
+    @Autowired
+    private ISysRoleService roleService;
+
+    @Autowired
+    private ISysPostService postService;
 
     /**
      * 查询歌单列表
@@ -361,7 +376,7 @@ public class SongListController extends BaseController
     @GetMapping("/public/initData")
     public AjaxResult getPublicInitData(SongListSearchParam params, @RequestParam(value = "uid", required = false) String uid)
     {
-        if (com.ruoyi.common.utils.StringUtils.isEmpty(uid)) {
+        if (StringUtils.isEmpty(uid)) {
              return error("未提供有效的访问通行证 (UID 缺失)");
         }
 
@@ -377,7 +392,7 @@ public class SongListController extends BaseController
         
         // 1. 设置查询的所属人 (底层依靠真实的数字 user_id)
         params.setUploader(String.valueOf(realUserId));
-        List<SongList> songs = songListService.selectSongList(params);
+        List<SongList> songs = songListService.selectSongListForPublic(params);
         ajax.put("songList", songs);
         
         // 2. 提取该用户的独立曲风库
@@ -390,9 +405,12 @@ public class SongListController extends BaseController
         ajax.put("extendInfo", extendInfo);
         
         // 5. 补充播主基础信息 (用于标题等展示)
-        com.ruoyi.common.core.domain.entity.SysUser hostUser = userService.selectUserById(realUserId);
+        SysUser hostUser = userService.selectUserById(realUserId);
         if (hostUser != null) {
-            ajax.put("hostNickname", hostUser.getNickName());
+            // 补充完整用户信息 (模拟 SysUserController.getInfo)
+            Map<String, Object> userMap = new HashMap<>();
+            userMap.put(AjaxResult.DATA_TAG, hostUser);
+            ajax.put("user", userMap);
         }
         
         // 5. 提前从后端字典缓存池强行拉取所用字典，避开前端 useDict 的 401
