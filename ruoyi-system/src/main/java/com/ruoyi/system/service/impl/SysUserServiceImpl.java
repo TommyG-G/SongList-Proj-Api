@@ -571,7 +571,15 @@ public class SysUserServiceImpl implements ISysUserService
         if (currentUserId == null) {
             throw new ServiceException("用户未登录");
         }
-        
+
+        // 校验 UID 唯一性
+        if (StringUtils.isNotEmpty(user.getUid())) {
+            UserExtendInfo existInfo = userMapper.selectUserExtendInfoByUid(user.getUid());
+            if (existInfo != null && !existInfo.getUserId().equals(currentUserId)) {
+                throw new ServiceException("UID '" + user.getUid() + "' 已被其他用户使用，请换一个。");
+            }
+        }
+
         // 检查用户扩展信息是否存在
         int exists = userMapper.checkUserExtendInfoExists(currentUserId);
         
