@@ -11,7 +11,7 @@
  Target Server Version : 80045 (8.0.45)
  File Encoding         : 65001
 
- Date: 22/03/2026 20:50:12
+ Date: 18/04/2026 10:18:48
 */
 
 SET NAMES utf8mb4;
@@ -541,7 +541,7 @@ CREATE TABLE `song_list`  (
   `remark` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '备注',
   `uploader` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '上传人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1945 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '歌单' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1946 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '歌单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of song_list
@@ -1518,6 +1518,7 @@ INSERT INTO `song_list` VALUES (1941, '我怀念的', 'W', '孙燕姿', '1', '',
 INSERT INTO `song_list` VALUES (1942, '下等马', 'X', '洛天依Official/ChiliChill', '1', '', '', NULL, NULL, '', '', '3');
 INSERT INTO `song_list` VALUES (1943, '普通朋友', 'P', '陶喆', '1', '', '', NULL, NULL, '', '', '3');
 INSERT INTO `song_list` VALUES (1944, '几分之几', 'J', '卢广仲', '1', '', '', NULL, NULL, '', '', '3');
+INSERT INTO `song_list` VALUES (1945, NULL, NULL, NULL, '1', '[[\"common_category\",\"流行\"],[\"common_category\",\"古风\"],[\"common_category\",\"国风\"],[\"common_category\",\"ACG\"],[\"common_category\",\"V家\"],[\"common_category\",\"东方\"],[\"common_category\",\"经典\"],[\"common_category\",\"怀旧\"],[\"common_category\",\"民谣\"],[\"common_category\",\"民族\"],[\"common_category\",\"美声\"],[\"common_category\",\"爵士\"],[\"common_category\",\"摇滚\"],[\"common_category\",\"电子\"],[\"common_category\",\"金属\"],[\"common_category\",\"戏腔\"],[\"common_category\",\"RAP\"],[\"common_category\",\"儿歌\"],[\"common_category\",\"整活\"],[\"common_category\",\"可爱\"],[\"common_category\",\"治愈\"],[\"common_category\",\"温柔\"],[\"common_category\",\"活泼\"],[\"common_category\",\"悲伤\"],[\"common_category\",\"空灵\"],[\"common_category\",\"童年回忆\"],[\"common_category\",\"OST\"],[\"common_category\",\"动漫\"],[\"common_category\",\"影视金曲\"],[\"common_category\",\"游戏\"],[\"common_category\",\"原创曲\"],[\"common_category\",\"弹唱\"],[\"common_category\",\"合唱\"],[\"common_category\",\"舞曲\"],[\"common_category\",\"偶像\"],[\"common_category\",\"音乐剧\"],[\"common_category\",\"哥特\"],[\"common_category\",\"特摄\"],[\"common_category\",\"说唱\"],[\"common_category\",\"喊麦\"],[\"common_category\",\"配音\"],[\"common_category\",\"方言\"],[\"common_category\",\"约德尔\"],[\"common_category\",\"其他\"],[\"sound_category\",\"安静\"],[\"sound_category\",\"适中\"],[\"sound_category\",\"较吵\"],[\"pitch_category\",\"高音\"],[\"pitch_category\",\"中音\"],[\"pitch_category\",\"低音\"]]', '0', '0', NULL, '1', NULL, '1');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -1857,7 +1858,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 191 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1953,6 +1954,22 @@ INSERT INTO `sys_logininfor` VALUES (187, 'test', '127.0.0.1', '内网IP', 'Chro
 INSERT INTO `sys_logininfor` VALUES (188, 'test', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-22 00:09:50');
 INSERT INTO `sys_logininfor` VALUES (189, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-22 00:09:50');
 INSERT INTO `sys_logininfor` VALUES (190, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-22 00:38:21');
+INSERT INTO `sys_logininfor` VALUES (191, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '1', '用户不存在/密码错误', '2026-03-24 20:33:33');
+INSERT INTO `sys_logininfor` VALUES (192, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '1', '用户不存在/密码错误', '2026-03-24 20:33:33');
+INSERT INTO `sys_logininfor` VALUES (193, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-24 20:33:36');
+INSERT INTO `sys_logininfor` VALUES (194, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '1', '用户不存在/密码错误', '2026-03-30 19:48:38');
+INSERT INTO `sys_logininfor` VALUES (195, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 19:48:40');
+INSERT INTO `sys_logininfor` VALUES (196, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-30 20:15:39');
+INSERT INTO `sys_logininfor` VALUES (197, 'test1', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '注册成功', '2026-03-30 20:16:08');
+INSERT INTO `sys_logininfor` VALUES (198, 'test1', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 20:16:33');
+INSERT INTO `sys_logininfor` VALUES (199, 'test123', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '注册成功', '2026-03-30 21:43:00');
+INSERT INTO `sys_logininfor` VALUES (200, 'test123', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 21:43:09');
+INSERT INTO `sys_logininfor` VALUES (201, 'test123', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-30 21:44:41');
+INSERT INTO `sys_logininfor` VALUES (202, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 21:44:46');
+INSERT INTO `sys_logininfor` VALUES (203, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-30 21:45:55');
+INSERT INTO `sys_logininfor` VALUES (204, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 21:46:34');
+INSERT INTO `sys_logininfor` VALUES (205, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-30 21:47:49');
+INSERT INTO `sys_logininfor` VALUES (206, 'test123', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 21:47:59');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -2132,7 +2149,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 250 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 252 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2287,6 +2304,8 @@ INSERT INTO `sys_oper_log` VALUES (246, '歌单', 2, 'com.ruoyi.songList.control
 INSERT INTO `sys_oper_log` VALUES (247, '歌单显示列配置', 2, 'com.ruoyi.songList.controller.SongListController.saveShowColumns()', 'POST', 1, 'test', NULL, '/songList/info/saveShowColumns', '127.0.0.1', '内网IP', '[\"musicName\",\"singer\",\"musicalStyle\"] ', '{\"msg\":\"显示列配置保存成功\",\"code\":200}', 0, NULL, '2026-03-21 23:41:49', 11);
 INSERT INTO `sys_oper_log` VALUES (248, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_cate', NULL, 1, '\r\n### Error updating database.  Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column \'musical_style\' at row 1\r\n### The error may exist in file [C:\\Proj\\RuoYi\\RuoYi-Api\\ruoyi-songList\\target\\classes\\mapper\\songList\\SongListMapper.xml]\r\n### The error may involve com.ruoyi.songList.mapper.SongListMapper.updateSongList-Inline\r\n### The error occurred while setting parameters\r\n### SQL: update song_list          SET music_name = ?,             singer = ?,             language = ?,             musical_style = ?,             pay = ?,             exclusive_level = ?,             gift = ?,             song_slice = ?,             remark = ?,             uploader = ?,             first_letter = ?          where id = ?\r\n### Cause: com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Data too long for column \'musical_style\' at row 1\n; Data truncation: Data too long for column \'musical_style\' at row 1', '2026-03-21 23:50:32', 189);
 INSERT INTO `sys_oper_log` VALUES (249, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_cate', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:51:11', 19);
+INSERT INTO `sys_oper_log` VALUES (250, '用户管理', 3, 'com.ruoyi.web.controller.system.SysUserController.remove()', 'DELETE', 1, 'admin', '管理员', '/system/user/3', '127.0.0.1', '内网IP', '[3] ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-30 20:15:33', 28);
+INSERT INTO `sys_oper_log` VALUES (251, '歌单', 1, 'com.ruoyi.songList.controller.SongListController.add()', 'POST', 1, 'admin', '管理员', '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"0\",\"language\":\"1\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"],[\\\"sound_category\\\",\\\"安静\\\"],[\\\"sound_category\\\",\\\"适中\\\"],[\\\"sound_category\\\",\\\"较吵\\\"],[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"co', '{\"msg\":\"歌曲 \'null\' 新增成功\",\"code\":200}', 0, NULL, '2026-03-30 21:47:01', 32);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2410,14 +2429,16 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '超级管理员', '00', '18888888888@163.com', '18888888888', '0', '/profile/avatar/2026/03/15/847276882d154bd4b81b31274f8ab67e.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-22 00:09:51', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', '2026-03-15 12:49:41', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '超级管理员', '00', '18888888888@163.com', '18888888888', '0', '/profile/avatar/2026/03/15/847276882d154bd4b81b31274f8ab67e.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-30 21:46:34', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', '2026-03-15 12:49:41', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-19 19:32:51', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', NULL, '测试员');
-INSERT INTO `sys_user` VALUES (3, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$CaNBqJW7hMXuNx6Pdw2rpe0EY59wpAuBzJOeK4lRck9N3pe5u/VSa', '0', '0', '127.0.0.1', '2026-03-21 21:50:00', '2026-03-19 20:02:44', '', '2026-03-19 20:02:43', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (3, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$CaNBqJW7hMXuNx6Pdw2rpe0EY59wpAuBzJOeK4lRck9N3pe5u/VSa', '0', '2', '127.0.0.1', '2026-03-21 21:50:00', '2026-03-19 20:02:44', '', '2026-03-19 20:02:43', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (4, NULL, 'test1', 'test1', '00', '', '', '0', '', '$2a$10$ynXcFALLj4Ul4vlMLzKikOO1SGcAWsCOJaCD5PuSU7RWSehAJJyrK', '0', '0', '127.0.0.1', '2026-03-30 20:16:33', '2026-03-30 20:16:09', '', '2026-03-30 20:16:08', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (5, NULL, 'test123', 'test123', '00', '', '', '0', '', '$2a$10$z0k2efh46PTRNvmw8wyhEe6hQSnb8IASxRxjM3ZDPVK.4uCOAaGVC', '0', '0', '127.0.0.1', '2026-03-30 21:47:59', '2026-03-30 21:42:57', '', '2026-03-30 21:42:57', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -2450,7 +2471,8 @@ CREATE TABLE `sys_user_role`  (
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 2);
-INSERT INTO `sys_user_role` VALUES (3, 2);
+INSERT INTO `sys_user_role` VALUES (4, 2);
+INSERT INTO `sys_user_role` VALUES (5, 2);
 
 -- ----------------------------
 -- Table structure for user_extend_info
@@ -2468,11 +2490,12 @@ CREATE TABLE `user_extend_info`  (
   `main_prompt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主标题',
   `sub_prompt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '副标题',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_extend_info
 -- ----------------------------
 INSERT INTO `user_extend_info` VALUES (1, 1, 123, 'https://live.bilibili.com/24999?broadcast_type=0&is_room_feed=1&spm_id_from=333.1387.to_liveroom.0.click&live_from=86002', 'https://space.bilibili.com/31244832?spm_id_from=333.1007.0.0', '/profile//2026/03/15/30e7390d20e7495a9d15daa9d1f5687d.png', 'rgb(255, 215, 0)', '网页标签标题', '主标题', '副标题');
+INSERT INTO `user_extend_info` VALUES (2, 5, 123, '123', '123', NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
