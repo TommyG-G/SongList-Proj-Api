@@ -75,7 +75,9 @@ spring:
       # 数据库索引
       database: 0
       # 密码
-      password: zxcvbnmm
+#      password: =@ZxCV1N
+      # 本机redis密码： "无"
+      password:
       # 连接超时时间
       timeout: 10s
       lettuce:

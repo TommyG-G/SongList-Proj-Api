@@ -1,21 +1,89 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : local
  Source Server Type    : MySQL
- Source Server Version : 80045 (8.0.45)
+ Source Server Version : 80044 (8.0.44)
  Source Host           : localhost:3306
  Source Schema         : ry
 
  Target Server Type    : MySQL
- Target Server Version : 80045 (8.0.45)
+ Target Server Version : 80044 (8.0.44)
  File Encoding         : 65001
 
- Date: 18/04/2026 10:18:48
+ Date: 05/05/2026 12:51:47
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for bilibili_guard
+-- ----------------------------
+DROP TABLE IF EXISTS `bilibili_guard`;
+CREATE TABLE `bilibili_guard`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `user_id` bigint NOT NULL COMMENT '若依用户ID',
+  `guard_uid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'B站UID',
+  `guard_username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'B站用户名',
+  `guard_level` int NULL DEFAULT NULL COMMENT '舰长等级 1:总督 2:提督 3:舰长',
+  `guard_level_text` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '舰长类型文本',
+  `room_id` bigint NULL DEFAULT NULL COMMENT '直播间ID',
+  `anchor_uid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '主播UID',
+  `start_time` datetime NULL DEFAULT NULL COMMENT '开通时间',
+  `end_time` datetime NULL DEFAULT NULL COMMENT '过期时间',
+  `auto_renew` int NULL DEFAULT 0 COMMENT '是否自动续费 0:否 1:是',
+  `send_status` int NULL DEFAULT 0 COMMENT '私信发送状态 0:未发送 1:已发送 2:发送失败',
+  `send_time` datetime NULL DEFAULT NULL COMMENT '私信发送时间',
+  `send_msg` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '私信发送结果消息',
+  `snapshot_date` date NULL DEFAULT NULL COMMENT '数据快照日期',
+  `guard_address` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '舰长地址/备注信息',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_user_guard_snapshot`(`user_id` ASC, `guard_uid` ASC, `snapshot_date` ASC) USING BTREE,
+  INDEX `idx_user_id`(`user_id` ASC) USING BTREE,
+  INDEX `idx_guard_uid`(`guard_uid` ASC) USING BTREE,
+  INDEX `idx_snapshot_date`(`snapshot_date` ASC) USING BTREE,
+  INDEX `idx_send_status`(`send_status` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'B站舰长信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of bilibili_guard
+-- ----------------------------
+INSERT INTO `bilibili_guard` VALUES (1, 1, '2316152', '庭风千恪', 2, '提督', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (2, 1, '3214780', '梅洛斯Meros_DD-557', 2, '提督', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (3, 1, '24053647', '天海透', 2, '提督', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (4, 1, '13100124', '应钟Clochette', 2, '提督', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (5, 1, '22192078', '刀刀向太阳', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (6, 1, '15132462', '成功降落', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (7, 1, '183739', '奇拉拉-单推默汐Moxi', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (8, 1, '260267142', '韭机kuqi', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (9, 1, '3546962710235959', 'Mia_o不可言', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (10, 1, '1224103689', 'OO啊啊AA', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (11, 1, '320782892', '不要香菜多加葱蒜', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (12, 1, '272002436', '蠢蠢的猎人', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (13, 1, '168377325', '爸爸不可能打断我腿', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (14, 1, '1975207286', '剪纸公主心柔柔', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (15, 1, '38809866', '一夏一夏花', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (16, 1, '3493133761383128', '脑洞宕机灵感堵塞L-', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (17, 1, '332971594', '天气好好出门跑跑', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (18, 1, '2121953084', '沃尔芙-', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (19, 1, '243089656', '艾斯o_O', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (20, 1, '15372440', '是我拉菲啊', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (21, 1, '40107059', '果冻味抹布', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (22, 1, '32740350', '哎哟那个黑8哎嗨哟', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (23, 1, '33896414', '宅月半', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (24, 1, '24744060', '非现实的考虑', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (25, 1, '107085300', '幻环意志Logic', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (26, 1, '187745559', '我是空白白的', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (27, 1, '48677761', '天皓哥', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (28, 1, '216585505', 'tanpuopuo', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (29, 1, '11898569', '空溟丶', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
+INSERT INTO `bilibili_guard` VALUES (30, 1, '251927315', '恋空-_--', 3, '舰长', 1828676195, '3546955458283799', NULL, NULL, NULL, 0, NULL, NULL, '2026-05-01', NULL, '', '2026-05-01 18:36:51', '', '2026-05-01 18:44:09', NULL);
 
 -- ----------------------------
 -- Table structure for gen_table
@@ -1606,7 +1674,7 @@ CREATE TABLE `sys_dict_data`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 144 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 146 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -1754,6 +1822,8 @@ INSERT INTO `sys_dict_data` VALUES (140, 3, '音高分类', 'pitch_category', 'm
 INSERT INTO `sys_dict_data` VALUES (141, 4, '小众分类', 'niche_category', 'music_style', NULL, 'primary', 'N', '0', 'admin', '2026-03-09 09:41:35', '', NULL, NULL);
 INSERT INTO `sys_dict_data` VALUES (142, 5, 'QQ音乐分类', 'qq_music_category', 'music_style', NULL, 'primary', 'N', '0', 'admin', '2026-03-09 09:42:03', '', NULL, NULL);
 INSERT INTO `sys_dict_data` VALUES (143, 6, '如有其他需要', 'other_needs', 'music_style', NULL, 'primary', 'N', '0', 'admin', '2026-03-09 09:42:24', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (144, 1, '已绑定', '0', 'bili_bind_status', '', 'success', 'N', '0', 'admin', '2026-05-01 14:32:04', '', NULL, '已绑定B站账号');
+INSERT INTO `sys_dict_data` VALUES (145, 2, '未绑定', '1', 'bili_bind_status', '', 'warning', 'N', '0', 'admin', '2026-05-01 14:32:04', '', NULL, '未绑定B站账号');
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -1771,7 +1841,7 @@ CREATE TABLE `sys_dict_type`  (
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
   UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -1792,6 +1862,7 @@ INSERT INTO `sys_dict_type` VALUES (13, '大航海', 'exclusive_level', '0', 'ad
 INSERT INTO `sys_dict_type` VALUES (14, '歌切', 'song_slice', '0', 'admin', '2026-02-26 21:36:59', '', NULL, '歌切');
 INSERT INTO `sys_dict_type` VALUES (15, '礼物', 'gift_list', '0', 'admin', '2026-03-02 14:10:11', 'admin', '2026-03-02 14:10:44', '礼物列表');
 INSERT INTO `sys_dict_type` VALUES (16, '新曲风', 'music_style', '0', 'admin', '2026-03-09 09:28:21', '', NULL, '新曲风');
+INSERT INTO `sys_dict_type` VALUES (17, 'Bilibili绑定状态', 'bili_bind_status', '0', 'admin', '2026-05-01 14:32:04', '', NULL, 'Bilibili账号绑定状态');
 
 -- ----------------------------
 -- Table structure for sys_job
@@ -1858,7 +1929,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 218 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1970,6 +2041,17 @@ INSERT INTO `sys_logininfor` VALUES (203, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (204, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 21:46:34');
 INSERT INTO `sys_logininfor` VALUES (205, 'admin', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '退出成功', '2026-03-30 21:47:49');
 INSERT INTO `sys_logininfor` VALUES (206, 'test123', '127.0.0.1', '内网IP', 'Chrome 146', 'Windows10', '0', '登录成功', '2026-03-30 21:47:59');
+INSERT INTO `sys_logininfor` VALUES (207, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '登录成功', '2026-04-18 11:46:00');
+INSERT INTO `sys_logininfor` VALUES (208, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '登录成功', '2026-04-18 11:47:04');
+INSERT INTO `sys_logininfor` VALUES (209, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '退出成功', '2026-04-18 12:00:12');
+INSERT INTO `sys_logininfor` VALUES (210, 'test', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '1', '用户不存在/密码错误', '2026-04-18 12:00:17');
+INSERT INTO `sys_logininfor` VALUES (211, 'test', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '1', '用户不存在/密码错误', '2026-04-18 12:00:22');
+INSERT INTO `sys_logininfor` VALUES (212, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '登录成功', '2026-04-18 12:00:44');
+INSERT INTO `sys_logininfor` VALUES (213, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '退出成功', '2026-04-18 12:01:40');
+INSERT INTO `sys_logininfor` VALUES (214, 'test1', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '登录成功', '2026-04-18 12:01:50');
+INSERT INTO `sys_logininfor` VALUES (215, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '登录成功', '2026-05-01 14:48:49');
+INSERT INTO `sys_logininfor` VALUES (216, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '退出成功', '2026-05-01 15:02:48');
+INSERT INTO `sys_logininfor` VALUES (217, 'admin', '127.0.0.1', '内网IP', 'Chrome 147', 'Windows10', '0', '退出成功', '2026-05-01 15:13:08');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1997,7 +2079,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2011 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2017 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -2098,6 +2180,12 @@ INSERT INTO `sys_menu` VALUES (2007, '歌单导出', 2002, 5, '#', '', NULL, '',
 INSERT INTO `sys_menu` VALUES (2008, '歌单导入', 2002, 6, '', NULL, NULL, '', 1, 0, 'F', '0', '0', 'songList:info:import', '#', 'admin', '2026-03-04 15:12:53', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2009, '网页歌单', 0, 5, 'songList/edit', 'songList/edit/index', NULL, 'songlistEdit', 1, 0, 'C', '0', '0', 'songList:edit:list', 'button', 'admin', '2026-03-14 22:18:34', 'admin', '2026-03-14 22:28:02', '');
 INSERT INTO `sys_menu` VALUES (2010, '外部访问歌单', 0, 8, 'songlist', 'songList/index', NULL, 'songlist', 1, 0, 'M', '1', '0', '', '#', 'admin', '2026-03-19 21:17:50', 'admin', '2026-03-19 21:18:01', '');
+INSERT INTO `sys_menu` VALUES (2011, 'B站账号绑定', 0, 1, 'system/bilibili/bind', 'system/bilibili/bind/index', NULL, 'bind', 1, 0, 'C', '0', '0', 'system:bilibili:bind', 'bilibili', 'admin', NULL, '', NULL, 'Bilibili账号绑定管理');
+INSERT INTO `sys_menu` VALUES (2012, '舰长管理', 0, 1, 'guard', 'bilibili/guard/index', NULL, 'guard', 1, 0, 'C', '0', '0', 'bilibili:guard:list', 'bilibili', 'admin', '2026-05-01 17:27:33', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2013, '获取舰长列表', 2012, 1, '', NULL, NULL, '', 1, 0, 'F', '0', '0', 'bilibili:guard:fetch', '#', 'admin', '2026-05-01 17:28:40', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2014, '批量发送私信', 2012, 2, '', NULL, NULL, '', 1, 0, 'F', '0', '0', 'bilibili:guard:send', '#', 'admin', '2026-05-01 17:29:02', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2015, '重置发送状态', 2012, 3, '', NULL, NULL, '', 1, 0, 'F', '0', '0', 'bilibili:guard:reset', '#', 'admin', '2026-05-01 17:29:25', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2016, '删除', 2012, 4, '', NULL, NULL, '', 1, 0, 'F', '0', '0', 'bilibili:guard:remove', '#', 'admin', '2026-05-01 17:29:43', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -2149,7 +2237,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 252 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 264 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2306,6 +2394,18 @@ INSERT INTO `sys_oper_log` VALUES (248, '歌单', 2, 'com.ruoyi.songList.control
 INSERT INTO `sys_oper_log` VALUES (249, '歌单', 2, 'com.ruoyi.songList.controller.SongListController.edit()', 'PUT', 1, 'test', NULL, '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"1\",\"firstLetter\":\"S\",\"gift\":\"{\\\"name\\\":\\\"重拳出击\\\",\\\"price\\\":\\\"19.9\\\",\\\"icon\\\":\\\"https://s1.hdslb.com/bfs/live/53eca0815f8e628bd619a27628b1acbd57fc82b4.png\\\"}\",\"id\":1459,\"language\":\"2\",\"musicName\":\"SLEEPWALK\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_cate', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-21 23:51:11', 19);
 INSERT INTO `sys_oper_log` VALUES (250, '用户管理', 3, 'com.ruoyi.web.controller.system.SysUserController.remove()', 'DELETE', 1, 'admin', '管理员', '/system/user/3', '127.0.0.1', '内网IP', '[3] ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-03-30 20:15:33', 28);
 INSERT INTO `sys_oper_log` VALUES (251, '歌单', 1, 'com.ruoyi.songList.controller.SongListController.add()', 'POST', 1, 'admin', '管理员', '/songList/info', '127.0.0.1', '内网IP', '{\"exclusiveLevel\":\"0\",\"language\":\"1\",\"musicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"common_category\\\",\\\"RAP\\\"],[\\\"common_category\\\",\\\"儿歌\\\"],[\\\"common_category\\\",\\\"整活\\\"],[\\\"common_category\\\",\\\"可爱\\\"],[\\\"common_category\\\",\\\"治愈\\\"],[\\\"common_category\\\",\\\"温柔\\\"],[\\\"common_category\\\",\\\"活泼\\\"],[\\\"common_category\\\",\\\"悲伤\\\"],[\\\"common_category\\\",\\\"空灵\\\"],[\\\"common_category\\\",\\\"童年回忆\\\"],[\\\"common_category\\\",\\\"OST\\\"],[\\\"common_category\\\",\\\"动漫\\\"],[\\\"common_category\\\",\\\"影视金曲\\\"],[\\\"common_category\\\",\\\"游戏\\\"],[\\\"common_category\\\",\\\"原创曲\\\"],[\\\"common_category\\\",\\\"弹唱\\\"],[\\\"common_category\\\",\\\"合唱\\\"],[\\\"common_category\\\",\\\"舞曲\\\"],[\\\"common_category\\\",\\\"偶像\\\"],[\\\"common_category\\\",\\\"音乐剧\\\"],[\\\"common_category\\\",\\\"哥特\\\"],[\\\"common_category\\\",\\\"特摄\\\"],[\\\"common_category\\\",\\\"说唱\\\"],[\\\"common_category\\\",\\\"喊麦\\\"],[\\\"common_category\\\",\\\"配音\\\"],[\\\"common_category\\\",\\\"方言\\\"],[\\\"common_category\\\",\\\"约德尔\\\"],[\\\"common_category\\\",\\\"其他\\\"],[\\\"sound_category\\\",\\\"安静\\\"],[\\\"sound_category\\\",\\\"适中\\\"],[\\\"sound_category\\\",\\\"较吵\\\"],[\\\"pitch_category\\\",\\\"高音\\\"],[\\\"pitch_category\\\",\\\"中音\\\"],[\\\"pitch_category\\\",\\\"低音\\\"]]\",\"newMusicalStyle\":\"[[\\\"common_category\\\",\\\"流行\\\"],[\\\"common_category\\\",\\\"古风\\\"],[\\\"common_category\\\",\\\"国风\\\"],[\\\"common_category\\\",\\\"ACG\\\"],[\\\"common_category\\\",\\\"V家\\\"],[\\\"common_category\\\",\\\"东方\\\"],[\\\"common_category\\\",\\\"经典\\\"],[\\\"common_category\\\",\\\"怀旧\\\"],[\\\"common_category\\\",\\\"民谣\\\"],[\\\"common_category\\\",\\\"民族\\\"],[\\\"common_category\\\",\\\"美声\\\"],[\\\"common_category\\\",\\\"爵士\\\"],[\\\"common_category\\\",\\\"摇滚\\\"],[\\\"common_category\\\",\\\"电子\\\"],[\\\"common_category\\\",\\\"金属\\\"],[\\\"common_category\\\",\\\"戏腔\\\"],[\\\"co', '{\"msg\":\"歌曲 \'null\' 新增成功\",\"code\":200}', 0, NULL, '2026-03-30 21:47:01', 32);
+INSERT INTO `sys_oper_log` VALUES (252, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.resetPwd()', 'PUT', 1, 'admin', '管理员', '/system/user/resetPwd', '127.0.0.1', '内网IP', '{\"admin\":false,\"params\":{},\"updateBy\":\"admin\",\"userId\":4} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-04-18 12:01:01', 175);
+INSERT INTO `sys_oper_log` VALUES (253, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.resetPwd()', 'PUT', 1, 'admin', '管理员', '/system/user/resetPwd', '127.0.0.1', '内网IP', '{\"admin\":false,\"params\":{},\"updateBy\":\"admin\",\"userId\":5} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-04-18 12:01:06', 159);
+INSERT INTO `sys_oper_log` VALUES (254, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bilibili/guard/index\",\"createBy\":\"admin\",\"icon\":\"bilibili\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"舰长管理\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":0,\"path\":\"guard\",\"perms\":\"bilibili:guard:list\",\"routeName\":\"guard\",\"status\":\"0\",\"visible\":\"0\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-05-01 17:27:33', 352);
+INSERT INTO `sys_oper_log` VALUES (255, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"获取舰长列表\",\"menuType\":\"F\",\"orderNum\":1,\"params\":{},\"parentId\":2012,\"perms\":\"bilibili:guard:fetch\",\"status\":\"0\",\"visible\":\"0\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-05-01 17:28:40', 50);
+INSERT INTO `sys_oper_log` VALUES (256, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"批量发送私信\",\"menuType\":\"F\",\"orderNum\":2,\"params\":{},\"parentId\":2012,\"perms\":\"bilibili:guard:send\",\"status\":\"0\",\"visible\":\"0\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-05-01 17:29:02', 35);
+INSERT INTO `sys_oper_log` VALUES (257, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"重置发送状态\",\"menuType\":\"F\",\"orderNum\":3,\"params\":{},\"parentId\":2012,\"perms\":\"bilibili:guard:reset\",\"status\":\"0\",\"visible\":\"0\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-05-01 17:29:25', 38);
+INSERT INTO `sys_oper_log` VALUES (258, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', '管理员', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"删除\",\"menuType\":\"F\",\"orderNum\":4,\"params\":{},\"parentId\":2012,\"perms\":\"bilibili:guard:remove\",\"status\":\"0\",\"visible\":\"0\"} ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2026-05-01 17:29:43', 35);
+INSERT INTO `sys_oper_log` VALUES (259, '获取舰长列表', 0, 'com.ruoyi.web.controller.system.BilibiliGuardController.fetchGuardList()', 'POST', 1, 'admin', '管理员', '/bilibili/guard/fetch', '127.0.0.1', '内网IP', '{\"roomId\":\"86002\",\"anchorUid\":\"3723075\"} ', '{\"msg\":\"成功获取0条舰长数据\",\"code\":200}', 0, NULL, '2026-05-01 17:44:50', 220);
+INSERT INTO `sys_oper_log` VALUES (260, '获取舰长列表', 0, 'com.ruoyi.web.controller.system.BilibiliGuardController.fetchGuardList()', 'POST', 1, 'admin', '管理员', '/bilibili/guard/fetch', '127.0.0.1', '内网IP', '{\"roomId\":\"1828676195\",\"anchorUid\":\"3546955458283799\"} ', '{\"msg\":\"成功获取30条舰长数据\",\"code\":200}', 0, NULL, '2026-05-01 17:46:10', 320);
+INSERT INTO `sys_oper_log` VALUES (261, '获取舰长列表', 0, 'com.ruoyi.web.controller.system.BilibiliGuardController.fetchGuardList()', 'POST', 1, 'admin', '管理员', '/bilibili/guard/fetch', '127.0.0.1', '内网IP', '{\"roomId\":\"1828676195\",\"anchorUid\":\"3546955458283799\"} ', '{\"msg\":\"成功获取30条舰长数据\",\"code\":200}', 0, NULL, '2026-05-01 18:36:52', 984);
+INSERT INTO `sys_oper_log` VALUES (262, '获取舰长列表', 0, 'com.ruoyi.web.controller.system.BilibiliGuardController.fetchGuardList()', 'POST', 1, 'admin', '管理员', '/bilibili/guard/fetch', '127.0.0.1', '内网IP', '{\"roomId\":\"1828676195\",\"anchorUid\":\"3546955458283799\"} ', '{\"msg\":\"成功获取30条舰长数据\",\"code\":200}', 0, NULL, '2026-05-01 18:37:09', 317);
+INSERT INTO `sys_oper_log` VALUES (263, '获取舰长列表', 0, 'com.ruoyi.web.controller.system.BilibiliGuardController.fetchGuardList()', 'POST', 1, 'admin', '管理员', '/bilibili/guard/fetch', '127.0.0.1', '内网IP', '{\"roomId\":\"1828676195\",\"anchorUid\":\"3546955458283799\"} ', '{\"msg\":\"成功获取30条舰长数据\",\"code\":200}', 0, NULL, '2026-05-01 18:44:09', 28653);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2434,11 +2534,46 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '超级管理员', '00', '18888888888@163.com', '18888888888', '0', '/profile/avatar/2026/03/15/847276882d154bd4b81b31274f8ab67e.png', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-30 21:46:34', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', '2026-03-15 12:49:41', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '超级管理员', '00', '18888888888@163.com', '18888888888', '0', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-05-01 14:48:45', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', '2026-03-15 12:49:41', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2026-03-19 19:32:51', '2026-02-24 20:59:01', 'admin', '2026-02-24 20:59:01', '', NULL, '测试员');
 INSERT INTO `sys_user` VALUES (3, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$CaNBqJW7hMXuNx6Pdw2rpe0EY59wpAuBzJOeK4lRck9N3pe5u/VSa', '0', '2', '127.0.0.1', '2026-03-21 21:50:00', '2026-03-19 20:02:44', '', '2026-03-19 20:02:43', '', NULL, NULL);
-INSERT INTO `sys_user` VALUES (4, NULL, 'test1', 'test1', '00', '', '', '0', '', '$2a$10$ynXcFALLj4Ul4vlMLzKikOO1SGcAWsCOJaCD5PuSU7RWSehAJJyrK', '0', '0', '127.0.0.1', '2026-03-30 20:16:33', '2026-03-30 20:16:09', '', '2026-03-30 20:16:08', '', NULL, NULL);
-INSERT INTO `sys_user` VALUES (5, NULL, 'test123', 'test123', '00', '', '', '0', '', '$2a$10$z0k2efh46PTRNvmw8wyhEe6hQSnb8IASxRxjM3ZDPVK.4uCOAaGVC', '0', '0', '127.0.0.1', '2026-03-30 21:47:59', '2026-03-30 21:42:57', '', '2026-03-30 21:42:57', '', NULL, NULL);
+INSERT INTO `sys_user` VALUES (4, NULL, 'test1', 'test1', '00', '', '', '0', '', '$2a$10$cm1GX4zracExTp/1cvrm7ejkQMbSX0Y6F.qon98KrTxw26U9ADV1O', '0', '0', '127.0.0.1', '2026-04-18 12:01:50', '2026-04-18 12:01:00', '', '2026-03-30 20:16:08', '', '2026-04-18 12:01:00', NULL);
+INSERT INTO `sys_user` VALUES (5, NULL, 'test123', 'test123', '00', '', '', '0', '', '$2a$10$TQqZUuKgqhYJUp3unODBYe3LjSHhpHIFxp1NetG8ebGX2wECMe46m', '0', '0', '127.0.0.1', '2026-03-30 21:47:59', '2026-04-18 12:01:06', '', '2026-03-30 21:42:57', '', '2026-04-18 12:01:06', NULL);
+
+-- ----------------------------
+-- Table structure for sys_user_bilibili
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_bilibili`;
+CREATE TABLE `sys_user_bilibili`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `user_id` bigint NOT NULL COMMENT '若依系统用户ID',
+  `bili_uid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Bilibili用户UID',
+  `bili_uname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'Bilibili用户名',
+  `bili_face` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'Bilibili头像URL',
+  `sessdata` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'B站会话令牌(SESSDATA)',
+  `bili_jct` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'B站CSRF令牌(bili_jct)',
+  `dede_userid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'B站DedeUserID',
+  `refresh_token` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '刷新令牌',
+  `token_expire_time` datetime NULL DEFAULT NULL COMMENT 'Token过期时间',
+  `bind_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '绑定状态(0已绑定 1已解绑)',
+  `bind_time` datetime NULL DEFAULT NULL COMMENT '绑定时间',
+  `unbind_time` datetime NULL DEFAULT NULL COMMENT '解绑时间',
+  `last_login_time` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_user_id`(`user_id` ASC) USING BTREE COMMENT '用户ID唯一索引',
+  UNIQUE INDEX `uk_bili_uid`(`bili_uid` ASC) USING BTREE COMMENT 'B站UID唯一索引',
+  INDEX `idx_bind_status`(`bind_status` ASC) USING BTREE COMMENT '绑定状态索引'
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'Bilibili账号绑定表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_user_bilibili
+-- ----------------------------
+INSERT INTO `sys_user_bilibili` VALUES (1, 1, '31244832', 'DPYZLG', NULL, '85089712,1793170953,2ec4f*52CjBaUkdywiTkG0-gXKkzZzYOUOTY6E6cczMP06tBVb-YmE_TNkj1Z2tBwQcRjgP4dGMSVmtTSkMwWkRFNU00TUhZY1Q0TzJ1blRnWGN3cENLQlpUYWNmcFRrZjhQc2MzTldkWmxsNUJyVUt2MDROR1IzX0Y5WEQtWEt5Y1czSjhlQjN2SnZTNjF3IIEC', '2b2af8a565ca12c0428eed7ca118db12', '31244832', NULL, NULL, '0', '2026-05-01 15:02:39', NULL, '2026-05-01 17:24:42', 'admin', '2026-05-01 15:02:39', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
@@ -2482,6 +2617,10 @@ CREATE TABLE `user_extend_info`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` int NULL DEFAULT NULL COMMENT '用户ID',
   `uid` int NULL DEFAULT NULL COMMENT 'UID',
+  `room_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '直播间ID',
+  `bili_uid` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'Bilibili用户UID',
+  `bili_uname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'Bilibili用户名',
+  `bili_bind_status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT 'B站绑定状态(0未绑定 1已绑定)',
   `live_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '直播地址',
   `homepage_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '个人主页地址',
   `background_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '背景图选择',
@@ -2490,12 +2629,11 @@ CREATE TABLE `user_extend_info`  (
   `main_prompt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主标题',
   `sub_prompt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '副标题',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_extend_info
 -- ----------------------------
-INSERT INTO `user_extend_info` VALUES (1, 1, 123, 'https://live.bilibili.com/24999?broadcast_type=0&is_room_feed=1&spm_id_from=333.1387.to_liveroom.0.click&live_from=86002', 'https://space.bilibili.com/31244832?spm_id_from=333.1007.0.0', '/profile//2026/03/15/30e7390d20e7495a9d15daa9d1f5687d.png', 'rgb(255, 215, 0)', '网页标签标题', '主标题', '副标题');
-INSERT INTO `user_extend_info` VALUES (2, 5, 123, '123', '123', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user_extend_info` VALUES (1, 1, 31244832, '24999', NULL, NULL, '0', 'https://live.bilibili.com/24999?broadcast_type=0&is_room_feed=1&spm_id_from=333.1387.to_liveroom.0.click&live_from=86002', 'https://space.bilibili.com/31244832?spm_id_from=333.1007.0.0', NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

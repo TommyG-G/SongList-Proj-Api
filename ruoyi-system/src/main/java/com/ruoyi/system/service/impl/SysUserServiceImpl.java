@@ -23,6 +23,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanValidators;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysPost;
+import com.ruoyi.system.domain.SysUserBilibili;
 import com.ruoyi.system.domain.SysUserPost;
 import com.ruoyi.system.domain.SysUserRole;
 import com.ruoyi.system.mapper.SysPostMapper;
@@ -33,6 +34,7 @@ import com.ruoyi.system.mapper.SysUserRoleMapper;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysDeptService;
 import com.ruoyi.system.service.ISysUserService;
+import com.ruoyi.system.service.ISysUserBilibiliService;
 
 /**
  * 用户 业务层处理
@@ -67,6 +69,9 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     protected Validator validator;
+
+    @Autowired
+    private ISysUserBilibiliService userBilibiliService;
 
     /**
      * 根据条件分页查询用户列表
@@ -580,16 +585,27 @@ public class SysUserServiceImpl implements ISysUserService
             }
         }
 
+        // 校验 UID 是否与 B站绑定信息一致
+        if (StringUtils.isNotEmpty(user.getUid())) {
+            SysUserBilibili bindInfo = userBilibiliService.selectSysUserBilibiliByUserId(currentUserId);
+            if (bindInfo == null) {
+                throw new ServiceException("您还未绑定B站账号，请先在个人中心绑定B站账号。");
+            }
+            if (!user.getUid().equals(bindInfo.getBiliUid())) {
+                throw new ServiceException("输入的UID（" + user.getUid() + "）与绑定的B站UID（" + bindInfo.getBiliUid() + "）不一致，请检查个人主页链接是否正确。");
+            }
+        }
+
         // 检查用户扩展信息是否存在
         int exists = userMapper.checkUserExtendInfoExists(currentUserId);
         
         if (exists > 0) {
             // 存在则更新
-            return userMapper.updateUserExtendInfo(currentUserId, user.getUid(), user.getLiveUrl(), user.getHomePage(),
+            return userMapper.updateUserExtendInfo(currentUserId, user.getUid(), user.getRoomId(), user.getLiveUrl(), user.getHomePage(),
                     user.getBackgroundImage(), user.getBackgroundColor(), user.getPageTitle(), user.getMainPrompt(), user.getSubPrompt());
         } else {
             // 不存在则插入
-            return userMapper.insertUserExtendInfo(currentUserId, user.getUid(), user.getLiveUrl(), user.getHomePage(),
+            return userMapper.insertUserExtendInfo(currentUserId, user.getUid(), user.getRoomId(), user.getLiveUrl(), user.getHomePage(),
                     user.getBackgroundImage(), user.getBackgroundColor(), user.getPageTitle(), user.getMainPrompt(), user.getSubPrompt());
         }
     }
@@ -638,7 +654,7 @@ public class SysUserServiceImpl implements ISysUserService
             return userMapper.updateUserBackgroundImage(currentUserId, backgroundImage) > 0;
         } else {
             // 不存在则插入新的记录，只设置背景图片字段
-            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, backgroundImage, null, null, null, null) > 0;
+            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, backgroundImage, null, null, null, null) > 0;
         }
     }
 
@@ -658,7 +674,7 @@ public class SysUserServiceImpl implements ISysUserService
             return userMapper.updateUserBackgroundColor(currentUserId, backgroundColor) > 0;
         } else {
             // 不存在则插入新的记录，只设置背景颜色字段
-            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, backgroundColor, null, null, null) > 0;
+            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, null, backgroundColor, null, null, null) > 0;
         }
     }
 
@@ -678,7 +694,7 @@ public class SysUserServiceImpl implements ISysUserService
             return userMapper.updateUserPrompts(currentUserId, pageTitle, mainPrompt, subPrompt) > 0;
         } else {
             // 不存在则插入新的记录，只设置页面标题和提示信息字段
-            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, null, pageTitle, mainPrompt, subPrompt) > 0;
+            return userMapper.insertUserExtendInfo(currentUserId, null, null, null, null, null, null, pageTitle, mainPrompt, subPrompt) > 0;
         }
     }
 }

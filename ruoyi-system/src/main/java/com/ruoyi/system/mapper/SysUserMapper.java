@@ -152,6 +152,7 @@ public interface SysUserMapper
      *
      * @param userId 用户ID
      * @param uid UID
+     * @param roomId 直播间ID
      * @param liveUrl 直播链接
      * @param homePage 主页链接
      * @param backgroundImage 背景图片地址
@@ -159,7 +160,7 @@ public interface SysUserMapper
      * @return 结果
      */
     public int insertUserExtendInfo(@Param("userId") Long userId, @Param("uid") String uid,
-                                   @Param("liveUrl") String liveUrl, @Param("homePage") String homePage,
+                                   @Param("roomId") String roomId, @Param("liveUrl") String liveUrl, @Param("homePage") String homePage,
                                    @Param("backgroundImage") String backgroundImage, @Param("backgroundColor") String backgroundColor,
                                    @Param("pageTitle") String pageTitle, @Param("mainPrompt") String mainPrompt, @Param("subPrompt") String subPrompt);
 
@@ -168,13 +169,14 @@ public interface SysUserMapper
      *
      * @param userId 用户ID
      * @param uid UID
+     * @param roomId 直播间ID
      * @param liveUrl 直播链接
      * @param homePage 主页链接
      * @param backgroundImage 背景图片地址
      * @return 结果
      */
     public int updateUserExtendInfo(@Param("userId") Long userId, @Param("uid") String uid,
-                                   @Param("liveUrl") String liveUrl, @Param("homePage") String homePage,
+                                   @Param("roomId") String roomId, @Param("liveUrl") String liveUrl, @Param("homePage") String homePage,
                                    @Param("backgroundImage") String backgroundImage, @Param("backgroundColor") String backgroundColor,
                                    @Param("pageTitle") String pageTitle, @Param("mainPrompt") String mainPrompt, @Param("subPrompt") String subPrompt);
 

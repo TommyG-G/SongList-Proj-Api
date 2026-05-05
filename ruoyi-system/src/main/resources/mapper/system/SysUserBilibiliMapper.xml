@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysUserBilibiliMapper">
+    
+    <resultMap type="SysUserBilibili" id="SysUserBilibiliResult">
+        <id     property="id"              column="id"              />
+        <result property="userId"          column="user_id"         />
+        <result property="biliUid"         column="bili_uid"        />
+        <result property="biliUname"       column="bili_uname"      />
+        <result property="biliFace"        column="bili_face"       />
+        <result property="sessdata"        column="sessdata"        />
+        <result property="biliJct"         column="bili_jct"        />
+        <result property="dedeUserid"      column="dede_userid"     />
+        <result property="refreshToken"    column="refresh_token"   />
+        <result property="tokenExpireTime" column="token_expire_time" />
+        <result property="bindStatus"      column="bind_status"     />
+        <result property="bindTime"        column="bind_time"       />
+        <result property="unbindTime"      column="unbind_time"     />
+        <result property="lastLoginTime"   column="last_login_time" />
+        <result property="createBy"        column="create_by"       />
+        <result property="createTime"      column="create_time"     />
+        <result property="updateBy"        column="update_by"       />
+        <result property="updateTime"      column="update_time"     />
+        <result property="remark"          column="remark"          />
+    </resultMap>
+
+    <sql id="selectSysUserBilibiliVo">
+        select id, user_id, bili_uid, bili_uname, bili_face, sessdata, bili_jct, dede_userid, 
+               refresh_token, token_expire_time, bind_status, bind_time, unbind_time, 
+               last_login_time, create_by, create_time, update_by, update_time, remark 
+        from sys_user_bilibili
+    </sql>
+
+    <select id="selectSysUserBilibiliList" parameterType="SysUserBilibili" resultMap="SysUserBilibiliResult">
+        <include refid="selectSysUserBilibiliVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="biliUid != null  and biliUid != ''"> and bili_uid = #{biliUid}</if>
+            <if test="biliUname != null  and biliUname != ''"> and bili_uname like concat('%', #{biliUname}, '%')</if>
+            <if test="bindStatus != null  and bindStatus != ''"> and bind_status = #{bindStatus}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectSysUserBilibiliById" parameterType="Long" resultMap="SysUserBilibiliResult">
+        <include refid="selectSysUserBilibiliVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectSysUserBilibiliByUserId" parameterType="Long" resultMap="SysUserBilibiliResult">
+        <include refid="selectSysUserBilibiliVo"/>
+        where user_id = #{userId} and bind_status = '0'
+    </select>
+
+    <select id="selectSysUserBilibiliByBiliUid" parameterType="String" resultMap="SysUserBilibiliResult">
+        <include refid="selectSysUserBilibiliVo"/>
+        where bili_uid = #{biliUid} and bind_status = '0'
+    </select>
+        
+    <insert id="insertSysUserBilibili" parameterType="SysUserBilibili" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user_bilibili
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="biliUid != null and biliUid != ''">bili_uid,</if>
+            <if test="biliUname != null">bili_uname,</if>
+            <if test="biliFace != null">bili_face,</if>
+            <if test="sessdata != null">sessdata,</if>
+            <if test="biliJct != null">bili_jct,</if>
+            <if test="dedeUserid != null">dede_userid,</if>
+            <if test="refreshToken != null">refresh_token,</if>
+            <if test="tokenExpireTime != null">token_expire_time,</if>
+            <if test="bindStatus != null">bind_status,</if>
+            <if test="bindTime != null">bind_time,</if>
+            <if test="lastLoginTime != null">last_login_time,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            <if test="remark != null">remark,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="biliUid != null and biliUid != ''">#{biliUid},</if>
+            <if test="biliUname != null">#{biliUname},</if>
+            <if test="biliFace != null">#{biliFace},</if>
+            <if test="sessdata != null">#{sessdata},</if>
+            <if test="biliJct != null">#{biliJct},</if>
+            <if test="dedeUserid != null">#{dedeUserid},</if>
+            <if test="refreshToken != null">#{refreshToken},</if>
+            <if test="tokenExpireTime != null">#{tokenExpireTime},</if>
+            <if test="bindStatus != null">#{bindStatus},</if>
+            <if test="bindTime != null">#{bindTime},</if>
+            <if test="lastLoginTime != null">#{lastLoginTime},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            <if test="remark != null">#{remark},</if>
+            sysdate()
+         </trim>
+    </insert>
+
+    <update id="updateSysUserBilibili" parameterType="SysUserBilibili">
+        update sys_user_bilibili
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="biliUid != null and biliUid != ''">bili_uid = #{biliUid},</if>
+            <if test="biliUname != null">bili_uname = #{biliUname},</if>
+            <if test="biliFace != null">bili_face = #{biliFace},</if>
+            <if test="sessdata != null">sessdata = #{sessdata},</if>
+            <if test="biliJct != null">bili_jct = #{biliJct},</if>
+            <if test="dedeUserid != null">dede_userid = #{dedeUserid},</if>
+            <if test="refreshToken != null">refresh_token = #{refreshToken},</if>
+            <if test="tokenExpireTime != null">token_expire_time = #{tokenExpireTime},</if>
+            <if test="bindStatus != null">bind_status = #{bindStatus},</if>
+            <if test="bindTime != null">bind_time = #{bindTime},</if>
+            <if test="unbindTime != null">unbind_time = #{unbindTime},</if>
+            <if test="lastLoginTime != null">last_login_time = #{lastLoginTime},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            update_time = sysdate()
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysUserBilibiliById" parameterType="Long">
+        delete from sys_user_bilibili where id = #{id}
+    </delete>
+
+    <delete id="deleteSysUserBilibiliByIds" parameterType="String">
+        delete from sys_user_bilibili where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateLastLoginTime" parameterType="Long">
+        update sys_user_bilibili 
+        set last_login_time = sysdate() 
+        where user_id = #{userId}
+    </update>
+</mapper>

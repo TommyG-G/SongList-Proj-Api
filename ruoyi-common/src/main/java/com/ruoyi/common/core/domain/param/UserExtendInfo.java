@@ -6,6 +6,8 @@ public class UserExtendInfo {
 
     private String uid;
 
+    private String roomId;
+
     private String liveUrl;
 
     private String homePage;
@@ -34,6 +36,14 @@ public class UserExtendInfo {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 
     public String getLiveUrl() {
@@ -96,6 +106,7 @@ public class UserExtendInfo {
     public String toString() {
         return "UserExtendInfo{" +
                 "uid='" + uid + '\'' +
+                ", roomId='" + roomId + '\'' +
                 ", liveUrl='" + liveUrl + '\'' +
                 ", homePage='" + homePage + '\'' +
                 ", backgroundImage='" + backgroundImage + '\'' +

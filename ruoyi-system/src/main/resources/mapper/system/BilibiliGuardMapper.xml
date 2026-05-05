@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BilibiliGuardMapper">
+    
+    <resultMap type="BilibiliGuard" id="BilibiliGuardResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="guardUid"    column="guard_uid"    />
+        <result property="guardUsername"    column="guard_username"    />
+        <result property="guardLevel"    column="guard_level"    />
+        <result property="guardLevelText"    column="guard_level_text"    />
+        <result property="roomId"    column="room_id"    />
+        <result property="anchorUid"    column="anchor_uid"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="autoRenew"    column="auto_renew"    />
+        <result property="sendStatus"    column="send_status"    />
+        <result property="sendTime"    column="send_time"    />
+        <result property="sendMsg"    column="send_msg"    />
+        <result property="snapshotDate"    column="snapshot_date"    />
+        <result property="guardAddress"    column="guard_address"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBilibiliGuardVo">
+        select id, user_id, guard_uid, guard_username, guard_level, guard_level_text, 
+               room_id, anchor_uid, start_time, end_time, auto_renew, send_status, 
+               send_time, send_msg, snapshot_date, guard_address, create_by, create_time, update_by, 
+               update_time, remark 
+        from bilibili_guard
+    </sql>
+
+    <select id="selectBilibiliGuardList" parameterType="BilibiliGuard" resultMap="BilibiliGuardResult">
+        <include refid="selectBilibiliGuardVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="guardUid != null  and guardUid != ''"> and guard_uid = #{guardUid}</if>
+            <if test="guardUsername != null  and guardUsername != ''"> and guard_username like concat('%', #{guardUsername}, '%')</if>
+            <if test="guardLevel != null "> and guard_level = #{guardLevel}</if>
+            <if test="roomId != null "> and room_id = #{roomId}</if>
+            <if test="sendStatus != null "> and send_status = #{sendStatus}</if>
+            <if test="snapshotDate != null "> and snapshot_date = #{snapshotDate}</if>
+        </where>
+        order by snapshot_date desc, guard_level asc, start_time desc
+    </select>
+    
+    <select id="selectBilibiliGuardById" parameterType="Long" resultMap="BilibiliGuardResult">
+        <include refid="selectBilibiliGuardVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectBilibiliGuardByUid" resultMap="BilibiliGuardResult">
+        <include refid="selectBilibiliGuardVo"/>
+        where user_id = #{userId} and guard_uid = #{guardUid}
+        order by snapshot_date desc
+        limit 1
+    </select>
+        
+    <insert id="insertBilibiliGuard" parameterType="BilibiliGuard" useGeneratedKeys="true" keyProperty="id">
+        insert into bilibili_guard
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="guardUid != null and guardUid != ''">guard_uid,</if>
+            <if test="guardUsername != null and guardUsername != ''">guard_username,</if>
+            <if test="guardLevel != null">guard_level,</if>
+            <if test="guardLevelText != null">guard_level_text,</if>
+            <if test="roomId != null">room_id,</if>
+            <if test="anchorUid != null">anchor_uid,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="autoRenew != null">auto_renew,</if>
+            <if test="sendStatus != null">send_status,</if>
+            <if test="sendTime != null">send_time,</if>
+            <if test="sendMsg != null">send_msg,</if>
+            <if test="snapshotDate != null">snapshot_date,</if>
+            <if test="guardAddress != null">guard_address,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="guardUid != null and guardUid != ''">#{guardUid},</if>
+            <if test="guardUsername != null and guardUsername != ''">#{guardUsername},</if>
+            <if test="guardLevel != null">#{guardLevel},</if>
+            <if test="guardLevelText != null">#{guardLevelText},</if>
+            <if test="roomId != null">#{roomId},</if>
+            <if test="anchorUid != null">#{anchorUid},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="autoRenew != null">#{autoRenew},</if>
+            <if test="sendStatus != null">#{sendStatus},</if>
+            <if test="sendTime != null">#{sendTime},</if>
+            <if test="sendMsg != null">#{sendMsg},</if>
+            <if test="snapshotDate != null">#{snapshotDate},</if>
+            <if test="guardAddress != null">#{guardAddress},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBilibiliGuard" parameterType="BilibiliGuard">
+        update bilibili_guard
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="guardUid != null and guardUid != ''">guard_uid = #{guardUid},</if>
+            <if test="guardUsername != null and guardUsername != ''">guard_username = #{guardUsername},</if>
+            <if test="guardLevel != null">guard_level = #{guardLevel},</if>
+            <if test="guardLevelText != null">guard_level_text = #{guardLevelText},</if>
+            <if test="roomId != null">room_id = #{roomId},</if>
+            <if test="anchorUid != null">anchor_uid = #{anchorUid},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="autoRenew != null">auto_renew = #{autoRenew},</if>
+            <if test="sendStatus != null">send_status = #{sendStatus},</if>
+            <if test="sendTime != null">send_time = #{sendTime},</if>
+            <if test="sendMsg != null">send_msg = #{sendMsg},</if>
+            <if test="snapshotDate != null">snapshot_date = #{snapshotDate},</if>
+            <if test="guardAddress != null">guard_address = #{guardAddress},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBilibiliGuardById" parameterType="Long">
+        delete from bilibili_guard where id = #{id}
+    </delete>
+
+    <delete id="deleteBilibiliGuardByIds" parameterType="String">
+        delete from bilibili_guard where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsertOrUpdate" parameterType="java.util.List">
+        INSERT INTO bilibili_guard (
+            user_id, guard_uid, guard_username, guard_level, guard_level_text,
+            room_id, anchor_uid, start_time, end_time, auto_renew,
+            send_status, snapshot_date, create_time
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.userId}, #{item.guardUid}, #{item.guardUsername}, 
+                #{item.guardLevel}, #{item.guardLevelText},
+                #{item.roomId}, #{item.anchorUid}, #{item.startTime}, 
+                #{item.endTime}, #{item.autoRenew},
+                #{item.sendStatus}, #{item.snapshotDate}, NOW()
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+            guard_username = VALUES(guard_username),
+            guard_level = VALUES(guard_level),
+            guard_level_text = VALUES(guard_level_text),
+            start_time = VALUES(start_time),
+            end_time = VALUES(end_time),
+            auto_renew = VALUES(auto_renew),
+            update_time = NOW()
+    </insert>
+
+    <update id="updateGuardAddress">
+        update bilibili_guard
+        set guard_address = #{guardAddress},
+            update_time = NOW()
+        where id = #{id}
+    </update>
+</mapper>

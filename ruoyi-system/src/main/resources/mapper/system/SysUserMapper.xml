@@ -227,9 +227,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <!-- 新增用户扩展信息 -->
   <insert id="insertUserExtendInfo">
    	insert into user_extend_info (
-   		user_id, uid, live_url, homepage_url, background_image, background_color, page_title, main_prompt, sub_prompt
+   		user_id, uid, room_id, live_url, homepage_url, background_image, background_color, page_title, main_prompt, sub_prompt
    	) values (
-   		#{userId}, #{uid}, #{liveUrl}, #{homePage}, #{backgroundImage}, #{backgroundColor}, #{pageTitle}, #{mainPrompt}, #{subPrompt}
+   		#{userId}, #{uid}, #{roomId}, #{liveUrl}, #{homePage}, #{backgroundImage}, #{backgroundColor}, #{pageTitle}, #{mainPrompt}, #{subPrompt}
   	)
   </insert>
 
@@ -237,6 +237,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <update id="updateUserExtendInfo">
    	update user_extend_info set
    		uid = #{uid},
+   		room_id = #{roomId},
    		live_url = #{liveUrl},
    		homepage_url = #{homePage},
    		background_image = #{backgroundImage},
@@ -252,6 +253,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	select
    	    user_id as userId,
    		uid as uid,
+   		room_id as roomId,
    		live_url as liveUrl,
    		homepage_url as homePage,
    		background_image as backgroundImage,
