@@ -1,13 +1,13 @@
 # 项目相关配置
-songList:
+jlsz:
   # 名称
-  name: songList
+  name: jlsz
   # 版本
   version: 3.9.1
   # 版权年份
   copyrightYear: 2026
   # 文件路径 示例（ Windows配置D:/jlsz/uploadPath，Linux配置 /home/jlsz/uploadPath）
-  profile: /proj/songList/demo_1/uploadfiles/uploadpath
+  profile: /home/lmode/uploadfiles/project/su-officer/uploadPath
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数字计算 char 字符验证
@@ -34,7 +34,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.ruoyi: debug
+    com.jlsz: debug
     org.springframework: warn
 
 # 用户配置
@@ -64,28 +64,27 @@ spring:
       # 热部署开关
       enabled: true
   # redis 配置
-  data:
-    redis:
-      # 地址
-      host: 127.0.0.1
-      # 端口，默认为6379
-      port: 6379
-      # 数据库索引
-      database: 14
-      # 密码
-      password: =@ZxCV1N
-      # 连接超时时间
-      timeout: 10s
-      lettuce:
-        pool:
-          # 连接池中的最小空闲连接
-          min-idle: 0
-          # 连接池中的最大空闲连接
-          max-idle: 8
-          # 连接池的最大数据库连接数
-          max-active: 8
-          # #连接池最大阻塞等待时间（使用负值表示没有限制）
-          max-wait: -1ms
+  redis:
+    # 地址
+    host: 127.0.0.1
+    # 端口，默认为6379
+    port: 18082
+    # 数据库索引
+    database: 14
+    # 密码
+    password: ctgcache-190651newoa#1Hbls_qt
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
 
 # token配置
 token:
@@ -99,7 +98,7 @@ token:
 # MyBatis配置
 mybatis:
   # 搜索指定包别名
-  typeAliasesPackage: com.ruoyi.**.domain
+  typeAliasesPackage: com.jlsz.**.domain
   # 配置mapper的扫描，找到所有的mapper.xml映射文件
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件

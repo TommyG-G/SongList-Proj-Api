@@ -1,13 +1,13 @@
 # 项目相关配置
-songList:
+ruoyi:
   # 名称
-  name: songList
+  name: RuoYi
   # 版本
   version: 3.9.1
   # 版权年份
   copyrightYear: 2026
-  # 文件路径 示例（ Windows配置D:/jlsz/uploadPath，Linux配置 /home/jlsz/uploadPath）
-  profile: /proj/songList/demo_1/uploadfiles/uploadpath
+  # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
+  profile: D:/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数字计算 char 字符验证
@@ -16,7 +16,7 @@ songList:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 9095
+  port: 8080
   servlet:
     # 应用的访问路径
     context-path: /
@@ -51,6 +51,8 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
+  profiles:
+    active: @spring.profiles.active@
   # 文件上传
   servlet:
     multipart:
@@ -63,17 +65,20 @@ spring:
     restart:
       # 热部署开关
       enabled: true
-  # redis 配置
   data:
+    # redis 配置
     redis:
       # 地址
-      host: 127.0.0.1
+      host: localhost
+#      host: 188.119.64.69
       # 端口，默认为6379
       port: 6379
       # 数据库索引
-      database: 14
+      database: 0
       # 密码
-      password: =@ZxCV1N
+#      password: =@ZxCV1N
+      # 本机redis密码： "无"
+      password:
       # 连接超时时间
       timeout: 10s
       lettuce:
@@ -111,19 +116,26 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
-# Swagger配置
-swagger:
-  # 是否开启swagger
-  enabled: true
-  # 请求前缀
-  pathMapping: /dev-api
+# Springdoc配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    tags-sorter: alpha
+  group-configs:
+    - group: 'default'
+      display-name: '测试模块'
+      paths-to-match: '/**'
+      packages-to-scan: com.ruoyi.web.controller.tool
 
 # 防盗链配置
 referer:
   # 防盗链开关
   enabled: false
   # 允许的域名列表
-  allowed-domains: localhost,127.0.0.1
+  allowed-domains: localhost,127.0.0.1,ruoyi.vip,www.ruoyi.vip
 
 # 防止XSS攻击
 xss:
