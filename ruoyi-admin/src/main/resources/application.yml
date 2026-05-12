@@ -3,7 +3,8 @@ spring:
   application:
     name: songList
   profiles:
-    active: dev,devDruid
+    active: prod,prodDruid
+#    active: dev,devDruid
 amap:
   key: ed782194c3b3b3fffe146ae99e0dcdba
   jackson:

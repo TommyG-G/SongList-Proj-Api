@@ -245,6 +245,14 @@ public interface ISysUserService
     public UserExtendInfo selectUserExtendInfoByUid(String uid);
 
     /**
+     * 根据二级域名查询用户扩展信息
+     *
+     * @param subdomain 二级域名前缀
+     * @return 用户扩展信息
+     */
+    public UserExtendInfo selectUserExtendInfoBySubdomain(String subdomain);
+
+    /**
      * 更新用户背景图片
      *
      * @param backgroundImage 背景图片地址

@@ -6,6 +6,8 @@ public class UserExtendInfo {
 
     private String uid;
 
+    private String subdomain;
+
     private String roomId;
 
     private String liveUrl;
@@ -36,6 +38,14 @@ public class UserExtendInfo {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getSubdomain() {
+        return subdomain;
+    }
+
+    public void setSubdomain(String subdomain) {
+        this.subdomain = subdomain;
     }
 
     public String getRoomId() {
@@ -105,7 +115,9 @@ public class UserExtendInfo {
     @Override
     public String toString() {
         return "UserExtendInfo{" +
-                "uid='" + uid + '\'' +
+                "userId=" + userId +
+                ", uid='" + uid + '\'' +
+                ", subdomain='" + subdomain + '\'' +
                 ", roomId='" + roomId + '\'' +
                 ", liveUrl='" + liveUrl + '\'' +
                 ", homePage='" + homePage + '\'' +

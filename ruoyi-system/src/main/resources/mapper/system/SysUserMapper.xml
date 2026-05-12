@@ -253,6 +253,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	select
    	    user_id as userId,
    		uid as uid,
+   		subdomain as subdomain,
    		room_id as roomId,
    		live_url as liveUrl,
    		homepage_url as homePage,
@@ -270,6 +271,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    	select
    	    user_id as userId,
    		uid as uid,
+   		subdomain as subdomain,
    		live_url as liveUrl,
    		homepage_url as homePage,
    		background_image as backgroundImage,
@@ -279,6 +281,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    		sub_prompt as subPrompt
    	from user_extend_info
   	where uid = #{uid}
+  </select>
+
+  <!-- 根据二级域名查询用户扩展信息 -->
+  <select id="selectUserExtendInfoBySubdomain" resultType="com.ruoyi.common.core.domain.param.UserExtendInfo">
+   	select
+   	    user_id as userId,
+   		uid as uid,
+   		subdomain as subdomain,
+   		room_id as roomId,
+   		live_url as liveUrl,
+   		homepage_url as homePage,
+   		background_image as backgroundImage,
+   		background_color as backgroundColor,
+   		page_title as pageTitle,
+   		main_prompt as mainPrompt,
+   		sub_prompt as subPrompt
+   	from user_extend_info
+  	where subdomain = #{subdomain}
   </select>
 
   <!-- 检查用户扩展信息是否存在 -->

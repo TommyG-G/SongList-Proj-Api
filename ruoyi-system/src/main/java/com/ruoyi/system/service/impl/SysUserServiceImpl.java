@@ -639,6 +639,14 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     @Override
+    public UserExtendInfo selectUserExtendInfoBySubdomain(String subdomain) {
+        if (StringUtils.isEmpty(subdomain)) {
+            return null;
+        }
+        return userMapper.selectUserExtendInfoBySubdomain(subdomain);
+    }
+
+    @Override
     public boolean updateUserBackgroundImage(String backgroundImage) {
         // 获取当前登录用户ID
         Long currentUserId = SecurityUtils.getUserId();

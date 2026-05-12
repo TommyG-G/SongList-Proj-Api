@@ -196,6 +196,14 @@ public interface SysUserMapper
     public UserExtendInfo selectUserExtendInfoByUid(@Param("uid") String uid);
 
     /**
+     * 根据二级域名查询用户扩展信息
+     *
+     * @param subdomain 二级域名前缀
+     * @return 用户扩展信息
+     */
+    public UserExtendInfo selectUserExtendInfoBySubdomain(@Param("subdomain") String subdomain);
+
+    /**
      * 检查用户扩展信息是否存在
      *
      * @param userId 用户ID
